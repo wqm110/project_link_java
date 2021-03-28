@@ -4,8 +4,6 @@ package com.ruoyi.camunda.config;
 import com.ruoyi.camunda.plugin.ProcessEnginePlugInTest;
 import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
 import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
