@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -32,6 +33,8 @@ public class CamundaTestController {
         Object taskService1 = beans.get("taskService");
         System.out.println("beans = " + beans);
         System.out.println("taskService1 = " + taskService1);
+        List<String> adminUsers = defaults.getAdminUsers();
+        System.out.println("adminUsers = " + adminUsers);
         return AjaxResult.success(objectObjectHashMap);
 
     }
