@@ -1,18 +1,19 @@
 package com.ruoyi.web.controller.camunda;
 
+import com.ruoyi.camunda.plugin.ProcessEnginePlugInTest;
 import com.ruoyi.common.core.domain.AjaxResult;
 import io.swagger.annotations.Api;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngineConfiguration;
-import org.camunda.bpm.engine.ProcessEngines;
-import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.*;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
 import org.camunda.bpm.engine.spring.SpringConfigurationHelper;
 import org.camunda.bpm.spring.boot.starter.property.Defaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +24,20 @@ public class CamundaTestController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/getServices")
-    public AjaxResult testGetService() {
+    @GetMapping("/getServices/{pname}")
+    public AjaxResult testGetService(@PathVariable("pname")String pname) {
         HashMap<Object, Object> objectObjectHashMap = new HashMap<>();
 
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        Defaults defaults = (Defaults) engine.getProcessEngineConfiguration();
-        Map<Object, Object> beans = defaults.getBeans();
-        Object taskService1 = beans.get("taskService");
-        System.out.println("beans = " + beans);
-        System.out.println("taskService1 = " + taskService1);
-        List<String> adminUsers = defaults.getAdminUsers();
-        System.out.println("adminUsers = " + adminUsers);
+        ProcessEngine engine = ProcessEngines.getProcessEngine("default");
+        ProcessEngineConfigurationImpl config = (ProcessEngineConfigurationImpl) engine.getProcessEngineConfiguration();
+        config = config.setProcessEngineName("test");
+        String name = engine.getName();
+        AuthorizationService authorizationService = engine.getAuthorizationService();
+        DecisionService decisionService = engine.getDecisionService();
+        System.out.println("name = " + name+"\t");
+        System.out.println("decisionService = " + decisionService);
+        System.out.println("authorizationService = " + authorizationService);
+
         return AjaxResult.success(objectObjectHashMap);
 
     }
