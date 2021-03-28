@@ -1,0 +1,17 @@
+## camunda 工作流配置
+#camunda:
+#  bpm:
+#    admin-user:
+#      id: demo
+#      password: demo
+#      firstName: Demo
+#    filter:
+#      create: All tasks
+#    enabled: true
+#    history-level-default: 3
+#
+#
+## 日志配置
+#logging:
+#  level:
+#    com.ruoyi.camunda: info

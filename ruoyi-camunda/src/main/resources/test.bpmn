@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://sourceforge.net/bpmn/definitions/_1616484674323" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:yaoqiang="http://bpmn.sourceforge.net" exporter="Camunda Modeler" exporterVersion="4.6.0" expressionLanguage="http://www.w3.org/1999/XPath" id="_1616484674323" name="" targetNamespace="http://sourceforge.net/bpmn/definitions/_1616484674323" typeLanguage="http://www.w3.org/2001/XMLSchema" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://bpmn.sourceforge.net/schemas/BPMN20.xsd">
+  <process camunda:versionTag="01" id="PROCESS_1" isClosed="false" isExecutable="true" name="charge-card" processType="None">
+    <extensionElements>
+      <yaoqiang:description/>
+      <yaoqiang:pageFormat height="841.8897637795276" imageableHeight="831.8897637795276" imageableWidth="588.1102362204724" imageableX="5.0" imageableY="5.0" orientation="0" width="598.1102362204724"/>
+      <yaoqiang:page background="#FFFFFF" horizontalCount="1" verticalCount="1"/>
+    </extensionElements>
+    <startEvent id="_2" isInterrupting="true" name="学生报名" parallelMultiple="false">
+      <outgoing>Flow_0bksse0</outgoing>
+      <outputSet/>
+    </startEvent>
+    <sequenceFlow id="Flow_0bksse0" sourceRef="_2" targetRef="Activity_0v2dcio"/>
+    <serviceTask camunda:topic="charge-card" camunda:type="external" completionQuantity="1" id="Activity_0v2dcio" implementation="##WebService" isForCompensation="false" name="换卡" startQuantity="1">
+      <incoming>Flow_0bksse0</incoming>
+      <outgoing>Flow_01b6i0d</outgoing>
+    </serviceTask>
+    <sequenceFlow id="Flow_01b6i0d" sourceRef="Activity_0v2dcio" targetRef="Event_1l98eui"/>
+    <endEvent id="Event_1l98eui" name="否费完成">
+      <incoming>Flow_01b6i0d</incoming>
+      <inputSet/>
+    </endEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="Yaoqiang_Diagram-PROCESS_1" name="Untitled Diagram" resolution="96">
+    <bpmndi:BPMNPlane bpmnElement="PROCESS_1">
+      <bpmndi:BPMNShape bpmnElement="_2" id="Yaoqiang-_2">
+        <dc:Bounds height="32.0" width="32.0" x="163.0" y="106.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="50.0" x="154.0" y="147.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Activity_0v2dcio" id="Yaoqiang-Activity_0v2dcio">
+        <dc:Bounds height="80.0" width="100.0" x="250.0" y="82.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="28.0" x="286.0" y="114.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="Event_1l98eui" id="Yaoqiang-Event_1l98eui">
+        <dc:Bounds height="32.0" width="32.0" x="406.0" y="111.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="50.0" x="402.0" y="154.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0bksse0" id="Yaoqiang-Flow_0bksse0">
+        <di:waypoint x="194.99945895899637" y="122.0"/>
+        <di:waypoint x="250.0" y="122.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="219.5" y="112.52"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_01b6i0d" id="Yaoqiang-Flow_01b6i0d">
+        <di:waypoint x="350.0" y="122.0"/>
+        <di:waypoint x="406.0005410410036" y="127.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="18.96" width="6.0" x="375.0" y="115.02"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

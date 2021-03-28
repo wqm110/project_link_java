@@ -1,0 +1,3138 @@
+@startuml
+participant Actor
+Actor -> ProcessEngineConfigurationImpl : init
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : invokePreInit
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Object : toString
+activate Object
+Object --> ProcessEngineConfigurationImpl
+deactivate Object
+ProcessEngineConfigurationImpl -> ConfigurationLogger : pluginActivated
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> ProcessEnginePlugin : preInit
+activate ProcessEnginePlugin
+ProcessEnginePlugin --> ProcessEngineConfigurationImpl
+deactivate ProcessEnginePlugin
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDefaultCharset
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Charset : forName
+activate Charset
+Charset --> ProcessEngineConfigurationImpl
+deactivate Charset
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryLevel
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> String : equalsIgnoreCase
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : usingDeprecatedHistoryLevelVariable
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> String : equalsIgnoreCase
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : equalsIgnoreCase
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ProcessEngineException : new
+activate ProcessEngineException
+ProcessEngineException --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineException
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryEventProducer
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> CacheAwareHistoryEventProducer : new
+activate CacheAwareHistoryEventProducer
+CacheAwareHistoryEventProducer --> ProcessEngineConfigurationImpl
+deactivate CacheAwareHistoryEventProducer
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCmmnHistoryEventProducer
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> CacheAwareCmmnHistoryEventProducer : new
+activate CacheAwareCmmnHistoryEventProducer
+CacheAwareCmmnHistoryEventProducer --> ProcessEngineConfigurationImpl
+deactivate CacheAwareCmmnHistoryEventProducer
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDmnHistoryEventProducer
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultDmnHistoryEventProducer : new
+activate DefaultDmnHistoryEventProducer
+DefaultDmnHistoryEventProducer --> ProcessEngineConfigurationImpl
+deactivate DefaultDmnHistoryEventProducer
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryEventHandler
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> CompositeDbHistoryEventHandler : new
+activate CompositeDbHistoryEventHandler
+CompositeDbHistoryEventHandler --> ProcessEngineConfigurationImpl
+deactivate CompositeDbHistoryEventHandler
+ProcessEngineConfigurationImpl -> CompositeHistoryEventHandler : new
+activate CompositeHistoryEventHandler
+CompositeHistoryEventHandler --> ProcessEngineConfigurationImpl
+deactivate CompositeHistoryEventHandler
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initExpressionManager
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ExpressionManager : new
+activate ExpressionManager
+ExpressionManager --> ProcessEngineConfigurationImpl
+deactivate ExpressionManager
+ProcessEngineConfigurationImpl -> CommandContextFunctionMapper : new
+activate CommandContextFunctionMapper
+CommandContextFunctionMapper --> ProcessEngineConfigurationImpl
+deactivate CommandContextFunctionMapper
+ProcessEngineConfigurationImpl -> ExpressionManager : addFunctionMapper
+activate ExpressionManager
+ExpressionManager --> ProcessEngineConfigurationImpl
+deactivate ExpressionManager
+ProcessEngineConfigurationImpl -> DateTimeFunctionMapper : new
+activate DateTimeFunctionMapper
+DateTimeFunctionMapper --> ProcessEngineConfigurationImpl
+deactivate DateTimeFunctionMapper
+ProcessEngineConfigurationImpl -> ExpressionManager : addFunctionMapper
+activate ExpressionManager
+ExpressionManager --> ProcessEngineConfigurationImpl
+deactivate ExpressionManager
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initBeans
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initArtifactFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultArtifactFactory : new
+activate DefaultArtifactFactory
+DefaultArtifactFactory --> ProcessEngineConfigurationImpl
+deactivate DefaultArtifactFactory
+ProcessEngineConfigurationImpl -> SpringProcessEngineConfiguration : initArtifactFactory
+activate SpringProcessEngineConfiguration
+SpringProcessEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate SpringProcessEngineConfiguration
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initFormEngines
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> HtmlFormEngine : new
+activate HtmlFormEngine
+HtmlFormEngine --> ProcessEngineConfigurationImpl
+deactivate HtmlFormEngine
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> JuelFormEngine : new
+activate JuelFormEngine
+JuelFormEngine --> ProcessEngineConfigurationImpl
+deactivate JuelFormEngine
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initFormTypes
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> FormTypes : new
+activate FormTypes
+FormTypes --> ProcessEngineConfigurationImpl
+deactivate FormTypes
+ProcessEngineConfigurationImpl -> StringFormType : new
+activate StringFormType
+StringFormType --> ProcessEngineConfigurationImpl
+deactivate StringFormType
+ProcessEngineConfigurationImpl -> FormTypes : addFormType
+activate FormTypes
+FormTypes --> ProcessEngineConfigurationImpl
+deactivate FormTypes
+ProcessEngineConfigurationImpl -> LongFormType : new
+activate LongFormType
+LongFormType --> ProcessEngineConfigurationImpl
+deactivate LongFormType
+ProcessEngineConfigurationImpl -> FormTypes : addFormType
+activate FormTypes
+FormTypes --> ProcessEngineConfigurationImpl
+deactivate FormTypes
+ProcessEngineConfigurationImpl -> DateFormType : new
+activate DateFormType
+DateFormType --> ProcessEngineConfigurationImpl
+deactivate DateFormType
+ProcessEngineConfigurationImpl -> FormTypes : addFormType
+activate FormTypes
+FormTypes --> ProcessEngineConfigurationImpl
+deactivate FormTypes
+ProcessEngineConfigurationImpl -> BooleanFormType : new
+activate BooleanFormType
+BooleanFormType --> ProcessEngineConfigurationImpl
+deactivate BooleanFormType
+ProcessEngineConfigurationImpl -> FormTypes : addFormType
+activate FormTypes
+FormTypes --> ProcessEngineConfigurationImpl
+deactivate FormTypes
+ProcessEngineConfigurationImpl -> FormTypes : addFormType
+activate FormTypes
+FormTypes --> ProcessEngineConfigurationImpl
+deactivate FormTypes
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initFormFieldValidators
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> FormValidators : new
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl -> FormValidators : addValidator
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl -> FormValidators : addValidator
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl -> FormValidators : addValidator
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl -> FormValidators : addValidator
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl -> FormValidators : addValidator
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl -> FormValidators : addValidator
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl -> Map : entrySet
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> FormValidators : addValidator
+activate FormValidators
+FormValidators --> ProcessEngineConfigurationImpl
+deactivate FormValidators
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initScripting
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> MocksResolverFactory : new
+activate MocksResolverFactory
+MocksResolverFactory --> ProcessEngineConfigurationImpl
+deactivate MocksResolverFactory
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> VariableScopeResolverFactory : new
+activate VariableScopeResolverFactory
+VariableScopeResolverFactory --> ProcessEngineConfigurationImpl
+deactivate VariableScopeResolverFactory
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> BeansResolverFactory : new
+activate BeansResolverFactory
+BeansResolverFactory --> ProcessEngineConfigurationImpl
+deactivate BeansResolverFactory
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> ScriptBindingsFactory : new
+activate ScriptBindingsFactory
+ScriptBindingsFactory --> ProcessEngineConfigurationImpl
+deactivate ScriptBindingsFactory
+ProcessEngineConfigurationImpl -> ScriptingEngines : new
+activate ScriptingEngines
+ScriptingEngines --> ProcessEngineConfigurationImpl
+deactivate ScriptingEngines
+ProcessEngineConfigurationImpl -> ScriptFactory : new
+activate ScriptFactory
+ScriptFactory --> ProcessEngineConfigurationImpl
+deactivate ScriptFactory
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> ScriptingEnvironment : new
+activate ScriptingEnvironment
+ScriptingEnvironment --> ProcessEngineConfigurationImpl
+deactivate ScriptingEnvironment
+ProcessEngineConfigurationImpl -> SpringProcessEngineConfiguration : initScripting
+activate SpringProcessEngineConfiguration
+SpringProcessEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate SpringProcessEngineConfiguration
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDmnEngine
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DmnEngineConfiguration : createDefaultDmnEngineConfiguration
+activate DmnEngineConfiguration
+DmnEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate DmnEngineConfiguration
+ProcessEngineConfigurationImpl -> DmnEngineConfigurationBuilder : dmnHistoryEventProducer
+activate DmnEngineConfigurationBuilder
+DmnEngineConfigurationBuilder --> ProcessEngineConfigurationImpl
+deactivate DmnEngineConfigurationBuilder
+ProcessEngineConfigurationImpl -> DmnEngineConfigurationBuilder : scriptEngineResolver
+activate DmnEngineConfigurationBuilder
+DmnEngineConfigurationBuilder --> ProcessEngineConfigurationImpl
+deactivate DmnEngineConfigurationBuilder
+ProcessEngineConfigurationImpl -> DmnEngineConfigurationBuilder : expressionManager
+activate DmnEngineConfigurationBuilder
+DmnEngineConfigurationBuilder --> ProcessEngineConfigurationImpl
+deactivate DmnEngineConfigurationBuilder
+ProcessEngineConfigurationImpl -> DmnEngineConfigurationBuilder : feelCustomFunctionProviders
+activate DmnEngineConfigurationBuilder
+DmnEngineConfigurationBuilder --> ProcessEngineConfigurationImpl
+deactivate DmnEngineConfigurationBuilder
+ProcessEngineConfigurationImpl -> DmnEngineConfigurationBuilder : enableFeelLegacyBehavior
+activate DmnEngineConfigurationBuilder
+DmnEngineConfigurationBuilder --> ProcessEngineConfigurationImpl
+deactivate DmnEngineConfigurationBuilder
+ProcessEngineConfigurationImpl -> DmnEngineConfigurationBuilder : build
+activate DmnEngineConfigurationBuilder
+DmnEngineConfigurationBuilder --> ProcessEngineConfigurationImpl
+deactivate DmnEngineConfigurationBuilder
+ProcessEngineConfigurationImpl -> DefaultDmnEngineConfiguration : buildEngine
+activate DefaultDmnEngineConfiguration
+DefaultDmnEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate DefaultDmnEngineConfiguration
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initBusinessCalendarManager
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> MapBusinessCalendarManager : new
+activate MapBusinessCalendarManager
+MapBusinessCalendarManager --> ProcessEngineConfigurationImpl
+deactivate MapBusinessCalendarManager
+ProcessEngineConfigurationImpl -> DurationBusinessCalendar : new
+activate DurationBusinessCalendar
+DurationBusinessCalendar --> ProcessEngineConfigurationImpl
+deactivate DurationBusinessCalendar
+ProcessEngineConfigurationImpl -> MapBusinessCalendarManager : addBusinessCalendar
+activate MapBusinessCalendarManager
+MapBusinessCalendarManager --> ProcessEngineConfigurationImpl
+deactivate MapBusinessCalendarManager
+ProcessEngineConfigurationImpl -> DueDateBusinessCalendar : new
+activate DueDateBusinessCalendar
+DueDateBusinessCalendar --> ProcessEngineConfigurationImpl
+deactivate DueDateBusinessCalendar
+ProcessEngineConfigurationImpl -> MapBusinessCalendarManager : addBusinessCalendar
+activate MapBusinessCalendarManager
+MapBusinessCalendarManager --> ProcessEngineConfigurationImpl
+deactivate MapBusinessCalendarManager
+ProcessEngineConfigurationImpl -> CycleBusinessCalendar : new
+activate CycleBusinessCalendar
+CycleBusinessCalendar --> ProcessEngineConfigurationImpl
+deactivate CycleBusinessCalendar
+ProcessEngineConfigurationImpl -> MapBusinessCalendarManager : addBusinessCalendar
+activate MapBusinessCalendarManager
+MapBusinessCalendarManager --> ProcessEngineConfigurationImpl
+deactivate MapBusinessCalendarManager
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandContextFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> CommandContextFactory : new
+activate CommandContextFactory
+CommandContextFactory --> ProcessEngineConfigurationImpl
+deactivate CommandContextFactory
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initTransactionContextFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> StandaloneTransactionContextFactory : new
+activate StandaloneTransactionContextFactory
+StandaloneTransactionContextFactory --> ProcessEngineConfigurationImpl
+deactivate StandaloneTransactionContextFactory
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDataSource
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> InitialContext : lookup
+activate InitialContext
+InitialContext --> ProcessEngineConfigurationImpl
+deactivate InitialContext
+ProcessEngineConfigurationImpl -> ProcessEngineException : new
+activate ProcessEngineException
+ProcessEngineException --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineException
+ProcessEngineConfigurationImpl -> ProcessEngineException : new
+activate ProcessEngineException
+ProcessEngineException --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineException
+ProcessEngineConfigurationImpl -> PooledDataSource : new
+activate PooledDataSource
+PooledDataSource --> ProcessEngineConfigurationImpl
+deactivate PooledDataSource
+ProcessEngineConfigurationImpl -> PooledDataSource : forceCloseAll
+activate PooledDataSource
+PooledDataSource --> ProcessEngineConfigurationImpl
+deactivate PooledDataSource
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDatabaseType
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : checkForMariaDb
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : toLowerCase
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : contains
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : toLowerCase
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : contains
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : toLowerCase
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : contains
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : checkForCrdb
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Connection : prepareStatement
+activate Connection
+Connection --> ProcessEngineConfigurationImpl
+deactivate Connection
+ProcessEngineConfigurationImpl -> PreparedStatement : executeQuery
+activate PreparedStatement
+PreparedStatement --> ProcessEngineConfigurationImpl
+deactivate PreparedStatement
+ProcessEngineConfigurationImpl -> ResultSet : next
+activate ResultSet
+ResultSet --> ProcessEngineConfigurationImpl
+deactivate ResultSet
+ProcessEngineConfigurationImpl -> ResultSet : getString
+activate ResultSet
+ResultSet --> ProcessEngineConfigurationImpl
+deactivate ResultSet
+ProcessEngineConfigurationImpl -> String : toLowerCase
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : contains
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ConfigurationLogger : debugDatabaseproductName
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> Properties : getProperty
+activate Properties
+Properties --> ProcessEngineConfigurationImpl
+deactivate Properties
+ProcessEngineConfigurationImpl -> EnsureUtil : ensureNotNull
+activate EnsureUtil
+EnsureUtil --> ProcessEngineConfigurationImpl
+deactivate EnsureUtil
+ProcessEngineConfigurationImpl -> ConfigurationLogger : debugDatabaseType
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDatabaseVendorAndVersion
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ConfigurationLogger : databaseConnectionAccessException
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> Connection : close
+activate Connection
+Connection --> ProcessEngineConfigurationImpl
+deactivate Connection
+ProcessEngineConfigurationImpl -> ConfigurationLogger : databaseConnectionCloseException
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandExecutors
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initActualCommandExecutor
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> CommandExecutorImpl : new
+activate CommandExecutorImpl
+CommandExecutorImpl --> ProcessEngineConfigurationImpl
+deactivate CommandExecutorImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandInterceptorsTxRequired
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandExecutorTxRequired
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initInterceptorChain
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineException : new
+activate ProcessEngineException
+ProcessEngineException --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineException
+ProcessEngineConfigurationImpl -> List : size
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : get
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : get
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : get
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandInterceptorsTxRequiresNew
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandExecutorTxRequiresNew
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initInterceptorChain
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineException : new
+activate ProcessEngineException
+ProcessEngineException --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineException
+ProcessEngineConfigurationImpl -> List : size
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : get
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : get
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : get
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandExecutorDbSchemaOperations
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> JtaProcessEngineConfiguration : initCommandExecutorDbSchemaOperations
+activate JtaProcessEngineConfiguration
+JtaProcessEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate JtaProcessEngineConfiguration
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initServices
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initService
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initIdGenerator
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> StandaloneProcessEngineConfiguration : new
+activate StandaloneProcessEngineConfiguration
+StandaloneProcessEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate StandaloneProcessEngineConfiguration
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : init
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> StandaloneProcessEngineConfiguration : new
+activate StandaloneProcessEngineConfiguration
+StandaloneProcessEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate StandaloneProcessEngineConfiguration
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : init
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DbIdGenerator : new
+activate DbIdGenerator
+DbIdGenerator --> ProcessEngineConfigurationImpl
+deactivate DbIdGenerator
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initFailedJobCommandFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultFailedJobCommandFactory : new
+activate DefaultFailedJobCommandFactory
+DefaultFailedJobCommandFactory --> ProcessEngineConfigurationImpl
+deactivate DefaultFailedJobCommandFactory
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> DefaultFailedJobParseListener : new
+activate DefaultFailedJobParseListener
+DefaultFailedJobParseListener --> ProcessEngineConfigurationImpl
+deactivate DefaultFailedJobParseListener
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDeployers
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCacheFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultCacheFactory : new
+activate DefaultCacheFactory
+DefaultCacheFactory --> ProcessEngineConfigurationImpl
+deactivate DefaultCacheFactory
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DeploymentCache : new
+activate DeploymentCache
+DeploymentCache --> ProcessEngineConfigurationImpl
+deactivate DeploymentCache
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initJobProvider
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultJobPriorityProvider : new
+activate DefaultJobPriorityProvider
+DefaultJobPriorityProvider --> ProcessEngineConfigurationImpl
+deactivate DefaultJobPriorityProvider
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initExternalTaskPriorityProvider
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultExternalTaskPriorityProvider : new
+activate DefaultExternalTaskPriorityProvider
+DefaultExternalTaskPriorityProvider --> ProcessEngineConfigurationImpl
+deactivate DefaultExternalTaskPriorityProvider
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initBatchHandlers
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> MigrationBatchJobHandler : new
+activate MigrationBatchJobHandler
+MigrationBatchJobHandler --> ProcessEngineConfigurationImpl
+deactivate MigrationBatchJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> ModificationBatchJobHandler : new
+activate ModificationBatchJobHandler
+ModificationBatchJobHandler --> ProcessEngineConfigurationImpl
+deactivate ModificationBatchJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> DeleteProcessInstancesJobHandler : new
+activate DeleteProcessInstancesJobHandler
+DeleteProcessInstancesJobHandler --> ProcessEngineConfigurationImpl
+deactivate DeleteProcessInstancesJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> DeleteHistoricProcessInstancesJobHandler : new
+activate DeleteHistoricProcessInstancesJobHandler
+DeleteHistoricProcessInstancesJobHandler --> ProcessEngineConfigurationImpl
+deactivate DeleteHistoricProcessInstancesJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> SetJobRetriesJobHandler : new
+activate SetJobRetriesJobHandler
+SetJobRetriesJobHandler --> ProcessEngineConfigurationImpl
+deactivate SetJobRetriesJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> SetExternalTaskRetriesJobHandler : new
+activate SetExternalTaskRetriesJobHandler
+SetExternalTaskRetriesJobHandler --> ProcessEngineConfigurationImpl
+deactivate SetExternalTaskRetriesJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> RestartProcessInstancesJobHandler : new
+activate RestartProcessInstancesJobHandler
+RestartProcessInstancesJobHandler --> ProcessEngineConfigurationImpl
+deactivate RestartProcessInstancesJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> UpdateProcessInstancesSuspendStateJobHandler : new
+activate UpdateProcessInstancesSuspendStateJobHandler
+UpdateProcessInstancesSuspendStateJobHandler --> ProcessEngineConfigurationImpl
+deactivate UpdateProcessInstancesSuspendStateJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> DeleteHistoricDecisionInstancesJobHandler : new
+activate DeleteHistoricDecisionInstancesJobHandler
+DeleteHistoricDecisionInstancesJobHandler --> ProcessEngineConfigurationImpl
+deactivate DeleteHistoricDecisionInstancesJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> ProcessSetRemovalTimeJobHandler : new
+activate ProcessSetRemovalTimeJobHandler
+ProcessSetRemovalTimeJobHandler --> ProcessEngineConfigurationImpl
+deactivate ProcessSetRemovalTimeJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> DecisionSetRemovalTimeJobHandler : new
+activate DecisionSetRemovalTimeJobHandler
+DecisionSetRemovalTimeJobHandler --> ProcessEngineConfigurationImpl
+deactivate DecisionSetRemovalTimeJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchSetRemovalTimeJobHandler : new
+activate BatchSetRemovalTimeJobHandler
+BatchSetRemovalTimeJobHandler --> ProcessEngineConfigurationImpl
+deactivate BatchSetRemovalTimeJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchSetVariablesHandler : new
+activate BatchSetVariablesHandler
+BatchSetVariablesHandler --> ProcessEngineConfigurationImpl
+deactivate BatchSetVariablesHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initJobExecutor
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultJobExecutor : new
+activate DefaultJobExecutor
+DefaultJobExecutor --> ProcessEngineConfigurationImpl
+deactivate DefaultJobExecutor
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> TimerExecuteNestedActivityJobHandler : new
+activate TimerExecuteNestedActivityJobHandler
+TimerExecuteNestedActivityJobHandler --> ProcessEngineConfigurationImpl
+deactivate TimerExecuteNestedActivityJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerCatchIntermediateEventJobHandler : new
+activate TimerCatchIntermediateEventJobHandler
+TimerCatchIntermediateEventJobHandler --> ProcessEngineConfigurationImpl
+deactivate TimerCatchIntermediateEventJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerStartEventJobHandler : new
+activate TimerStartEventJobHandler
+TimerStartEventJobHandler --> ProcessEngineConfigurationImpl
+deactivate TimerStartEventJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerStartEventSubprocessJobHandler : new
+activate TimerStartEventSubprocessJobHandler
+TimerStartEventSubprocessJobHandler --> ProcessEngineConfigurationImpl
+deactivate TimerStartEventSubprocessJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> AsyncContinuationJobHandler : new
+activate AsyncContinuationJobHandler
+AsyncContinuationJobHandler --> ProcessEngineConfigurationImpl
+deactivate AsyncContinuationJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> ProcessEventJobHandler : new
+activate ProcessEventJobHandler
+ProcessEventJobHandler --> ProcessEngineConfigurationImpl
+deactivate ProcessEventJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerSuspendProcessDefinitionHandler : new
+activate TimerSuspendProcessDefinitionHandler
+TimerSuspendProcessDefinitionHandler --> ProcessEngineConfigurationImpl
+deactivate TimerSuspendProcessDefinitionHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerActivateProcessDefinitionHandler : new
+activate TimerActivateProcessDefinitionHandler
+TimerActivateProcessDefinitionHandler --> ProcessEngineConfigurationImpl
+deactivate TimerActivateProcessDefinitionHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerSuspendJobDefinitionHandler : new
+activate TimerSuspendJobDefinitionHandler
+TimerSuspendJobDefinitionHandler --> ProcessEngineConfigurationImpl
+deactivate TimerSuspendJobDefinitionHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerActivateJobDefinitionHandler : new
+activate TimerActivateJobDefinitionHandler
+TimerActivateJobDefinitionHandler --> ProcessEngineConfigurationImpl
+deactivate TimerActivateJobDefinitionHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> TimerTaskListenerJobHandler : new
+activate TimerTaskListenerJobHandler
+TimerTaskListenerJobHandler --> ProcessEngineConfigurationImpl
+deactivate TimerTaskListenerJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchSeedJobHandler : new
+activate BatchSeedJobHandler
+BatchSeedJobHandler --> ProcessEngineConfigurationImpl
+deactivate BatchSeedJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchMonitorJobHandler : new
+activate BatchMonitorJobHandler
+BatchMonitorJobHandler --> ProcessEngineConfigurationImpl
+deactivate BatchMonitorJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> HistoryCleanupJobHandler : new
+activate HistoryCleanupJobHandler
+HistoryCleanupJobHandler --> ProcessEngineConfigurationImpl
+deactivate HistoryCleanupJobHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : values
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> NotifyAcquisitionRejectedJobsHandler : new
+activate NotifyAcquisitionRejectedJobsHandler
+NotifyAcquisitionRejectedJobsHandler --> ProcessEngineConfigurationImpl
+deactivate NotifyAcquisitionRejectedJobsHandler
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initTransactionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ManagedTransactionFactory : new
+activate ManagedTransactionFactory
+ManagedTransactionFactory --> ProcessEngineConfigurationImpl
+deactivate ManagedTransactionFactory
+ProcessEngineConfigurationImpl -> JdbcTransactionFactory : new
+activate JdbcTransactionFactory
+JdbcTransactionFactory --> ProcessEngineConfigurationImpl
+deactivate JdbcTransactionFactory
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initSqlSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Environment : new
+activate Environment
+Environment --> ProcessEngineConfigurationImpl
+deactivate Environment
+ProcessEngineConfigurationImpl -> InputStreamReader : new
+activate InputStreamReader
+InputStreamReader --> ProcessEngineConfigurationImpl
+deactivate InputStreamReader
+ProcessEngineConfigurationImpl -> Properties : new
+activate Properties
+Properties --> ProcessEngineConfigurationImpl
+deactivate Properties
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initSqlSessionFactoryProperties
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : entrySet
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Hashtable : put
+activate Hashtable
+Hashtable --> ProcessEngineConfigurationImpl
+deactivate Hashtable
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> XMLConfigBuilder : new
+activate XMLConfigBuilder
+XMLConfigBuilder --> ProcessEngineConfigurationImpl
+deactivate XMLConfigBuilder
+ProcessEngineConfigurationImpl -> XMLConfigBuilder : parse
+activate XMLConfigBuilder
+XMLConfigBuilder --> ProcessEngineConfigurationImpl
+deactivate XMLConfigBuilder
+ProcessEngineConfigurationImpl -> DefaultSqlSessionFactory : new
+activate DefaultSqlSessionFactory
+DefaultSqlSessionFactory --> ProcessEngineConfigurationImpl
+deactivate DefaultSqlSessionFactory
+ProcessEngineConfigurationImpl -> ProcessEngineException : new
+activate ProcessEngineException
+ProcessEngineException --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineException
+ProcessEngineConfigurationImpl -> IoUtil : closeSilently
+activate IoUtil
+IoUtil --> ProcessEngineConfigurationImpl
+deactivate IoUtil
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initIdentityProviderSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initSessionFactories
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initPersistenceProviders
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : ensurePrefixAndSchemaFitToegether
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : startsWith
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ProcessEngineException : new
+activate ProcessEngineException
+ProcessEngineException --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineException
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DbSqlSessionFactory : new
+activate DbSqlSessionFactory
+DbSqlSessionFactory --> ProcessEngineConfigurationImpl
+deactivate DbSqlSessionFactory
+ProcessEngineConfigurationImpl -> String : contains
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : split
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DbSqlPersistenceProviderFactory : new
+activate DbSqlPersistenceProviderFactory
+DbSqlPersistenceProviderFactory --> ProcessEngineConfigurationImpl
+deactivate DbSqlPersistenceProviderFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DbEntityManagerFactory : new
+activate DbEntityManagerFactory
+DbEntityManagerFactory --> ProcessEngineConfigurationImpl
+deactivate DbEntityManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> GenericManagerFactory : new
+activate GenericManagerFactory
+GenericManagerFactory --> ProcessEngineConfigurationImpl
+deactivate GenericManagerFactory
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Class : isAssignableFrom
+activate Class
+Class --> ProcessEngineConfigurationImpl
+deactivate Class
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : addSessionFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initValueTypeResolver
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ValueTypeResolverImpl : new
+activate ValueTypeResolverImpl
+ValueTypeResolverImpl --> ProcessEngineConfigurationImpl
+deactivate ValueTypeResolverImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initTypeValidator
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultDeserializationTypeValidator : new
+activate DefaultDeserializationTypeValidator
+DefaultDeserializationTypeValidator --> ProcessEngineConfigurationImpl
+deactivate DefaultDeserializationTypeValidator
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initSerialization
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultVariableSerializers : new
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> ProcessEngineConfigurationImpl
+deactivate DefaultVariableSerializers
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> NullValueSerializer : new
+activate NullValueSerializer
+NullValueSerializer --> ProcessEngineConfigurationImpl
+deactivate NullValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> StringValueSerializer : new
+activate StringValueSerializer
+StringValueSerializer --> ProcessEngineConfigurationImpl
+deactivate StringValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> BooleanValueSerializer : new
+activate BooleanValueSerializer
+BooleanValueSerializer --> ProcessEngineConfigurationImpl
+deactivate BooleanValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> ShortValueSerializer : new
+activate ShortValueSerializer
+ShortValueSerializer --> ProcessEngineConfigurationImpl
+deactivate ShortValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> IntegerValueSerializer : new
+activate IntegerValueSerializer
+IntegerValueSerializer --> ProcessEngineConfigurationImpl
+deactivate IntegerValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> LongValueSerlializer : new
+activate LongValueSerlializer
+LongValueSerlializer --> ProcessEngineConfigurationImpl
+deactivate LongValueSerlializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> DateValueSerializer : new
+activate DateValueSerializer
+DateValueSerializer --> ProcessEngineConfigurationImpl
+deactivate DateValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> DoubleValueSerializer : new
+activate DoubleValueSerializer
+DoubleValueSerializer --> ProcessEngineConfigurationImpl
+deactivate DoubleValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> ByteArrayValueSerializer : new
+activate ByteArrayValueSerializer
+ByteArrayValueSerializer --> ProcessEngineConfigurationImpl
+deactivate ByteArrayValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> JavaObjectSerializer : new
+activate JavaObjectSerializer
+JavaObjectSerializer --> ProcessEngineConfigurationImpl
+deactivate JavaObjectSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> FileValueSerializer : new
+activate FileValueSerializer
+FileValueSerializer --> ProcessEngineConfigurationImpl
+deactivate FileValueSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initJpa
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> JpaHelper : createEntityManagerFactory
+activate JpaHelper
+JpaHelper --> ProcessEngineConfigurationImpl
+deactivate JpaHelper
+ProcessEngineConfigurationImpl -> EntityManagerSessionFactory : new
+activate EntityManagerSessionFactory
+EntityManagerSessionFactory --> ProcessEngineConfigurationImpl
+deactivate EntityManagerSessionFactory
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> VariableSerializers : getSerializerByName
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : getSerializerByName
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> VariableSerializers : getSerializerIndexByName
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : getSerializerIndexByName
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> JPAVariableSerializer : new
+activate JPAVariableSerializer
+JPAVariableSerializer --> ProcessEngineConfigurationImpl
+deactivate JPAVariableSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> JPAVariableSerializer : new
+activate JPAVariableSerializer
+JPAVariableSerializer --> ProcessEngineConfigurationImpl
+deactivate JPAVariableSerializer
+ProcessEngineConfigurationImpl -> VariableSerializers : addSerializer
+activate VariableSerializers
+VariableSerializers -> DefaultVariableSerializers : addSerializer
+activate DefaultVariableSerializers
+DefaultVariableSerializers --> VariableSerializers
+deactivate DefaultVariableSerializers
+VariableSerializers --> ProcessEngineConfigurationImpl
+deactivate VariableSerializers
+ProcessEngineConfigurationImpl -> SpringTransactionsProcessEngineConfiguration : initJpa
+activate SpringTransactionsProcessEngineConfiguration
+SpringTransactionsProcessEngineConfiguration --> ProcessEngineConfigurationImpl
+deactivate SpringTransactionsProcessEngineConfiguration
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDelegateInterceptor
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultDelegateInterceptor : new
+activate DefaultDelegateInterceptor
+DefaultDelegateInterceptor --> ProcessEngineConfigurationImpl
+deactivate DefaultDelegateInterceptor
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initEventHandlers
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> SignalEventHandler : new
+activate SignalEventHandler
+SignalEventHandler --> ProcessEngineConfigurationImpl
+deactivate SignalEventHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> CompensationEventHandler : new
+activate CompensationEventHandler
+CompensationEventHandler --> ProcessEngineConfigurationImpl
+deactivate CompensationEventHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> EventHandlerImpl : new
+activate EventHandlerImpl
+EventHandlerImpl --> ProcessEngineConfigurationImpl
+deactivate EventHandlerImpl
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> ConditionalEventHandler : new
+activate ConditionalEventHandler
+ConditionalEventHandler --> ProcessEngineConfigurationImpl
+deactivate ConditionalEventHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initProcessApplicationManager
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessApplicationManager : new
+activate ProcessApplicationManager
+ProcessApplicationManager --> ProcessEngineConfigurationImpl
+deactivate ProcessApplicationManager
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCorrelationHandler
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultCorrelationHandler : new
+activate DefaultCorrelationHandler
+DefaultCorrelationHandler --> ProcessEngineConfigurationImpl
+deactivate DefaultCorrelationHandler
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initConditionHandler
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultConditionHandler : new
+activate DefaultConditionHandler
+DefaultConditionHandler --> ProcessEngineConfigurationImpl
+deactivate DefaultConditionHandler
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initIncidentHandlers
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> DefaultIncidentHandler : new
+activate DefaultIncidentHandler
+DefaultIncidentHandler --> ProcessEngineConfigurationImpl
+deactivate DefaultIncidentHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> DefaultIncidentHandler : new
+activate DefaultIncidentHandler
+DefaultIncidentHandler --> ProcessEngineConfigurationImpl
+deactivate DefaultIncidentHandler
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initPasswordDigest
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Default16ByteSaltGenerator : new
+activate Default16ByteSaltGenerator
+Default16ByteSaltGenerator --> ProcessEngineConfigurationImpl
+deactivate Default16ByteSaltGenerator
+ProcessEngineConfigurationImpl -> Sha512HashDigest : new
+activate Sha512HashDigest
+Sha512HashDigest --> ProcessEngineConfigurationImpl
+deactivate Sha512HashDigest
+ProcessEngineConfigurationImpl -> Collections : emptyList
+activate Collections
+Collections --> ProcessEngineConfigurationImpl
+deactivate Collections
+ProcessEngineConfigurationImpl -> PasswordManager : new
+activate PasswordManager
+PasswordManager --> ProcessEngineConfigurationImpl
+deactivate PasswordManager
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDeploymentRegistration
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> CopyOnWriteArraySet : new
+activate CopyOnWriteArraySet
+CopyOnWriteArraySet --> ProcessEngineConfigurationImpl
+deactivate CopyOnWriteArraySet
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDeploymentHandlerFactory
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultDeploymentHandlerFactory : new
+activate DefaultDeploymentHandlerFactory
+DefaultDeploymentHandlerFactory --> ProcessEngineConfigurationImpl
+deactivate DefaultDeploymentHandlerFactory
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initResourceAuthorizationProvider
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultAuthorizationProvider : new
+activate DefaultAuthorizationProvider
+DefaultAuthorizationProvider --> ProcessEngineConfigurationImpl
+deactivate DefaultAuthorizationProvider
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initPermissionProvider
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultPermissionProvider : new
+activate DefaultPermissionProvider
+DefaultPermissionProvider --> ProcessEngineConfigurationImpl
+deactivate DefaultPermissionProvider
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHostName
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> SimpleIpBasedProvider : new
+activate SimpleIpBasedProvider
+SimpleIpBasedProvider --> ProcessEngineConfigurationImpl
+deactivate SimpleIpBasedProvider
+ProcessEngineConfigurationImpl -> HostnameProvider : getHostname
+activate HostnameProvider
+HostnameProvider -> SimpleIpBasedProvider : getHostname
+activate SimpleIpBasedProvider
+SimpleIpBasedProvider --> HostnameProvider
+deactivate SimpleIpBasedProvider
+HostnameProvider --> ProcessEngineConfigurationImpl
+deactivate HostnameProvider
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMetrics
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> MetricsRegistry : new
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDefaultMetrics
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> MetricsRegistry : createMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createDbMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl -> MetricsRegistry : createMeter
+activate MetricsRegistry
+MetricsRegistry --> ProcessEngineConfigurationImpl
+deactivate MetricsRegistry
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DbMetricsReporter : new
+activate DbMetricsReporter
+DbMetricsReporter --> ProcessEngineConfigurationImpl
+deactivate DbMetricsReporter
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initTelemetry
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> TelemetryRegistry : new
+activate TelemetryRegistry
+TelemetryRegistry --> ProcessEngineConfigurationImpl
+deactivate TelemetryRegistry
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initTelemetryData
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Database : new
+activate Database
+Database --> ProcessEngineConfigurationImpl
+deactivate Database
+ProcessEngineConfigurationImpl -> ParseUtil : parseJdkDetails
+activate ParseUtil
+ParseUtil --> ProcessEngineConfigurationImpl
+deactivate ParseUtil
+ProcessEngineConfigurationImpl -> Internals : new
+activate Internals
+Internals --> ProcessEngineConfigurationImpl
+deactivate Internals
+ProcessEngineConfigurationImpl -> Set : add
+activate Set
+Set --> ProcessEngineConfigurationImpl
+deactivate Set
+ProcessEngineConfigurationImpl -> ParseUtil : parseProcessEngineVersion
+activate ParseUtil
+ParseUtil --> ProcessEngineConfigurationImpl
+deactivate ParseUtil
+ProcessEngineConfigurationImpl -> Product : new
+activate Product
+Product --> ProcessEngineConfigurationImpl
+deactivate Product
+ProcessEngineConfigurationImpl -> Data : new
+activate Data
+Data --> ProcessEngineConfigurationImpl
+deactivate Data
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Connectors : getConnector
+activate Connectors
+Connectors --> ProcessEngineConfigurationImpl
+deactivate Connectors
+ProcessEngineConfigurationImpl -> TelemetryLogger : unexpectedExceptionDuringHttpConnectorConfiguration
+activate TelemetryLogger
+TelemetryLogger --> ProcessEngineConfigurationImpl
+deactivate TelemetryLogger
+ProcessEngineConfigurationImpl -> TelemetryLogger : unableToConfigureHttpConnectorWarning
+activate TelemetryLogger
+TelemetryLogger --> ProcessEngineConfigurationImpl
+deactivate TelemetryLogger
+ProcessEngineConfigurationImpl -> TelemetryReporter : new
+activate TelemetryReporter
+TelemetryReporter --> ProcessEngineConfigurationImpl
+deactivate TelemetryReporter
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMigration
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMigrationInstructionValidators
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMigrationActivityMatcher
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultMigrationActivityMatcher : new
+activate DefaultMigrationActivityMatcher
+DefaultMigrationActivityMatcher --> ProcessEngineConfigurationImpl
+deactivate DefaultMigrationActivityMatcher
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMigrationInstructionGenerator
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultMigrationInstructionGenerator : new
+activate DefaultMigrationInstructionGenerator
+DefaultMigrationInstructionGenerator --> ProcessEngineConfigurationImpl
+deactivate DefaultMigrationInstructionGenerator
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> MigrationInstructionGenerator : migrationActivityValidators
+activate MigrationInstructionGenerator
+MigrationInstructionGenerator -> DefaultMigrationInstructionGenerator : migrationActivityValidators
+activate DefaultMigrationInstructionGenerator
+DefaultMigrationInstructionGenerator --> MigrationInstructionGenerator
+deactivate DefaultMigrationInstructionGenerator
+MigrationInstructionGenerator --> ProcessEngineConfigurationImpl
+deactivate MigrationInstructionGenerator
+ProcessEngineConfigurationImpl -> MigrationInstructionGenerator : migrationInstructionValidators
+activate MigrationInstructionGenerator
+MigrationInstructionGenerator -> DefaultMigrationInstructionGenerator : migrationInstructionValidators
+activate DefaultMigrationInstructionGenerator
+DefaultMigrationInstructionGenerator --> MigrationInstructionGenerator
+deactivate DefaultMigrationInstructionGenerator
+MigrationInstructionGenerator --> ProcessEngineConfigurationImpl
+deactivate MigrationInstructionGenerator
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMigratingActivityInstanceValidators
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMigratingTransitionInstanceValidators
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : addAll
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initMigratingCompensationInstanceValidators
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> NoUnmappedLeafInstanceValidator : new
+activate NoUnmappedLeafInstanceValidator
+NoUnmappedLeafInstanceValidator --> ProcessEngineConfigurationImpl
+deactivate NoUnmappedLeafInstanceValidator
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> NoUnmappedCompensationStartEventValidator : new
+activate NoUnmappedCompensationStartEventValidator
+NoUnmappedCompensationStartEventValidator --> ProcessEngineConfigurationImpl
+deactivate NoUnmappedCompensationStartEventValidator
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initCommandCheckers
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> TenantCommandChecker : new
+activate TenantCommandChecker
+TenantCommandChecker --> ProcessEngineConfigurationImpl
+deactivate TenantCommandChecker
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> AuthorizationCommandChecker : new
+activate AuthorizationCommandChecker
+AuthorizationCommandChecker --> ProcessEngineConfigurationImpl
+deactivate AuthorizationCommandChecker
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initDefaultUserPermissionForTask
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidConfigDefaultUserPermissionNameForTask
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryRemovalTime
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryRemovalTimeProvider
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultHistoryRemovalTimeProvider : new
+activate DefaultHistoryRemovalTimeProvider
+DefaultHistoryRemovalTimeProvider --> ProcessEngineConfigurationImpl
+deactivate DefaultHistoryRemovalTimeProvider
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryRemovalTimeStrategy
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : valueOf
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : format
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryCleanup
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryCleanupStrategy
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : valueOf
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : format
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : equals
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : valueOf
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : format
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : valueOf
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : format
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryCleanupBatchWindowStartTime
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HistoryCleanupHelper : parseTimeConfiguration
+activate HistoryCleanupHelper
+HistoryCleanupHelper --> ProcessEngineConfigurationImpl
+deactivate HistoryCleanupHelper
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryCleanupBatchWindowEndTime
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HistoryCleanupHelper : parseTimeConfiguration
+activate HistoryCleanupHelper
+HistoryCleanupHelper --> ProcessEngineConfigurationImpl
+deactivate HistoryCleanupHelper
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryCleanupBatchWindowsMap
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> BatchWindowConfiguration : new
+activate BatchWindowConfiguration
+BatchWindowConfiguration --> ProcessEngineConfigurationImpl
+deactivate BatchWindowConfiguration
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchWindowConfiguration : new
+activate BatchWindowConfiguration
+BatchWindowConfiguration --> ProcessEngineConfigurationImpl
+deactivate BatchWindowConfiguration
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchWindowConfiguration : new
+activate BatchWindowConfiguration
+BatchWindowConfiguration --> ProcessEngineConfigurationImpl
+deactivate BatchWindowConfiguration
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchWindowConfiguration : new
+activate BatchWindowConfiguration
+BatchWindowConfiguration --> ProcessEngineConfigurationImpl
+deactivate BatchWindowConfiguration
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchWindowConfiguration : new
+activate BatchWindowConfiguration
+BatchWindowConfiguration --> ProcessEngineConfigurationImpl
+deactivate BatchWindowConfiguration
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchWindowConfiguration : new
+activate BatchWindowConfiguration
+BatchWindowConfiguration --> ProcessEngineConfigurationImpl
+deactivate BatchWindowConfiguration
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> BatchWindowConfiguration : new
+activate BatchWindowConfiguration
+BatchWindowConfiguration --> ProcessEngineConfigurationImpl
+deactivate BatchWindowConfiguration
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> String : valueOf
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> String : format
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> String : valueOf
+activate String
+String --> ProcessEngineConfigurationImpl
+deactivate String
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryTimeToLive
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ParseUtil : parseHistoryTimeToLive
+activate ParseUtil
+ParseUtil --> ProcessEngineConfigurationImpl
+deactivate ParseUtil
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initBatchOperationsHistoryTimeToLive
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ParseUtil : parseHistoryTimeToLive
+activate ParseUtil
+ParseUtil --> ProcessEngineConfigurationImpl
+deactivate ParseUtil
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> Map : keySet
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : keySet
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Set : contains
+activate Set
+Set --> ProcessEngineConfigurationImpl
+deactivate Set
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidBatchOperation
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> ParseUtil : parseHistoryTimeToLive
+activate ParseUtil
+ParseUtil --> ProcessEngineConfigurationImpl
+deactivate ParseUtil
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl -> Map : keySet
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : containsKey
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> Map : keySet
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Map : get
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> ParseUtil : parseHistoryTimeToLive
+activate ParseUtil
+ParseUtil --> ProcessEngineConfigurationImpl
+deactivate ParseUtil
+ProcessEngineConfigurationImpl -> Map : put
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initHistoryCleanupJobLogTimeToLive
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ParseUtil : parseHistoryTimeToLive
+activate ParseUtil
+ParseUtil --> ProcessEngineConfigurationImpl
+deactivate ParseUtil
+ProcessEngineConfigurationImpl -> ConfigurationLogger : invalidPropertyValue
+activate ConfigurationLogger
+ConfigurationLogger --> ProcessEngineConfigurationImpl
+deactivate ConfigurationLogger
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initInvocationsPerBatchJobByBatchType
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> HashMap : new
+activate HashMap
+HashMap --> ProcessEngineConfigurationImpl
+deactivate HashMap
+ProcessEngineConfigurationImpl -> Map : keySet
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl -> Collection : stream
+activate Collection
+Collection --> ProcessEngineConfigurationImpl
+deactivate Collection
+ProcessEngineConfigurationImpl -> Stream : filter
+activate Stream
+Stream -> ReferencePipeline : filter
+activate ReferencePipeline
+ReferencePipeline --> Stream
+deactivate ReferencePipeline
+Stream --> ProcessEngineConfigurationImpl
+deactivate Stream
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : λ→
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Map : containsKey
+activate Map
+Map --> ProcessEngineConfigurationImpl
+deactivate Map
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> Stream : forEach
+activate Stream
+Stream --> ProcessEngineConfigurationImpl
+deactivate Stream
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initAdminUser
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initAdminGroups
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ArrayList : new
+activate ArrayList
+ArrayList --> ProcessEngineConfigurationImpl
+deactivate ArrayList
+ProcessEngineConfigurationImpl -> List : contains
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl -> List : add
+activate List
+List --> ProcessEngineConfigurationImpl
+deactivate List
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : initPasswordPolicy
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> DefaultPasswordPolicyImpl : new
+activate DefaultPasswordPolicyImpl
+DefaultPasswordPolicyImpl --> ProcessEngineConfigurationImpl
+deactivate DefaultPasswordPolicyImpl
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEngineConfigurationImpl : invokePostInit
+activate ProcessEngineConfigurationImpl
+ProcessEngineConfigurationImpl -> ProcessEnginePlugin : postInit
+activate ProcessEnginePlugin
+ProcessEnginePlugin --> ProcessEngineConfigurationImpl
+deactivate ProcessEnginePlugin
+ProcessEngineConfigurationImpl --> ProcessEngineConfigurationImpl
+deactivate ProcessEngineConfigurationImpl
+return
+@enduml
