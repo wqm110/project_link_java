@@ -8,6 +8,7 @@ import com.ruoyi.system.service.ISysDictDataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,15 +25,16 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/system/dict/data/sp")
-@Api(tags = "专业管理")
+@Api(tags = "A专业管理")
 public class SysDictTypeSpController extends BaseController {
     @Autowired
     private ISysDictDataService dictDataService;
 
     @PreAuthorize("@ss.hasPermi('system:dict:sp:list')")
     @GetMapping("/list/{sp}")
-    @ApiOperation("数据字典类行列表")
-    @ApiImplicitParam(name = "sp", value = "专业类型的数据字典", required = true, defaultValue = "project_profession", example = "project_profession")
+    @ApiOperation("专业列表")
+    @ApiImplicitParam(name = "sp", value = "专业类型的数据字典(查询、修改和删除和数据字典一样，dictype 固定为 = project_profession)",
+            required = true, defaultValue = "project_profession", example = "project_profession")
     public TableDataInfo list(@PathVariable("sp") String sp) {
         SysDictData sysDictData = new SysDictData();
         sysDictData.setDictType(sp);
