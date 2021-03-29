@@ -1,6 +1,10 @@
 ## 平台简介
 gitee 使用 [教程](http://git.mydoc.io/?t=153739)
 
+数据库
+>         url: jdbc:mysql://112.125.24.70:3306/project_link?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+>        username: project_link
+>        password: pXBc2Xncc3S55sWJ
 若依是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
 
 * 前端采用Vue、Element UI。

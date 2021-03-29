@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
@@ -22,6 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/camunda/loanapproval")
 @Api(tags = "A工作流项目控制器")
+@ProcessApplication("Loan Approval App")
 public class ProjectController {
 
     private final Logger LOGGER = LoggerFactory.getLogger(ProjectController.class);
