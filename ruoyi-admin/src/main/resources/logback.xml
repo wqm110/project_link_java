@@ -76,7 +76,7 @@
 	<logger name="com.ruoyi" level="info" />
 	<!-- Spring日志级别控制  -->
 	<logger name="org.springframework" level="warn" />
-    <logger name="org.camunda" level="debug" >
+    <logger name="org.camunda" level="info" >
         <appender-ref ref="console" />
     </logger>
 

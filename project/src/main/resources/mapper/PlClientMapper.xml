@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.PlClientMapper">
+    
+    <resultMap type="PlClient" id="PlClientResult">
+        <result property="clientId"    column="client_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="clientNumber"    column="client_number"    />
+        <result property="clientName"    column="client_name"    />
+        <result property="industry"    column="industry"    />
+        <result property="unitProperty"    column="unit_property"    />
+        <result property="contacts"    column="contacts"    />
+        <result property="contactNumber"    column="contact_number"    />
+        <result property="province"    column="province"    />
+        <result property="zipCode"    column="zip_code"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="accountNumber"    column="account_number"    />
+        <result property="businessPhone"    column="business_phone"    />
+        <result property="companyAddress"    column="company_address"    />
+        <result property="remark"    column="remark"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="delFlag"    column="del_flag"    />
+    </resultMap>
+
+    <sql id="selectPlClientVo">
+        select client_id, user_id, client_number, client_name, industry, unit_property, contacts, contact_number, province, zip_code, bank_name, account_number, business_phone, company_address, remark, status, create_by, create_time, update_by, update_time, del_flag from pl_client
+    </sql>
+
+    <select id="selectPlClientList" parameterType="PlClient" resultMap="PlClientResult">
+        <include refid="selectPlClientVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="clientNumber != null  and clientNumber != ''"> and client_number = #{clientNumber}</if>
+            <if test="clientName != null  and clientName != ''"> and client_name like concat('%', #{clientName}, '%')</if>
+            <if test="industry != null  and industry != ''"> and industry = #{industry}</if>
+            <if test="unitProperty != null  and unitProperty != ''"> and unit_property = #{unitProperty}</if>
+            <if test="contacts != null  and contacts != ''"> and contacts = #{contacts}</if>
+            <if test="contactNumber != null  and contactNumber != ''"> and contact_number = #{contactNumber}</if>
+            <if test="province != null  and province != ''"> and province = #{province}</if>
+            <if test="zipCode != null  and zipCode != ''"> and zip_code = #{zipCode}</if>
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="accountNumber != null  and accountNumber != ''"> and account_number = #{accountNumber}</if>
+            <if test="businessPhone != null  and businessPhone != ''"> and business_phone = #{businessPhone}</if>
+            <if test="companyAddress != null  and companyAddress != ''"> and company_address = #{companyAddress}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlClientById" parameterType="String" resultMap="PlClientResult">
+        <include refid="selectPlClientVo"/>
+        where client_id = #{clientId}
+    </select>
+        
+    <insert id="insertPlClient" parameterType="PlClient">
+        insert into pl_client
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clientId != null">client_id,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="clientNumber != null">client_number,</if>
+            <if test="clientName != null">client_name,</if>
+            <if test="industry != null">industry,</if>
+            <if test="unitProperty != null">unit_property,</if>
+            <if test="contacts != null">contacts,</if>
+            <if test="contactNumber != null">contact_number,</if>
+            <if test="province != null">province,</if>
+            <if test="zipCode != null">zip_code,</if>
+            <if test="bankName != null">bank_name,</if>
+            <if test="accountNumber != null">account_number,</if>
+            <if test="businessPhone != null">business_phone,</if>
+            <if test="companyAddress != null">company_address,</if>
+            <if test="remark != null">remark,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clientId != null">#{clientId},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="clientNumber != null">#{clientNumber},</if>
+            <if test="clientName != null">#{clientName},</if>
+            <if test="industry != null">#{industry},</if>
+            <if test="unitProperty != null">#{unitProperty},</if>
+            <if test="contacts != null">#{contacts},</if>
+            <if test="contactNumber != null">#{contactNumber},</if>
+            <if test="province != null">#{province},</if>
+            <if test="zipCode != null">#{zipCode},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="accountNumber != null">#{accountNumber},</if>
+            <if test="businessPhone != null">#{businessPhone},</if>
+            <if test="companyAddress != null">#{companyAddress},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlClient" parameterType="PlClient">
+        update pl_client
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="clientNumber != null">client_number = #{clientNumber},</if>
+            <if test="clientName != null">client_name = #{clientName},</if>
+            <if test="industry != null">industry = #{industry},</if>
+            <if test="unitProperty != null">unit_property = #{unitProperty},</if>
+            <if test="contacts != null">contacts = #{contacts},</if>
+            <if test="contactNumber != null">contact_number = #{contactNumber},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="zipCode != null">zip_code = #{zipCode},</if>
+            <if test="bankName != null">bank_name = #{bankName},</if>
+            <if test="accountNumber != null">account_number = #{accountNumber},</if>
+            <if test="businessPhone != null">business_phone = #{businessPhone},</if>
+            <if test="companyAddress != null">company_address = #{companyAddress},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where client_id = #{clientId}
+    </update>
+
+    <delete id="deletePlClientById" parameterType="String">
+        delete from pl_client where client_id = #{clientId}
+    </delete>
+
+    <delete id="deletePlClientByIds" parameterType="String">
+        delete from pl_client where client_id in 
+        <foreach item="clientId" collection="array" open="(" separator="," close=")">
+            #{clientId}
+        </foreach>
+    </delete>
+</mapper>
