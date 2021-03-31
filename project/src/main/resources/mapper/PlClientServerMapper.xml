@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.client.mapper.PlClientServerMapper">
+
+    <resultMap type="PlClientServer" id="PlClientServerResult">
+        <result property="clientId" column="client_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+    <sql id="selectPlClientServerVo">
+        select client_id, user_id, create_by, update_by, create_time, update_time, del_flag
+        from pl_client_server
+    </sql>
+
+    <select id="selectPlClientServerList" parameterType="PlClientServer" resultMap="PlClientServerResult">
+        <include refid="selectPlClientServerVo"/>
+        <where>
+        </where>
+    </select>
+
+    <select id="selectPlClientServerById" parameterType="Long" resultMap="PlClientServerResult">
+        <include refid="selectPlClientServerVo"/>
+        where client_id = #{clientId}
+    </select>
+
+    <insert id="insertPlClientServer" parameterType="PlClientServer">
+        insert into pl_client_server
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clientId != null">client_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="delFlag != null">del_flag,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clientId != null">#{clientId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePlClientServer" parameterType="PlClientServer">
+        update pl_client_server
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+        </trim>
+        where client_id = #{clientId}
+    </update>
+
+    <delete id="deletePlClientServerById" parameterType="Long">
+        delete
+        from pl_client_server
+        where client_id = #{clientId}
+    </delete>
+
+    <delete id="deletePlClientServerByIds" parameterType="Long">
+        delete from pl_client_server where client_id in
+        <foreach item="clientId" collection="array" open="(" separator="," close=")">
+            #{clientId}
+        </foreach>
+    </delete>
+    <delete id="deletePlClientServerByUserId" parameterType="java.lang.Long">
+        <if test="userId !=null and userId !=''">
+            delete from pl_client_server where user_id =#{userId}
+        </if>
+    </delete>
+</mapper>

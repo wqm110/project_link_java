@@ -81,7 +81,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <include refid="selectDeptVo"/>
 		where dept_name=#{deptName} and parent_id = #{parentId} limit 1
 	</select>
-    
+	<!-- 查找部门及部门下的人  (视图)  -->
+	<select id="selectDeptUserList" parameterType="SysDept" resultMap="SysDeptResult">
+		select dept_id, parent_id, dept_name, remark
+		from dept_user
+	</select>
+
     <insert id="insertDept" parameterType="SysDept">
  		insert into sys_dept(
  			<if test="deptId != null and deptId != 0">dept_id,</if>

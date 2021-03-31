@@ -22,7 +22,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/camunda/loanapproval")
-@Api(tags = "A工作流项目控制器")
+//@Api(tags = "A工作流项目控制器")
 @ProcessApplication("Loan Approval App")
 public class ProjectController {
 

@@ -1,7 +1,8 @@
-package com.ruoyi.project.mapper;
+package com.ruoyi.project.client.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
-import com.ruoyi.project.domain.PlClient;
+import com.ruoyi.project.client.domain.PlClient;
 
 /**
  * 客户信息Mapper接口
@@ -17,7 +18,7 @@ public interface PlClientMapper
      * @param clientId 客户信息ID
      * @return 客户信息
      */
-    public PlClient selectPlClientById(String clientId);
+    public PlClient selectPlClientById(Long clientId);
 
     /**
      * 查询客户信息列表
@@ -49,7 +50,7 @@ public interface PlClientMapper
      * @param clientId 客户信息ID
      * @return 结果
      */
-    public int deletePlClientById(String clientId);
+    public int deletePlClientById(Long clientId);
 
     /**
      * 批量删除客户信息
@@ -57,5 +58,7 @@ public interface PlClientMapper
      * @param clientIds 需要删除的数据ID
      * @return 结果
      */
-    public int deletePlClientByIds(String[] clientIds);
+    public int deletePlClientByIds(Long[] clientIds);
+
+    List<PlClient> selectPlClientByIds(ArrayList<String> clientsUserIds);
 }

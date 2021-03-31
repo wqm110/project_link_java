@@ -106,4 +106,6 @@ public interface ISysDeptService
      * @return 结果
      */
     public int deleteDeptById(Long deptId);
+
+    List<SysDept> selectDeptUserList();
 }

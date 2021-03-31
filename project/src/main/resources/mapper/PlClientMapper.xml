@@ -1,63 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.mapper.PlClientMapper">
-    
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.client.mapper.PlClientMapper">
+
     <resultMap type="PlClient" id="PlClientResult">
-        <result property="clientId"    column="client_id"    />
-        <result property="userId"    column="user_id"    />
-        <result property="clientNumber"    column="client_number"    />
-        <result property="clientName"    column="client_name"    />
-        <result property="industry"    column="industry"    />
-        <result property="unitProperty"    column="unit_property"    />
-        <result property="contacts"    column="contacts"    />
-        <result property="contactNumber"    column="contact_number"    />
-        <result property="province"    column="province"    />
-        <result property="zipCode"    column="zip_code"    />
-        <result property="bankName"    column="bank_name"    />
-        <result property="accountNumber"    column="account_number"    />
-        <result property="businessPhone"    column="business_phone"    />
-        <result property="companyAddress"    column="company_address"    />
-        <result property="remark"    column="remark"    />
-        <result property="status"    column="status"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="delFlag"    column="del_flag"    />
+        <result property="clientId" column="client_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="clientNumber" column="client_number"/>
+        <result property="clientName" column="client_name"/>
+        <result property="industry" column="industry"/>
+        <result property="unitProperty" column="unit_property"/>
+        <result property="contacts" column="contacts"/>
+        <result property="contactNumber" column="contact_number"/>
+        <result property="province" column="province"/>
+        <result property="zipCode" column="zip_code"/>
+        <result property="bankName" column="bank_name"/>
+        <result property="accountNumber" column="account_number"/>
+        <result property="businessPhone" column="business_phone"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="remark" column="remark"/>
+        <result property="status" column="status"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="vipFlag" column="vip_flag"/>
     </resultMap>
 
     <sql id="selectPlClientVo">
-        select client_id, user_id, client_number, client_name, industry, unit_property, contacts, contact_number, province, zip_code, bank_name, account_number, business_phone, company_address, remark, status, create_by, create_time, update_by, update_time, del_flag from pl_client
+        select client_id,
+               user_id,
+               client_number,
+               client_name,
+               industry,
+               unit_property,
+               contacts,
+               contact_number,
+               province,
+               zip_code,
+               bank_name,
+               account_number,
+               business_phone,
+               company_address,
+               remark,
+               status,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               del_flag,
+               vip_flag
+        from pl_client
     </sql>
 
     <select id="selectPlClientList" parameterType="PlClient" resultMap="PlClientResult">
-        <include refid="selectPlClientVo"/>
-        <where>  
-            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
-            <if test="clientNumber != null  and clientNumber != ''"> and client_number = #{clientNumber}</if>
-            <if test="clientName != null  and clientName != ''"> and client_name like concat('%', #{clientName}, '%')</if>
-            <if test="industry != null  and industry != ''"> and industry = #{industry}</if>
-            <if test="unitProperty != null  and unitProperty != ''"> and unit_property = #{unitProperty}</if>
-            <if test="contacts != null  and contacts != ''"> and contacts = #{contacts}</if>
-            <if test="contactNumber != null  and contactNumber != ''"> and contact_number = #{contactNumber}</if>
-            <if test="province != null  and province != ''"> and province = #{province}</if>
-            <if test="zipCode != null  and zipCode != ''"> and zip_code = #{zipCode}</if>
-            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
-            <if test="accountNumber != null  and accountNumber != ''"> and account_number = #{accountNumber}</if>
-            <if test="businessPhone != null  and businessPhone != ''"> and business_phone = #{businessPhone}</if>
-            <if test="companyAddress != null  and companyAddress != ''"> and company_address = #{companyAddress}</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
+        select c.client_id,c.user_id, u.nick_name,c.client_number, c.client_name, c.industry, c.unit_property,
+        c.contacts,  c.contact_number, c.province, c.zip_code, c.bank_name, c.account_number, c.business_phone,
+        c.company_address, c.remark, c.status, c.create_by, c.create_time, c.update_by, c.update_time,c.del_flag,
+        c.vip_flag
+        from pl_client as c inner join sys_user as u on u.user_id = c.user_id
+        <where>
+            <if test="userId != null  and userId != ''">and c.user_id = #{userId}</if>
+            <if test="clientNumber != null  and clientNumber != ''">and c.client_number = #{clientNumber}</if>
+            <if test="clientName != null  and clientName != ''">and c.client_name like concat('%', #{clientName}, '%')
+            </if>
+            <if test="industry != null  and industry != ''">and c.industry = #{industry}</if>
+            <if test="unitProperty != null  and unitProperty != ''">and c.unit_property = #{unitProperty}</if>
+            <if test="contacts != null  and contacts != ''">and c.contacts = #{contacts}</if>
+            <if test="contactNumber != null  and contactNumber != ''">and c.contact_number = #{contactNumber}</if>
+            <if test="province != null  and province != ''">and c.province = #{province}</if>
+            <if test="zipCode != null  and zipCode != ''">and c.zip_code = #{zipCode}</if>
+            <if test="bankName != null  and bankName != ''">and c.bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="accountNumber != null  and accountNumber != ''">and c.account_number = #{accountNumber}</if>
+            <if test="businessPhone != null  and businessPhone != ''">and c.business_phone = #{businessPhone}</if>
+            <if test="companyAddress != null  and companyAddress != ''">and c.company_address = #{companyAddress}</if>
+            <if test="status != null  and status != ''">and c.status = #{status}</if>
+            <if test="vipFlag != null  and vipFlag != ''">and c.vip_flag = #{vipFlag}</if>
         </where>
     </select>
-    
-    <select id="selectPlClientById" parameterType="String" resultMap="PlClientResult">
+
+    <select id="selectPlClientById" parameterType="Long" resultMap="PlClientResult">
         <include refid="selectPlClientVo"/>
         where client_id = #{clientId}
     </select>
-        
-    <insert id="insertPlClient" parameterType="PlClient">
+    <select id="selectPlClientByIds" resultType="com.ruoyi.project.client.domain.PlClient"
+            parameterType="java.util.List">
+        <include refid="selectPlClientVo"/>
+        <where>
+            <if test="clientsUserIds != null and clientsUserIds != ''">
+                client_id in
+                <foreach item="clientId" collection="array" open="(" separator="," close=")">
+                    #{clientsUserIds}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertPlClient" parameterType="PlClient" useGeneratedKeys="true" keyProperty="clientId">
         insert into pl_client
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="clientId != null">client_id,</if>
@@ -81,7 +123,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="delFlag != null">del_flag,</if>
-         </trim>
+            <if test="vipFlag != null">vip_flag,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="clientId != null">#{clientId},</if>
             <if test="userId != null and userId != ''">#{userId},</if>
@@ -104,7 +147,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="delFlag != null">#{delFlag},</if>
-         </trim>
+            <if test="vipFlag != null">#{vipFlag},</if>
+        </trim>
     </insert>
 
     <update id="updatePlClient" parameterType="PlClient">
@@ -130,16 +174,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateBy != null">update_by = #{updateBy},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="vipFlag != null">vip_flag = #{vipFlag},</if>
         </trim>
         where client_id = #{clientId}
     </update>
 
-    <delete id="deletePlClientById" parameterType="String">
-        delete from pl_client where client_id = #{clientId}
+    <delete id="deletePlClientById" parameterType="Long">
+        delete
+        from pl_client
+        where client_id = #{clientId}
     </delete>
 
-    <delete id="deletePlClientByIds" parameterType="String">
-        delete from pl_client where client_id in 
+    <delete id="deletePlClientByIds" parameterType="Long">
+        delete from pl_client where client_id in
         <foreach item="clientId" collection="array" open="(" separator="," close=")">
             #{clientId}
         </foreach>

@@ -16,6 +16,11 @@
     </description>
 
     <dependencies>
+        <!--hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
         <!--        文档注解-->
         <dependency>
             <groupId>io.swagger</groupId>

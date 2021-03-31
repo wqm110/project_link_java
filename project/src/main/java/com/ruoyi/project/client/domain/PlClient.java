@@ -1,4 +1,4 @@
-package com.ruoyi.project.domain;
+package com.ruoyi.project.client.domain;
 
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
@@ -21,14 +21,21 @@ public class PlClient extends BaseEntity {
      * 主键
      */
     @ApiModelProperty(value = "主键")
-    private String clientId;
+    private Long clientId;
 
     /**
      * 业务员编号
      */
     @ApiModelProperty(value = "业务员编号")
     @Excel(name = "业务员编号")
-    private String userId;
+    private Long userId;
+    /**
+     * 负责人姓名
+     */
+    @ApiModelProperty(value = "负责人姓名")
+    private String nickName;
+
+
 
     /**
      * 客户编号
@@ -47,7 +54,7 @@ public class PlClient extends BaseEntity {
     /**
      * 客户行业类别
      */
-    @ApiModelProperty(value = "客户行业类别")
+    @ApiModelProperty(value = "客户行业类别 数据字典dic_industry")
     @Excel(name = "客户行业类别")
     private String industry;
 
@@ -125,27 +132,44 @@ public class PlClient extends BaseEntity {
      * 删除标志（0代表存在 2代表删除）
      */
     @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）")
-    private String delFlag;
+    private String delFlag="0";
     /**
      * 重点客户标志（0代表普通客户 1代表重点客户）
      */
     @ApiModelProperty(value = "删除标志（0代表普通客户 1代表重点客户）")
     private String vipFlag;
 
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
+
+    public String getNickName() {
+        return nickName;
     }
 
-    public String getClientId() {
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getVipFlag() {
+        return vipFlag;
+    }
+
+    public void setVipFlag(String vipFlag) {
+        this.vipFlag = vipFlag;
+    }
+
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public void setClientNumber(String clientNumber) {
@@ -265,6 +289,7 @@ public class PlClient extends BaseEntity {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("clientId", getClientId())
                 .append("userId", getUserId())
+                .append("nickName",getNickName())
                 .append("clientNumber", getClientNumber())
                 .append("clientName", getClientName())
                 .append("industry", getIndustry())

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.bidinfo.mapper.PlBidInfoMapper">
+
+    <resultMap type="PlBidInfo" id="PlBidInfoResult">
+        <result property="bidId" column="bid_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="bidName" column="bid_name"/>
+        <result property="bidNumber" column="bid_number"/>
+        <result property="bidDeadline" column="bid_deadline"/>
+        <result property="bidDate" column="bid_date"/>
+        <result property="winningDate" column="winning_date"/>
+        <result property="bidOpeningDate" column="bid_opening_date"/>
+        <result property="tenderAgency" column="tender_agency"/>
+        <result property="biddingUnit" column="bidding_unit"/>
+        <result property="quotedPrice" column="quoted_price"/>
+        <result property="constructionSite" column="construction_site"/>
+        <result property="bidBond" column="bid_bond"/>
+        <result property="winBid" column="win_bid"/>
+        <result property="bidBondRecovered" column="bid_bond_recovered"/>
+        <result property="bidBondTakebackDate" column="bid_bond_takeback_date"/>
+        <result property="bidBondReasonForFailure" column="bid_bond_reason_for_failure"/>
+        <result property="performBond" column="perform_bond"/>
+        <result property="performBondRecovered" column="perform_bond_recovered"/>
+        <result property="performBondTakebackDate" column="perform_bond_takeback_date"/>
+        <result property="performBondReasonForFailure" column="perform_bond_reason_for_failure"/>
+        <result property="bidAttachment" column="bid_attachment"/>
+        <result property="instanceId" column="instance_id"/>
+        <result property="status" column="status"/>
+        <result property="applyStatus" column="apply_status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+        <result property="applyTime" column="apply_time"/>
+        <result property="projectId" column="project_id"/>
+        <result property="projectCategory" column="project_category"/>
+        <result property="projectManager" column="project_manager"/>
+        <result property="projectManagerName" column="project_manager_name"/>
+        <result property="projectManagerContact" column="project_manager_contact"/>
+        <result property="agent" column="agent"/>
+        <result property="agentName" column="agent_name"/>
+        <result property="agentContact" column="agent_contact"/>
+        <result property="projectType" column="project_type"/>
+        <result property="scale" column="scale"/>
+        <result property="businessCategory" column="business_category"/>
+        <result property="unionCompanyName" column="union_company_name"/>
+        <result property="bidPlace" column="bid_place"/>
+    </resultMap>
+
+    <sql id="selectPlBidInfoVo">
+        select bid_id,
+               user_id,
+               bid_name,
+               bid_number,
+               bid_deadline,
+               bid_date,
+               bid_place,
+               winning_date,
+               bid_opening_date,
+               tender_agency,
+               bidding_unit,
+               quoted_price,
+               construction_site,
+               bid_bond,
+               win_bid,
+               bid_bond_recovered,
+               bid_bond_takeback_date,
+               bid_bond_reason_for_failure,
+               perform_bond,
+               perform_bond_recovered,
+               perform_bond_takeback_date,
+               perform_bond_reason_for_failure,
+               bid_attachment,
+               instance_id,
+               apply_time,
+               project_id,
+               project_category,
+               project_manager,
+               project_manager_name,
+               project_manager_contact,
+               agent,
+               agent_name,
+               agent_contact,
+               project_type,
+               scale,
+               business_category,
+               union_company_name,
+               status,
+               apply_status,
+               del_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from pl_bid_info
+    </sql>
+    <!--    agent-->
+    <!--    user_id-->
+    <select id="selectPlBidInfoList" parameterType="PlBidInfo" resultMap="PlBidInfoResult">
+        select bid_id,i.user_id,u.nick_name,bid_name,bid_number,bid_deadline,bid_date,bid_place,winning_date,bid_opening_date,
+        tender_agency,bidding_unit,quoted_price,construction_site,bid_bond,win_bid,bid_bond_recovered,bid_bond_takeback_date,
+        bid_bond_reason_for_failure,perform_bond,perform_bond_recovered,perform_bond_takeback_date,perform_bond_reason_for_failure,bid_attachment,
+        i.instance_id,i.apply_time,project_id,project_category,project_manager,project_manager_name,project_manager_contact,i.agent,u2.nick_name as agent_name,
+        agent_name,agent_contact,project_type,scale,business_category,union_company_name,i.apply_status
+        from pl_bid_info as i inner join  sys_user as u on u.user_id = i.user_id inner join sys_user as u2 on i.agent = u2.user_id
+        <where>
+            <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+            <if test="bidName != null  and bidName != ''">and bid_name like concat('%', #{bidName}, '%')</if>
+            <if test="bidNumber != null  and bidNumber != ''">and bid_number = #{bidNumber}</if>
+            <if test="bidDeadline != null ">and bid_deadline = #{bidDeadline}</if>
+            <if test="bidDate != null ">and bid_date = #{bidDate}</if>
+            <if test="winningDate != null ">and winning_date = #{winningDate}</if>
+            <if test="bidOpeningDate != null ">and bid_opening_date = #{bidOpeningDate}</if>
+            <if test="tenderAgency != null  and tenderAgency != ''">and tender_agency = #{tenderAgency}</if>
+            <if test="biddingUnit != null  and biddingUnit != ''">and bidding_unit = #{biddingUnit}</if>
+            <if test="quotedPrice != null ">and quoted_price = #{quotedPrice}</if>
+            <if test="constructionSite != null  and constructionSite != ''">and construction_site =
+                #{constructionSite}
+            </if>
+            <if test="bidBond != null ">and bid_bond = #{bidBond}</if>
+            <if test="winBid != null  and winBid != ''">and win_bid = #{winBid}</if>
+            <if test="bidBondRecovered != null  and bidBondRecovered != ''">and bid_bond_recovered =
+                #{bidBondRecovered}
+            </if>
+            <if test="bidBondTakebackDate != null ">and bid_bond_takeback_date = #{bidBondTakebackDate}</if>
+            <if test="bidBondReasonForFailure != null  and bidBondReasonForFailure != ''">and
+                bid_bond_reason_for_failure = #{bidBondReasonForFailure}
+            </if>
+            <if test="performBond != null ">and perform_bond = #{performBond}</if>
+            <if test="performBondRecovered != null  and performBondRecovered != ''">and perform_bond_recovered =
+                #{performBondRecovered}
+            </if>
+            <if test="performBondTakebackDate != null ">and perform_bond_takeback_date = #{performBondTakebackDate}</if>
+            <if test="performBondReasonForFailure != null  and performBondReasonForFailure != ''">and
+                perform_bond_reason_for_failure = #{performBondReasonForFailure}
+            </if>
+            <if test="bidAttachment != null  and bidAttachment != ''">and bid_attachment = #{bidAttachment}</if>
+            <if test="instanceId != null  and instanceId != ''">and instance_id = #{instanceId}</if>
+            <if test="status != null  and status != ''">and status = #{status}</if>
+            <if test="applyStatus != null  and applyStatus != ''">and apply_status = #{applyStatus}</if>
+            <if test="applyTime != null ">and apply_time = #{applyTime}</if>
+            <if test="projectId != null  and projectId != ''">and project_id = #{projectId}</if>
+            <if test="projectCategory != null  and projectCategory != ''">and project_category = #{projectCategory}</if>
+            <if test="projectManager != null  and projectManager != ''">and project_manager = #{projectManager}</if>
+            <if test="projectManagerName != null  and projectManagerName != ''">and project_manager_name like
+                concat('%', #{projectManagerName}, '%')
+            </if>
+            <if test="projectManagerContact != null  and projectManagerContact != ''">and project_manager_contact =
+                #{projectManagerContact}
+            </if>
+            <if test="agent != null  and agent != ''">and agent = #{agent}</if>
+            <if test="agentName != null  and agentName != ''">and agent_name like concat('%', #{agentName}, '%')</if>
+            <if test="agentContact != null  and agentContact != ''">and agent_contact = #{agentContact}</if>
+            <if test="projectType != null  and projectType != ''">and project_type = #{projectType}</if>
+            <if test="scale != null  and scale != ''">and scale = #{scale}</if>
+            <if test="businessCategory != null  and businessCategory != ''">and business_category =
+                #{businessCategory}
+            </if>
+            <if test="unionCompanyName != null  and unionCompanyName != ''">and union_company_name like concat('%',
+                #{unionCompanyName}, '%')
+            </if>
+            <if test="bidPlace != null  and bidPlace != ''">and bid_place = #{bidPlace}</if>
+        </where>
+    </select>
+
+    <select id="selectPlBidInfoById" parameterType="Long" resultMap="PlBidInfoResult">
+        <include refid="selectPlBidInfoVo"/>
+        where bid_id = #{bidId}
+    </select>
+    <!--    来源于客户表-->
+    <!--    查寻已录入的招标单位-->
+    <select id="slectBiddingUnits" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
+        select distinct bidding_unit, client_name
+        from pl_bid_info as i
+        inner join pl_client pc on pc.client_id = i.bidding_unit
+        <where>
+            <if test="delFlag != null">i.del_flag=#{delFlag}</if>
+        </where>
+    </select>
+    <!--    查寻已录入的投标地点(下拉)-->
+    <select id="selectBidPlaces" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
+        select distinct bid_place
+        from pl_bid_info
+        <where>
+            <if test="delFlag != null">del_flag=#{delFlag}</if>
+        </where>
+    </select>
+    <select id="selectAgents" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
+        select distinct agent,nick_name from pl_bid_info as i inner join sys_user su on i.agent = su.user_id
+        <where>
+            <if test="delFlag != null">del_flag=#{delFlag} and</if>
+            <if test="userId != null">user_id = #{userId}</if>
+        </where>
+    </select>
+    <select id="listCeaters" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
+        select distinct create_by from pl_bid_info as i inner join sys_user su on i.agent = su.user_id
+        <where>
+            <if test="delFlag != null">del_flag=#{delFlag}</if>
+        </where>
+    </select>
+
+    <insert id="insertPlBidInfo" parameterType="PlBidInfo">
+        insert into pl_bid_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bidId != null">bid_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="bidName != null">bid_name,</if>
+            <if test="bidNumber != null">bid_number,</if>
+            <if test="bidDeadline != null">bid_deadline,</if>
+            <if test="bidDate != null">bid_date,</if>
+            <if test="winningDate != null">winning_date,</if>
+            <if test="bidOpeningDate != null">bid_opening_date,</if>
+            <if test="tenderAgency != null">tender_agency,</if>
+            <if test="biddingUnit != null">bidding_unit,</if>
+            <if test="quotedPrice != null">quoted_price,</if>
+            <if test="constructionSite != null">construction_site,</if>
+            <if test="bidBond != null">bid_bond,</if>
+            <if test="winBid != null">win_bid,</if>
+            <if test="bidBondRecovered != null">bid_bond_recovered,</if>
+            <if test="bidBondTakebackDate != null">bid_bond_takeback_date,</if>
+            <if test="bidBondReasonForFailure != null">bid_bond_reason_for_failure,</if>
+            <if test="performBond != null">perform_bond,</if>
+            <if test="performBondRecovered != null">perform_bond_recovered,</if>
+            <if test="performBondTakebackDate != null">perform_bond_takeback_date,</if>
+            <if test="performBondReasonForFailure != null">perform_bond_reason_for_failure,</if>
+            <if test="bidAttachment != null">bid_attachment,</if>
+            <if test="instanceId != null">instance_id,</if>
+            <if test="status != null">status,</if>
+            <if test="applyStatus != null">apply_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="applyTime != null">apply_time,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="projectCategory != null">project_category,</if>
+            <if test="projectManager != null">project_manager,</if>
+            <if test="projectManagerName != null">project_manager_name,</if>
+            <if test="projectManagerContact != null">project_manager_contact,</if>
+            <if test="agent != null">agent,</if>
+            <if test="agentName != null">agent_name,</if>
+            <if test="agentContact != null">agent_contact,</if>
+            <if test="projectType != null">project_type,</if>
+            <if test="scale != null">scale,</if>
+            <if test="businessCategory != null">business_category,</if>
+            <if test="unionCompanyName != null">union_company_name,</if>
+            <if test="bidPlace != null">bid_place,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bidId != null">#{bidId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="bidName != null">#{bidName},</if>
+            <if test="bidNumber != null">#{bidNumber},</if>
+            <if test="bidDeadline != null">#{bidDeadline},</if>
+            <if test="bidDate != null">#{bidDate},</if>
+            <if test="winningDate != null">#{winningDate},</if>
+            <if test="bidOpeningDate != null">#{bidOpeningDate},</if>
+            <if test="tenderAgency != null">#{tenderAgency},</if>
+            <if test="biddingUnit != null">#{biddingUnit},</if>
+            <if test="quotedPrice != null">#{quotedPrice},</if>
+            <if test="constructionSite != null">#{constructionSite},</if>
+            <if test="bidBond != null">#{bidBond},</if>
+            <if test="winBid != null">#{winBid},</if>
+            <if test="bidBondRecovered != null">#{bidBondRecovered},</if>
+            <if test="bidBondTakebackDate != null">#{bidBondTakebackDate},</if>
+            <if test="bidBondReasonForFailure != null">#{bidBondReasonForFailure},</if>
+            <if test="performBond != null">#{performBond},</if>
+            <if test="performBondRecovered != null">#{performBondRecovered},</if>
+            <if test="performBondTakebackDate != null">#{performBondTakebackDate},</if>
+            <if test="performBondReasonForFailure != null">#{performBondReasonForFailure},</if>
+            <if test="bidAttachment != null">#{bidAttachment},</if>
+            <if test="instanceId != null">#{instanceId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="applyStatus != null">#{applyStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="applyTime != null">#{applyTime},</if>
+            <if test="projectId != null">#{projectId},</if>
+            <if test="projectCategory != null">#{projectCategory},</if>
+            <if test="projectManager != null">#{projectManager},</if>
+            <if test="projectManagerName != null">#{projectManagerName},</if>
+            <if test="projectManagerContact != null">#{projectManagerContact},</if>
+            <if test="agent != null">#{agent},</if>
+            <if test="agentName != null">#{agentName},</if>
+            <if test="agentContact != null">#{agentContact},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="scale != null">#{scale},</if>
+            <if test="businessCategory != null">#{businessCategory},</if>
+            <if test="unionCompanyName != null">#{unionCompanyName},</if>
+            <if test="bidPlace != null">#{bidPlace},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePlBidInfo" parameterType="PlBidInfo">
+        update pl_bid_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="bidName != null">bid_name = #{bidName},</if>
+            <if test="bidNumber != null">bid_number = #{bidNumber},</if>
+            <if test="bidDeadline != null">bid_deadline = #{bidDeadline},</if>
+            <if test="bidDate != null">bid_date = #{bidDate},</if>
+            <if test="winningDate != null">winning_date = #{winningDate},</if>
+            <if test="bidOpeningDate != null">bid_opening_date = #{bidOpeningDate},</if>
+            <if test="tenderAgency != null">tender_agency = #{tenderAgency},</if>
+            <if test="biddingUnit != null">bidding_unit = #{biddingUnit},</if>
+            <if test="quotedPrice != null">quoted_price = #{quotedPrice},</if>
+            <if test="constructionSite != null">construction_site = #{constructionSite},</if>
+            <if test="bidBond != null">bid_bond = #{bidBond},</if>
+            <if test="winBid != null">win_bid = #{winBid},</if>
+            <if test="bidBondRecovered != null">bid_bond_recovered = #{bidBondRecovered},</if>
+            <if test="bidBondTakebackDate != null">bid_bond_takeback_date = #{bidBondTakebackDate},</if>
+            <if test="bidBondReasonForFailure != null">bid_bond_reason_for_failure = #{bidBondReasonForFailure},</if>
+            <if test="performBond != null">perform_bond = #{performBond},</if>
+            <if test="performBondRecovered != null">perform_bond_recovered = #{performBondRecovered},</if>
+            <if test="performBondTakebackDate != null">perform_bond_takeback_date = #{performBondTakebackDate},</if>
+            <if test="performBondReasonForFailure != null">perform_bond_reason_for_failure =
+                #{performBondReasonForFailure},
+            </if>
+            <if test="bidAttachment != null">bid_attachment = #{bidAttachment},</if>
+            <if test="instanceId != null">instance_id = #{instanceId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="applyStatus != null">apply_status = #{applyStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="applyTime != null">apply_time = #{applyTime},</if>
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="projectCategory != null">project_category = #{projectCategory},</if>
+            <if test="projectManager != null">project_manager = #{projectManager},</if>
+            <if test="projectManagerName != null">project_manager_name = #{projectManagerName},</if>
+            <if test="projectManagerContact != null">project_manager_contact = #{projectManagerContact},</if>
+            <if test="agent != null">agent = #{agent},</if>
+            <if test="agentName != null">agent_name = #{agentName},</if>
+            <if test="agentContact != null">agent_contact = #{agentContact},</if>
+            <if test="projectType != null">project_type = #{projectType},</if>
+            <if test="scale != null">scale = #{scale},</if>
+            <if test="businessCategory != null">business_category = #{businessCategory},</if>
+            <if test="unionCompanyName != null">union_company_name = #{unionCompanyName},</if>
+            <if test="bidPlace != null">bid_place = #{bidPlace},</if>
+        </trim>
+        where bid_id = #{bidId}
+    </update>
+
+    <delete id="deletePlBidInfoById" parameterType="Long">
+        delete
+        from pl_bid_info
+        where bid_id = #{bidId}
+    </delete>
+
+    <delete id="deletePlBidInfoByIds" parameterType="Long">
+        delete from pl_bid_info where bid_id in
+        <foreach item="bidId" collection="array" open="(" separator="," close=")">
+            #{bidId}
+        </foreach>
+    </delete>
+</mapper>

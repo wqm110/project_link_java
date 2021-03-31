@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.system;
 
 import java.util.Iterator;
 import java.util.List;
+
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -45,6 +47,17 @@ public class SysDeptController extends BaseController
     {
         List<SysDept> depts = deptService.selectDeptList(dept);
         return AjaxResult.success(depts);
+    }
+    /**
+     * 获取部门及部门下的人员
+     */
+    @GetMapping("/treeselectDeptUser")
+    @ApiOperation("获取部门及部门下的人员")
+    public AjaxResult treeselectDeptUser()
+    {
+//        List<SysDept> depts = deptService.selectDeptList(dept);
+        List<SysDept> depts = deptService.selectDeptUserList();
+        return AjaxResult.success(deptService.buildDeptTreeSelect(depts));
     }
 
     /**

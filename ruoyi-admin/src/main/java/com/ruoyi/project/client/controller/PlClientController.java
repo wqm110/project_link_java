@@ -1,13 +1,16 @@
-package com.ruoyi.project.controller;
+package com.ruoyi.project.client.controller;
 
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.IdUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.project.domain.PlClient;
-import com.ruoyi.project.service.IPlClientService;
+import com.ruoyi.project.client.domain.PlClient;
+import com.ruoyi.project.client.service.IPlClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -16,21 +19,47 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 客户信息Controller
- * 
+ *
  * @author ruoyi
  * @date 2021-03-30
  */
 @Api(tags = "A客户信息")
 @RestController
 @RequestMapping("/project/client")
-public class PlClientController extends BaseController
-{
+public class PlClientController extends BaseController {
     @Autowired
     private IPlClientService plClientService;
+
+
+//    /**
+//     * 查询当前用户所服务的用户
+//     */
+//
+//    @ApiOperation("查询当前用户的客户")
+//    @GetMapping("/listByUserId/{userid}")
+//    public TableDataInfo listClientServerId(@PathVariable("userid") String userid) {
+//        LoginUser username = SecurityUtils.getLoginUser();
+//        PlClient plClient = new PlClient();
+//        //当前用户的id
+//        String s = username.getUser().getUserId().toString();
+//        plClient.setUserId(s);
+//        //存在中间表时 当前用户所服务的 客户id 列表
+//        ArrayList<String> clientsUserIds = GetClients.getClientsByUserid(s);
+//        //根据id列表查询客户的列表
+//        List<PlClient> list1 = plClientService.selectPlClientListByIds(clientsUserIds);
+//        startPage();
+//        //当前用户登记的客户
+//        List<PlClient> list = plClientService.selectPlClientList(plClient);
+//        list.addAll(list1);
+//        list = list.stream().distinct().collect(Collectors.toList());
+//        return getDataTable(list);
+//    }
 
     /**
      * 查询客户信息列表
@@ -41,8 +70,7 @@ public class PlClientController extends BaseController
     @ApiImplicitParams({
             @ApiImplicitParam(name = "plClient", value = "客户信息查询对象", required = false, paramType = "query")
     })
-    public TableDataInfo list(PlClient plClient)
-    {
+    public TableDataInfo list(PlClient plClient) {
         startPage();
         List<PlClient> list = plClientService.selectPlClientList(plClient);
         return getDataTable(list);
@@ -58,8 +86,7 @@ public class PlClientController extends BaseController
             @ApiImplicitParam(name = "plClient", value = "客户信息查询对象", required = false, paramType = "query")
     })
     @GetMapping("/export")
-    public AjaxResult export(PlClient plClient)
-    {
+    public AjaxResult export(PlClient plClient) {
         List<PlClient> list = plClientService.selectPlClientList(plClient);
         ExcelUtil<PlClient> util = new ExcelUtil<PlClient>(PlClient.class);
         return util.exportExcel(list, "client");
@@ -74,8 +101,7 @@ public class PlClientController extends BaseController
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientId", value = "客户信息ID", required = true, paramType = "query")
     })
-    public AjaxResult getInfo(@PathVariable("clientId") String clientId)
-    {
+    public AjaxResult getInfo(@PathVariable("clientId") Long clientId) {
         return AjaxResult.success(plClientService.selectPlClientById(clientId));
     }
 
@@ -89,9 +115,10 @@ public class PlClientController extends BaseController
     @PreAuthorize("@ss.hasPermi('project:client:add')")
     @Log(title = "客户信息", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody PlClient plClient)
-    {
-        return toAjax(plClientService.insertPlClient(plClient));
+    public AjaxResult add(@RequestBody PlClient plClient) {
+        plClient.setClientId(IdUtils.snowLId());
+        int i = plClientService.insertPlClient(plClient);
+        return toAjax(i);
     }
 
     /**
@@ -104,8 +131,7 @@ public class PlClientController extends BaseController
     @PreAuthorize("@ss.hasPermi('project:client:edit')")
     @Log(title = "客户信息", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody PlClient plClient)
-    {
+    public AjaxResult edit(@RequestBody PlClient plClient) {
         return toAjax(plClientService.updatePlClient(plClient));
     }
 
@@ -115,12 +141,11 @@ public class PlClientController extends BaseController
     @ApiOperation(value = "删除客户信息")
     @PreAuthorize("@ss.hasPermi('project:client:remove')")
     @Log(title = "客户信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{clientIds}")
+    @DeleteMapping("/{clientIds}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "clientIds", value = "客户信息ID[]", required = true, paramType = "body")
+            @ApiImplicitParam(name = "clientIds", value = "客户信息ID[]", required = true)
     })
-    public AjaxResult remove(@PathVariable String[] clientIds)
-    {
+    public AjaxResult remove(@PathVariable Long[] clientIds) {
         return toAjax(plClientService.deletePlClientByIds(clientIds));
     }
 }

@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@Api(tags = "A_Camunda测试接口")
+//@Api(tags = "A_Camunda测试接口")
 public class CamundaTestController {
     private IdentityService identityService;
 

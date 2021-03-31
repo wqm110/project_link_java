@@ -114,6 +114,7 @@ pagehelper:
 swagger:
   # 是否开启swagger
   enabled: true
+  host: 0.0.0.0
   # 请求前缀
   pathMapping: /dev-api
 knife4j:
@@ -126,3 +127,5 @@ xss:
   excludes: /system/notice/*
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+jwt:
+  header: Bear
