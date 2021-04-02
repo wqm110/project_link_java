@@ -98,6 +98,7 @@ public class PlBidInfoServiceImpl implements IPlBidInfoService {
     public List<PlBidInfo> slectBiddingUnits() {
         return plBidInfoMapper.slectBiddingUnits();
     }
+
     /**
      * 查寻已录入的投标地点(下拉)
      */
@@ -107,12 +108,15 @@ public class PlBidInfoServiceImpl implements IPlBidInfoService {
     }
 
     @Override
-    public List<PlBidInfo> selectAgents(Long userId) {
-        return plBidInfoMapper.selectAgents(userId);
+    public List<PlBidInfo> selectAgents() {
+        return plBidInfoMapper.selectAgents();
     }
 
+    /**
+     * 查询已录入的合同的创建人
+     */
     @Override
     public List<PlBidInfo> listCeaters() {
-        return plBidInfoMapper.listCeaters();
+        return plBidInfoMapper.listCreaters();
     }
 }

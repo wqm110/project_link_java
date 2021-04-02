@@ -68,7 +68,7 @@ public interface IPlBidInfoService
      */
     List<PlBidInfo> selectBidPlaces();
 
-    List<PlBidInfo> selectAgents(Long userId);
+    List<PlBidInfo> selectAgents();
 
     List<PlBidInfo> listCeaters();
 }

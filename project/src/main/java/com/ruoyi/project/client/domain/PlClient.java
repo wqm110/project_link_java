@@ -23,6 +23,7 @@ public class PlClient extends BaseEntity {
     @ApiModelProperty(value = "主键")
     private Long clientId;
 
+
     /**
      * 业务员编号
      */
@@ -34,7 +35,6 @@ public class PlClient extends BaseEntity {
      */
     @ApiModelProperty(value = "负责人姓名")
     private String nickName;
-
 
 
     /**
@@ -132,7 +132,7 @@ public class PlClient extends BaseEntity {
      * 删除标志（0代表存在 2代表删除）
      */
     @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）")
-    private String delFlag="0";
+    private String delFlag = "0";
     /**
      * 重点客户标志（0代表普通客户 1代表重点客户）
      */
@@ -289,7 +289,7 @@ public class PlClient extends BaseEntity {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("clientId", getClientId())
                 .append("userId", getUserId())
-                .append("nickName",getNickName())
+                .append("nickName", getNickName())
                 .append("clientNumber", getClientNumber())
                 .append("clientName", getClientName())
                 .append("industry", getIndustry())

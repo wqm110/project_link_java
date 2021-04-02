@@ -37,19 +37,7 @@
     </sql>
     <!--    带有时间条件-->
     <select id="selectPlClientServiceHisList" parameterType="PlClientServiceHis" resultMap="PlClientServiceHisResult">
-        select service_his_id,
-        client_id,
-        user_id,
-        create_by,
-        create_time,
-        update_time,
-        service_time,
-        del_flag,
-        client_name,
-        contacts,
-        contact_number,
-        detail,
-        update_by
+        select service_his_id,client_id,user_id,create_by,create_time,update_time,service_time,del_flag,client_name,contacts,contact_number,detail,update_by
         from pl_client_service_his
         <where>
             <if test="clientId != null  and clientId != ''">and client_id = #{clientId}</if>

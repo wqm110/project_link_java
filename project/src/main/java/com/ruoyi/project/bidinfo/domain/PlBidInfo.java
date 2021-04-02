@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.core.domain.entity.SysUser;
+import com.ruoyi.project.client.domain.PlClient;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -317,6 +318,58 @@ public class PlBidInfo extends BaseEntity {
      */
     @ApiModelProperty(value = "用户信息")
     private SysUser user;
+
+    /**
+     * 招标单位
+     */
+    @ApiModelProperty(value = "招标单位")
+    private String clientName;
+
+    /**
+     * 项目负责人电话
+     */
+    @ApiModelProperty(value = "项目负责人电话")
+    private String phonenumber;
+    /**
+     * 经办人电话
+     */
+    @ApiModelProperty(value = "经办人电话")
+    private String phoneNum;
+
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    private PlClient client;
+
+    public PlClient getClient() {
+        return client;
+    }
+
+    public void setClient(PlClient client) {
+        this.client = client;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
 
     public String getNickName() {
         return nickName;
@@ -703,6 +756,9 @@ public class PlBidInfo extends BaseEntity {
                 .append("businessCategory", getBusinessCategory())
                 .append("unionCompanyName", getUnionCompanyName())
                 .append("bidPlace", getBidPlace())
+                .append("clientName", getClientName())
+                .append("phonenumber", getPhonenumber())
+                .append("phonenNum", getPhoneNum())
                 .toString();
     }
 }

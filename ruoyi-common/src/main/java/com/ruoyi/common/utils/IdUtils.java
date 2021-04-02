@@ -57,16 +57,19 @@ public class IdUtils {
     public static String snowId() {
         return IdUtil.getSnowflake(0, 0).nextIdStr();
     }
+
     /**
      * 雪花id
      *
      * @return
      */
     public static Long snowLId() {
-        return IdUtil.getSnowflake(0, 0).nextId();
+        return Snowflake.getSnowflake().nextId();
     }
+
     //通用生成编号方法
     public static String currencyGenerateNumber(String numberType) {
+
         SimpleDateFormat dataTime = new SimpleDateFormat("yyyyMMddhhmmss");
         String data = dataTime.format(new Date());
         data = numberType + data;

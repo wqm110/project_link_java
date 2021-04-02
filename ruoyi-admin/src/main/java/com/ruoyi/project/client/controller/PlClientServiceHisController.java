@@ -61,7 +61,7 @@ public class PlClientServiceHisController extends BaseController {
             @ApiImplicitParam(name = "plClientServiceHis", value = "客户跟进记录查询对象", required = false, paramType = "query")
     })
     public TableDataInfo list(PlClientServiceHis plClientServiceHis) {
-        String startTime = plClientServiceHis.getBeginTime();
+        String beginTime = plClientServiceHis.getBeginTime();
         startPage();
         List<PlClientServiceHis> list = plClientServiceHisService.selectPlClientServiceHisList(plClientServiceHis);
         return getDataTable(list);

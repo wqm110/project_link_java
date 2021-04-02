@@ -50,6 +50,12 @@
         <result property="businessCategory" column="business_category"/>
         <result property="unionCompanyName" column="union_company_name"/>
         <result property="bidPlace" column="bid_place"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="agentName" column="agent_name"/>
+        <result property="clientName" column="client_name"/>
+        <result property="phonenumber" column="phonenumber"/>
+        <result property="phoneNum" column="phone_num"/>
+        <result property="bidPlace" column="bid_place"/>
     </resultMap>
 
     <sql id="selectPlBidInfoVo">
@@ -103,12 +109,15 @@
     <!--    agent-->
     <!--    user_id-->
     <select id="selectPlBidInfoList" parameterType="PlBidInfo" resultMap="PlBidInfoResult">
-        select bid_id,i.user_id,u.nick_name,bid_name,bid_number,bid_deadline,bid_date,bid_place,winning_date,bid_opening_date,
+        select
+        bid_id,i.user_id,u.nick_name,bid_name,bid_number,bid_deadline,bid_date,bid_place,winning_date,bid_opening_date,
         tender_agency,bidding_unit,quoted_price,construction_site,bid_bond,win_bid,bid_bond_recovered,bid_bond_takeback_date,
         bid_bond_reason_for_failure,perform_bond,perform_bond_recovered,perform_bond_takeback_date,perform_bond_reason_for_failure,bid_attachment,
-        i.instance_id,i.apply_time,project_id,project_category,project_manager,project_manager_name,project_manager_contact,i.agent,u2.nick_name as agent_name,
+        i.instance_id,i.apply_time,project_id,project_category,project_manager,project_manager_name,project_manager_contact,i.agent,u2.nick_name
+        as agent_name,
         agent_name,agent_contact,project_type,scale,business_category,union_company_name,i.apply_status
-        from pl_bid_info as i inner join  sys_user as u on u.user_id = i.user_id inner join sys_user as u2 on i.agent = u2.user_id
+        from pl_bid_info as i inner join sys_user as u on u.user_id = i.user_id inner join sys_user as u2 on i.agent =
+        u2.user_id
         <where>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="bidName != null  and bidName != ''">and bid_name like concat('%', #{bidName}, '%')</if>
@@ -168,38 +177,85 @@
             <if test="bidPlace != null  and bidPlace != ''">and bid_place = #{bidPlace}</if>
         </where>
     </select>
-
+    <!--    投标详情-->
+    <!--    代理 agent u2-->
+    <!--    项目负责人 user_id u-->
     <select id="selectPlBidInfoById" parameterType="Long" resultMap="PlBidInfoResult">
-        <include refid="selectPlBidInfoVo"/>
+        select bid_id,
+               i.user_id,
+               u.nick_name,
+               u.phonenumber,
+               bid_name,
+               bid_number,
+               bid_deadline,
+               bid_date,
+               bid_place,
+               winning_date,
+               bid_opening_date,
+               tender_agency,
+               bidding_unit,
+               quoted_price,
+               construction_site,
+               bid_bond,
+               win_bid,
+               bid_bond_recovered,
+               bid_bond_takeback_date,
+               bid_bond_reason_for_failure,
+               perform_bond,
+               perform_bond_recovered,
+               perform_bond_takeback_date,
+               perform_bond_reason_for_failure,
+               bid_attachment,
+               i.instance_id,
+               i.apply_time,
+               project_id,
+               project_category,
+               project_manager,
+               project_manager_name,
+               project_manager_contact,
+               i.agent,
+               u2.nick_name   as agent_name,
+               u2.phonenumber as phone_num,
+               agent_name,
+               agent_contact,
+               project_type,
+               scale,
+               business_category,
+               union_company_name,
+               i.apply_status
+        from pl_bid_info as i
+                 inner join sys_user as u on u.user_id = i.user_id
+                 inner join sys_user as u2 on i.agent =
+                                              u2.user_id
         where bid_id = #{bidId}
     </select>
     <!--    来源于客户表-->
     <!--    查寻已录入的招标单位-->
-    <select id="slectBiddingUnits" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
-        select distinct bidding_unit, client_name
+    <select id="slectBiddingUnits" resultMap="PlBidInfoResult">
+        select distinct i.bidding_unit,pc.client_name
         from pl_bid_info as i
         inner join pl_client pc on pc.client_id = i.bidding_unit
         <where>
-            <if test="delFlag != null">i.del_flag=#{delFlag}</if>
+            <if test="delFlag != null">i.del_flag=#{delFlag} and</if>
+            <if test="delFlag != null">pc.del_flag=#{delFlag}</if>
         </where>
     </select>
     <!--    查寻已录入的投标地点(下拉)-->
-    <select id="selectBidPlaces" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
+    <select id="selectBidPlaces" resultMap="PlBidInfoResult">
         select distinct bid_place
         from pl_bid_info
         <where>
             <if test="delFlag != null">del_flag=#{delFlag}</if>
         </where>
     </select>
-    <select id="selectAgents" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
+    <select id="selectAgents" resultMap="PlBidInfoResult">
         select distinct agent,nick_name from pl_bid_info as i inner join sys_user su on i.agent = su.user_id
         <where>
-            <if test="delFlag != null">del_flag=#{delFlag} and</if>
-            <if test="userId != null">user_id = #{userId}</if>
+            <if test="delFlag != null and delFlag != '' ">i.del_flag=#{delFlag}</if>
         </where>
     </select>
-    <select id="listCeaters" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
-        select distinct create_by from pl_bid_info as i inner join sys_user su on i.agent = su.user_id
+    <select id="listCreaters" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
+        select distinct i.create_by from pl_bid_info as i inner join sys_user su on i.agent = su.user_id
         <where>
             <if test="delFlag != null">del_flag=#{delFlag}</if>
         </where>

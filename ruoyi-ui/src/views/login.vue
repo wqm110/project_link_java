@@ -77,8 +77,8 @@ export default {
         ],
         password: [
           { required: true, trigger: "blur", message: "密码不能为空" }
-        ],
-        code: [{ required: true, trigger: "change", message: "验证码不能为空" }]
+        ]
+        // , code: [{ required: true, trigger: "change", message: "验证码不能为空" }]
       },
       loading: false,
       redirect: undefined

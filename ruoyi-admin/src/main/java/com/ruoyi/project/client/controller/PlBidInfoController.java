@@ -49,24 +49,17 @@ public class PlBidInfoController extends BaseController {
     @GetMapping("/listBidPlaces")
     public AjaxResult listBidPlaces() {
         List<PlBidInfo> list = plBidInfoService.selectBidPlaces();
-        return AjaxResult.success("200", list);
+        return AjaxResult.success("查寻已录入的投标地点", list);
     }
 
     /**
      * 查寻已录入的经办人（下拉）
      */
     @ApiOperation(value = "查寻已录入的经办人（下拉", response = AjaxResult.class)
-    @ApiImplicitParam(name = "flag", value = "查寻（true只查本人false查询全部）相关经办人", required = true)
-    @GetMapping("/listAgents/{flag}")
-    public AjaxResult listAgents(@PathVariable Boolean flag) {
-        Long userId = SecurityUtils.getLoginUser().getUser().getUserId();
-        List<PlBidInfo> list = null;
-        if (flag) {
-            list = plBidInfoService.selectAgents(userId);
-        } else {
-            userId = null;
-            list = plBidInfoService.selectAgents(userId);
-        }
+//    @ApiImplicitParam(name = "flag", value = "查寻（true只查本人false查询全部）相关经办人", required = true)
+    @GetMapping("/listAgents")
+    public AjaxResult listAgents() {
+        List<PlBidInfo> list = plBidInfoService.selectAgents();
         return AjaxResult.success("查寻经办人成功", list);
     }
 

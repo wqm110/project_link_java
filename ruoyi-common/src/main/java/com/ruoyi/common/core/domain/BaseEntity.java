@@ -1,12 +1,14 @@
 package com.ruoyi.common.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ruoyi.common.utils.TransformUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,9 +16,11 @@ import java.util.Map;
  *
  * @author ruoyi
  */
-@ApiModel("基类")
+@ApiModel(description = "基类")
 public class BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
+    private Object id;
+
 
     /**
      * 搜索值
@@ -62,8 +66,42 @@ public class BaseEntity implements Serializable {
     @ApiModelProperty(value = "请求参数")
     private Map<String, Object> params;
 
+    /**
+     * 后台到前台 long-> 字符串
+     */
+    // 数据往前台传, 为解决前台long长度过长导致的精度缺失
+    public static List idsLong2String(List<? extends BaseEntity> li) {
+        if (li == null || li.size() == 0) {
+            return li;
+        }
+        for (BaseEntity bean : li) {
+            bean.setId(bean.getId().toString());
+        }
+        return li;
+    }
+
+    /**
+     * 前台到后台 字符串->long
+     */
+    // 数据由前台往底层传, String转Long以匹配底层long类型主键
+    public static List idsString2Long(List<? extends BaseEntity> li) {
+        if (li == null || li.size() == 0) {
+            return li;
+        }
+        for (BaseEntity bean : li) {
+            bean.setId(TransformUtil.getLong((String) bean.getId()));
+        }
+        return li;
+    }
 
 
+    public Object getId() {
+        return id;
+    }
+
+    public void setId(Object id) {
+        this.id = id;
+    }
 
     public String getSearchValue() {
         return searchValue;

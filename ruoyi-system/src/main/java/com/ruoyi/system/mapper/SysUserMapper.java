@@ -108,4 +108,10 @@ public interface SysUserMapper
      * @return 结果
      */
     public SysUser checkEmailUnique(String email);
+
+    /**
+     * 查询某角色下的人员
+     * @param roleKey 角色的key
+     */
+    List<SysUser> selectUserListByRoleKey(String roleKey);
 }

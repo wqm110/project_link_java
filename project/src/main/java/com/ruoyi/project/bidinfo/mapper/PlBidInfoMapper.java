@@ -69,7 +69,13 @@ public interface PlBidInfoMapper {
      */
     List<PlBidInfo> selectBidPlaces();
 
-    List<PlBidInfo> selectAgents(Long userId);
+    /**
+     * 查寻已录入的经办人
+     */
+    List<PlBidInfo> selectAgents();
 
-    List<PlBidInfo> listCeaters();
+    /**
+     * 查寻已录入的创建人
+     */
+    List<PlBidInfo> listCreaters();
 }

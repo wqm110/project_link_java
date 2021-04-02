@@ -46,3 +46,48 @@ CREATE TABLE `pl_bid_info` (
 `bid_place` varchar(200) DEFAULT NULL COMMENT '投标地点',
 PRIMARY KEY (`apply_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='投标信息申请表'
+
+
+
+
+CREATE TABLE `pl_contract_info` (
+ `contract_id` bigint NOT NULL COMMENT '合同ID',
+ `contract_name` varchar(100) DEFAULT '' COMMENT '合同名称',
+ `contract_number` varchar(100) DEFAULT '' COMMENT '合同编号',
+ `dept_id` bigint DEFAULT NULL COMMENT '承办部门',
+ `project_id` bigint DEFAULT NULL COMMENT '关联项目',
+ `contract_status` char(1) DEFAULT '' COMMENT '合同状态(0-未签订 1-已签订 2-已完成)',
+ `client_id` bigint DEFAULT NULL  COMMENT '甲方',
+ `effective_date` date DEFAULT NULL COMMENT '生效日期',
+ `signing_date` date DEFAULT NULL COMMENT '签订日期',
+ `contract_amount` decimal(10,2) DEFAULT NULL COMMENT '合同金额(万元)',
+ `completion_date` date DEFAULT NULL COMMENT '完成日期',
+ `contact` bigint  DEFAULT NULL COMMENT '业主联系人',
+ `cost_structure` varchar(100) DEFAULT '' COMMENT '费用构成',
+ `owner_contact` varchar(100) DEFAULT '' COMMENT '业主联系方式',
+ `legal_representative` varchar(100) DEFAULT '' COMMENT '院法人代表',
+ `owner_legal_representative` varchar(100) DEFAULT '' COMMENT '业主法人代表',
+ `owner_project_manager` varchar(100) DEFAULT NULL COMMENT '业主项目负责人姓名',
+ `user_id` varchar(100) DEFAULT NULL COMMENT '项目负责人ID',
+ `project_manager_name` varchar(30) DEFAULT NULL COMMENT '项目负责人名称',
+ `project_manager_phone` varchar(100) DEFAULT NULL COMMENT '项目负责人电话',
+ `place_of_signing` varchar(500) DEFAULT '' COMMENT '签订地点',
+ `business_terms` varchar(500) DEFAULT '' COMMENT '商务条款',
+ `technical_terms` varchar(500) DEFAULT '' COMMENT '技术条款',
+ `specialty` varchar(100) DEFAULT NULL COMMENT '专业',
+ `agent` varchar(100)   DEFAULT NULL COMMENT '经办人id',
+ `operator_name` varchar(100) DEFAULT NULL COMMENT '经办人姓名',
+ `operator_phone` varchar(100) DEFAULT NULL COMMENT '经办人电话',
+ `project_scale` varchar(100) DEFAULT NULL COMMENT '项目规模',
+ `instance_id` varchar(100) DEFAULT '' COMMENT '流程实例ID',
+ `apply_status` char(1) DEFAULT '0' COMMENT '申请状态(0-未提交 1-审批中 2-被退回 3-审批通过 4-审批未通过 5-已撤销)',
+ `status` char(1) DEFAULT '0' COMMENT '状态（0正常 1停用）',
+ `del_flag` varchar(100) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+ `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+ `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+ `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+ `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+ `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+ `apply_time` datetime DEFAULT NULL COMMENT '申请时间',
+ PRIMARY KEY (`contract_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合同信息表'

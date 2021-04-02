@@ -61,7 +61,7 @@
         c.contacts,  c.contact_number, c.province, c.zip_code, c.bank_name, c.account_number, c.business_phone,
         c.company_address, c.remark, c.status, c.create_by, c.create_time, c.update_by, c.update_time,c.del_flag,
         c.vip_flag
-        from pl_client as c inner join sys_user as u on u.user_id = c.user_id
+        from pl_client as c left join sys_user as u on u.user_id = c.user_id
         <where>
             <if test="userId != null  and userId != ''">and c.user_id = #{userId}</if>
             <if test="clientNumber != null  and clientNumber != ''">and c.client_number = #{clientNumber}</if>
