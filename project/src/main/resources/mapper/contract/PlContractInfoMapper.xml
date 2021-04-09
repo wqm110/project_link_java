@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.contract.mapper.PlContractInfoMapper">
+
+    <resultMap type="PlContractInfo" id="PlContractInfoResult">
+        <result property="contractId" column="contract_id"/>
+        <result property="contractName" column="contract_name"/>
+        <result property="contractNumber" column="contract_number"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="projectId" column="project_id"/>
+        <result property="contractStatus" column="contract_status"/>
+        <result property="clientId" column="client_id"/>
+        <result property="effectiveDate" column="effective_date"/>
+        <result property="signingDate" column="signing_date"/>
+        <result property="contractAmount" column="contract_amount"/>
+        <result property="completionDate" column="completion_date"/>
+        <result property="contact" column="contact"/>
+        <result property="costStructure" column="cost_structure"/>
+        <result property="ownerContact" column="owner_contact"/>
+        <result property="legalRepresentative" column="legal_representative"/>
+        <result property="ownerLegalRepresentative" column="owner_legal_representative"/>
+        <result property="ownerProjectManager" column="owner_project_manager"/>
+        <result property="userId" column="user_id"/>
+        <result property="projectManagerName" column="project_manager_name"/>
+        <result property="projectManagerPhone" column="project_manager_phone"/>
+        <result property="placeOfSigning" column="place_of_signing"/>
+        <result property="businessTerms" column="business_terms"/>
+        <result property="technicalTerms" column="technical_terms"/>
+        <result property="specialty" column="specialty"/>
+        <result property="agent" column="agent"/>
+        <result property="operatorName" column="operator_name"/>
+        <result property="operatorPhone" column="operator_phone"/>
+        <result property="projectScale" column="project_scale"/>
+        <result property="instanceId" column="instance_id"/>
+        <result property="applyStatus" column="apply_status"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+        <result property="applyTime" column="apply_time"/>
+        <result property="sy" column="sy"/>
+        <result property="sm" column="sm"/>
+        <association property="dept" column="dept_id" javaType="SysDept" resultMap="deptResult"/>
+        <association property="projectManager" column="user_id" javaType="SysUser" resultMap="userResult"/>
+    </resultMap>
+    <resultMap type="SysUser" id="userResult">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="phonenumber" column="phonenumber"/>
+    </resultMap>
+    <resultMap id="deptResult" type="SysDept">
+        <id property="deptId" column="dept_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="leader" column="leader"/>
+        <result property="status" column="dept_status"/>
+    </resultMap>
+
+
+    <sql id="selectPlContractInfoVo">
+        select contract_id,
+               contract_name,
+               contract_number,
+               dept_id,
+               project_id,
+               contract_status,
+               client_id,
+               effective_date,
+               signing_date,
+               contract_amount,
+               completion_date,
+               contact,
+               cost_structure,
+               owner_contact,
+               legal_representative,
+               owner_legal_representative,
+               owner_project_manager,
+               user_id,
+               project_manager_name,
+               project_manager_phone,
+               place_of_signing,
+               business_terms,
+               technical_terms,
+               specialty,
+               agent,
+               operator_name,
+               operator_phone,
+               project_scale,
+               instance_id,
+               apply_status,
+               status,
+               del_flag,
+               create_by,
+               create_time,
+               update_by,
+               update_time,
+               remark,
+               apply_time
+        from pl_contract_info
+    </sql>
+
+    <select id="selectPlContractInfoList" parameterType="PlContractInfo" resultMap="PlContractInfoResult">
+        select contract_id, contract_name, contract_number, i.dept_id, project_id, contract_status, client_id,
+        effective_date, signing_date, contract_amount, completion_date, contact, cost_structure, owner_contact,
+        legal_representative, owner_legal_representative, owner_project_manager, i.user_id, project_manager_name,
+        project_manager_phone, place_of_signing, business_terms, technical_terms, specialty, agent, operator_name,
+        operator_phone, project_scale, i.instance_id, i.apply_status, i.status, i.del_flag, i.create_by, i.create_time,
+        i.update_by,
+        i.update_time, i.remark, i.apply_time,u.nick_name,d.dept_name
+        from pl_contract_info as i left join sys_dept as d on d.dept_id = i.dept_id
+        left join sys_user as u on u.user_id = i.user_id
+        <where>
+            <if test="contractName != null  and contractName != ''">and contract_name like concat('%', #{contractName},
+                '%')
+            </if>
+            <if test="contractNumber != null  and contractNumber != ''">and contract_number = #{contractNumber}</if>
+            <if test="deptId != null ">and dept_id = #{deptId}</if>
+            <if test="projectId != null ">and project_id = #{projectId}</if>
+            <if test="contractStatus != null  and contractStatus != ''">and contract_status = #{contractStatus}</if>
+            <if test="clientId != null ">and client_id = #{clientId}</if>
+            <if test="effectiveDate != null ">and effective_date = #{effectiveDate}</if>
+            <if test="signingDate != null ">and signing_date = #{signingDate}</if>
+            <if test="contractAmount != null ">and contract_amount = #{contractAmount}</if>
+            <if test="completionDate != null ">and completion_date = #{completionDate}</if>
+            <if test="contact != null ">and contact = #{contact}</if>
+            <if test="costStructure != null  and costStructure != ''">and cost_structure = #{costStructure}</if>
+            <if test="ownerContact != null  and ownerContact != ''">and owner_contact = #{ownerContact}</if>
+            <if test="legalRepresentative != null  and legalRepresentative != ''">and legal_representative =
+                #{legalRepresentative}
+            </if>
+            <if test="ownerLegalRepresentative != null  and ownerLegalRepresentative != ''">and
+                owner_legal_representative = #{ownerLegalRepresentative}
+            </if>
+            <if test="ownerProjectManager != null  and ownerProjectManager != ''">and owner_project_manager =
+                #{ownerProjectManager}
+            </if>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="projectManagerName != null  and projectManagerName != ''">and project_manager_name like
+                concat('%', #{projectManagerName}, '%')
+            </if>
+            <if test="projectManagerPhone != null  and projectManagerPhone != ''">and project_manager_phone =
+                #{projectManagerPhone}
+            </if>
+            <if test="placeOfSigning != null  and placeOfSigning != ''">and place_of_signing = #{placeOfSigning}</if>
+            <if test="businessTerms != null  and businessTerms != ''">and business_terms = #{businessTerms}</if>
+            <if test="technicalTerms != null  and technicalTerms != ''">and technical_terms = #{technicalTerms}</if>
+            <if test="specialty != null  and specialty != ''">and specialty = #{specialty}</if>
+            <if test="agent != null  and agent != ''">and agent = #{agent}</if>
+            <if test="operatorName != null  and operatorName != ''">and operator_name like concat('%', #{operatorName},
+                '%')
+            </if>
+            <if test="operatorPhone != null  and operatorPhone != ''">and operator_phone = #{operatorPhone}</if>
+            <if test="projectScale != null  and projectScale != ''">and project_scale = #{projectScale}</if>
+            <if test="instanceId != null  and instanceId != ''">and instance_id = #{instanceId}</if>
+            <if test="applyStatus != null  and applyStatus != ''">and apply_status = #{applyStatus}</if>
+            <if test="status != null  and status != ''">and status = #{status}</if>
+            <if test="applyTime != null ">and apply_time = #{applyTime}</if>
+        </where>
+    </select>
+
+    <select id="selectPlContractInfoById" parameterType="Long" resultMap="PlContractInfoResult">
+        <include refid="selectPlContractInfoVo"/>
+        where contract_id = #{contractId}
+    </select>
+
+    <select id="countContractSum" resultMap="PlContractInfoResult">
+        select contract_id,
+        contract_name,
+        contract_number,
+        dept_id,
+        project_id,
+        contract_status,
+        client_id,
+        effective_date,
+        signing_date,
+        contract_amount,
+        completion_date,
+        contact,
+        cost_structure,
+        owner_contact,
+        legal_representative,
+        owner_legal_representative,
+        owner_project_manager,
+        user_id,
+        project_manager_name,
+        project_manager_phone,
+        place_of_signing,
+        business_terms,
+        technical_terms,
+        specialty,
+        agent,
+        operator_name,
+        operator_phone,
+        project_scale,
+        instance_id,
+        apply_status,
+        status,
+        del_flag,
+        create_by,
+        create_time,
+        update_by,
+        update_time,
+        remark,
+        apply_time
+        from pl_contract_info
+        <where>
+            del_flag= '0'
+            <choose>
+                <when test="ed != null and ed != ''">
+                    <if test="s != null and s != ''">
+                        and YEAR (signing_date) between #{s} and #{ed}
+                    </if>
+                </when>
+                <otherwise>
+                    <if test="s != null and s != ''">
+                        and YEAR (signing_date) = #{s}
+                    </if>
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <!--    年度-->
+    <select id="getSummaryChartsContractYear" resultMap="PlContractInfoResult">
+        select sum(contract_amount) contract_amount,year(signing_date) as sy
+        from pl_contract_info
+        where del_flag = '0'
+        group by YEAR (signing_date)
+        <if test="s != null and ed != null and s != '' and ed != ''">
+            having sy is not null and sy between #{s} and #{ed}
+        </if>
+    </select>
+    <!--    月度-->
+    <select id="selectSummaryChartsContractMouth" resultMap="PlContractInfoResult"
+            parameterType="int">
+        select sum(contract_amount) contract_amount, month (signing_date) as sm
+        from pl_contract_info
+        where year (signing_date) = #{y} and del_flag= '0'
+        group by month (signing_date)
+    </select>
+    <!--    季度-->
+    <select id="selectSummaryChartsContractQuarter" resultMap="PlContractInfoResult"
+            parameterType="int">
+        select sum(contract_amount) contract_amount, quarter(signing_date) as sm
+        from pl_contract_info
+        where year (signing_date) = #{y}
+          and del_flag='0'
+        group by quarter(signing_date)
+    </select>
+
+    <insert id="insertPlContractInfo" parameterType="PlContractInfo">
+        insert into pl_contract_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">contract_id,</if>
+            <if test="contractName != null">contract_name,</if>
+            <if test="contractNumber != null">contract_number,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="contractStatus != null">contract_status,</if>
+            <if test="clientId != null">client_id,</if>
+            <if test="effectiveDate != null">effective_date,</if>
+            <if test="signingDate != null">signing_date,</if>
+            <if test="contractAmount != null">contract_amount,</if>
+            <if test="completionDate != null">completion_date,</if>
+            <if test="contact != null">contact,</if>
+            <if test="costStructure != null">cost_structure,</if>
+            <if test="ownerContact != null">owner_contact,</if>
+            <if test="legalRepresentative != null">legal_representative,</if>
+            <if test="ownerLegalRepresentative != null">owner_legal_representative,</if>
+            <if test="ownerProjectManager != null">owner_project_manager,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="projectManagerName != null">project_manager_name,</if>
+            <if test="projectManagerPhone != null">project_manager_phone,</if>
+            <if test="placeOfSigning != null">place_of_signing,</if>
+            <if test="businessTerms != null">business_terms,</if>
+            <if test="technicalTerms != null">technical_terms,</if>
+            <if test="specialty != null">specialty,</if>
+            <if test="agent != null">agent,</if>
+            <if test="operatorName != null">operator_name,</if>
+            <if test="operatorPhone != null">operator_phone,</if>
+            <if test="projectScale != null">project_scale,</if>
+            <if test="instanceId != null">instance_id,</if>
+            <if test="applyStatus != null">apply_status,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="applyTime != null">apply_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractId != null">#{contractId},</if>
+            <if test="contractName != null">#{contractName},</if>
+            <if test="contractNumber != null">#{contractNumber},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="projectId != null">#{projectId},</if>
+            <if test="contractStatus != null">#{contractStatus},</if>
+            <if test="clientId != null">#{clientId},</if>
+            <if test="effectiveDate != null">#{effectiveDate},</if>
+            <if test="signingDate != null">#{signingDate},</if>
+            <if test="contractAmount != null">#{contractAmount},</if>
+            <if test="completionDate != null">#{completionDate},</if>
+            <if test="contact != null">#{contact},</if>
+            <if test="costStructure != null">#{costStructure},</if>
+            <if test="ownerContact != null">#{ownerContact},</if>
+            <if test="legalRepresentative != null">#{legalRepresentative},</if>
+            <if test="ownerLegalRepresentative != null">#{ownerLegalRepresentative},</if>
+            <if test="ownerProjectManager != null">#{ownerProjectManager},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="projectManagerName != null">#{projectManagerName},</if>
+            <if test="projectManagerPhone != null">#{projectManagerPhone},</if>
+            <if test="placeOfSigning != null">#{placeOfSigning},</if>
+            <if test="businessTerms != null">#{businessTerms},</if>
+            <if test="technicalTerms != null">#{technicalTerms},</if>
+            <if test="specialty != null">#{specialty},</if>
+            <if test="agent != null">#{agent},</if>
+            <if test="operatorName != null">#{operatorName},</if>
+            <if test="operatorPhone != null">#{operatorPhone},</if>
+            <if test="projectScale != null">#{projectScale},</if>
+            <if test="instanceId != null">#{instanceId},</if>
+            <if test="applyStatus != null">#{applyStatus},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="applyTime != null">#{applyTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePlContractInfo" parameterType="PlContractInfo">
+        update pl_contract_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="contractName != null">contract_name = #{contractName},</if>
+            <if test="contractNumber != null">contract_number = #{contractNumber},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="contractStatus != null">contract_status = #{contractStatus},</if>
+            <if test="clientId != null">client_id = #{clientId},</if>
+            <if test="effectiveDate != null">effective_date = #{effectiveDate},</if>
+            <if test="signingDate != null">signing_date = #{signingDate},</if>
+            <if test="contractAmount != null">contract_amount = #{contractAmount},</if>
+            <if test="completionDate != null">completion_date = #{completionDate},</if>
+            <if test="contact != null">contact = #{contact},</if>
+            <if test="costStructure != null">cost_structure = #{costStructure},</if>
+            <if test="ownerContact != null">owner_contact = #{ownerContact},</if>
+            <if test="legalRepresentative != null">legal_representative = #{legalRepresentative},</if>
+            <if test="ownerLegalRepresentative != null">owner_legal_representative = #{ownerLegalRepresentative},</if>
+            <if test="ownerProjectManager != null">owner_project_manager = #{ownerProjectManager},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="projectManagerName != null">project_manager_name = #{projectManagerName},</if>
+            <if test="projectManagerPhone != null">project_manager_phone = #{projectManagerPhone},</if>
+            <if test="placeOfSigning != null">place_of_signing = #{placeOfSigning},</if>
+            <if test="businessTerms != null">business_terms = #{businessTerms},</if>
+            <if test="technicalTerms != null">technical_terms = #{technicalTerms},</if>
+            <if test="specialty != null">specialty = #{specialty},</if>
+            <if test="agent != null">agent = #{agent},</if>
+            <if test="operatorName != null">operator_name = #{operatorName},</if>
+            <if test="operatorPhone != null">operator_phone = #{operatorPhone},</if>
+            <if test="projectScale != null">project_scale = #{projectScale},</if>
+            <if test="instanceId != null">instance_id = #{instanceId},</if>
+            <if test="applyStatus != null">apply_status = #{applyStatus},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="applyTime != null">apply_time = #{applyTime},</if>
+        </trim>
+        where contract_id = #{contractId}
+    </update>
+
+    <delete id="deletePlContractInfoById" parameterType="Long">
+        delete
+        from pl_contract_info
+        where contract_id = #{contractId}
+    </delete>
+
+    <delete id="deletePlContractInfoByIds" parameterType="String">
+        delete from pl_contract_info where contract_id in
+        <foreach item="contractId" collection="array" open="(" separator="," close=")">
+            #{contractId}
+        </foreach>
+    </delete>
+</mapper>

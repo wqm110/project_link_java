@@ -1,8 +1,8 @@
-package com.ruoyi.project.service.impl;
+package com.ruoyi.project.file.service.impl;
 
 
 import com.ruoyi.common.core.domain.entity.SysUser;
-import com.ruoyi.project.service.IProjectCommonService;
+import com.ruoyi.project.common.IProjectCommonService;
 import com.ruoyi.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

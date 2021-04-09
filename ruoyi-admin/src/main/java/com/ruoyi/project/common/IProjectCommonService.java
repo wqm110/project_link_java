@@ -1,4 +1,4 @@
-package com.ruoyi.project.service;
+package com.ruoyi.project.common;
 
 import java.util.List;
 import java.util.Map;

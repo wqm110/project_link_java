@@ -56,68 +56,39 @@
         <result property="phonenumber" column="phonenumber"/>
         <result property="phoneNum" column="phone_num"/>
         <result property="bidPlace" column="bid_place"/>
+        <result property="contacts" column="contacts"/>
+        <result property="contactNumber" column="contact_number"/>
+        <result property="accessoriesBid" column="accessories_bid"/>
+        <result property="accessoriesWin" column="accessories_win"/>
+        <result property="accessoriesAudit" column="accessories_audit"/>
+        <result property="remarkWin" column="remark_win"/>
+        <result property="remarkAudit" column="remark_audit"/>
     </resultMap>
 
     <sql id="selectPlBidInfoVo">
-        select bid_id,
-               user_id,
-               bid_name,
-               bid_number,
-               bid_deadline,
-               bid_date,
-               bid_place,
-               winning_date,
-               bid_opening_date,
-               tender_agency,
-               bidding_unit,
-               quoted_price,
-               construction_site,
-               bid_bond,
-               win_bid,
-               bid_bond_recovered,
-               bid_bond_takeback_date,
-               bid_bond_reason_for_failure,
-               perform_bond,
-               perform_bond_recovered,
-               perform_bond_takeback_date,
-               perform_bond_reason_for_failure,
-               bid_attachment,
-               instance_id,
-               apply_time,
-               project_id,
-               project_category,
-               project_manager,
-               project_manager_name,
-               project_manager_contact,
-               agent,
-               agent_name,
-               agent_contact,
-               project_type,
-               scale,
-               business_category,
-               union_company_name,
-               status,
-               apply_status,
-               del_flag,
-               create_by,
-               create_time,
-               update_by,
-               update_time,
-               remark
+        select bid_id,user_id,bid_name,bid_number,bid_deadline,bid_date,bid_place,winning_date,bid_opening_date,
+               tender_agency,bidding_unit,quoted_price,construction_site,bid_bond,win_bid,bid_bond_recovered,
+               bid_bond_takeback_date,bid_bond_reason_for_failure,perform_bond,perform_bond_recovered,
+               perform_bond_takeback_date,perform_bond_reason_for_failure,bid_attachment,instance_id,apply_time,project_id,
+               project_category,project_manager,
+               project_manager_name,project_manager_contact,agent,agent_name,agent_contact,project_type,scale,
+               business_category,union_company_name,status,apply_status,del_flag,create_by,create_time,update_by,
+               update_time,remark,contact_number,contacts,accessories_bid
         from pl_bid_info
     </sql>
     <!--    agent-->
-    <!--    user_id-->
+    <!--    user_id 项目负责人-->
     <select id="selectPlBidInfoList" parameterType="PlBidInfo" resultMap="PlBidInfoResult">
         select
-        bid_id,i.user_id,u.nick_name,bid_name,bid_number,bid_deadline,bid_date,bid_place,winning_date,bid_opening_date,
+        bid_id,i.user_id,u.nick_name,bid_name,bid_number,bid_deadline,accessories_bid,bid_date,bid_place,winning_date,bid_opening_date,
         tender_agency,bidding_unit,quoted_price,construction_site,bid_bond,win_bid,bid_bond_recovered,bid_bond_takeback_date,
         bid_bond_reason_for_failure,perform_bond,perform_bond_recovered,perform_bond_takeback_date,perform_bond_reason_for_failure,bid_attachment,
-        i.instance_id,i.apply_time,project_id,project_category,project_manager,project_manager_name,project_manager_contact,i.agent,u2.nick_name
+        i.instance_id,i.apply_time,project_id,project_category,project_manager,u3.nick_name
+        project_manager_name,project_manager_contact,contact_number,contacts,i.agent,u2.nick_name
         as agent_name,
         agent_name,agent_contact,project_type,scale,business_category,union_company_name,i.apply_status
-        from pl_bid_info as i inner join sys_user as u on u.user_id = i.user_id inner join sys_user as u2 on i.agent =
-        u2.user_id
+        from pl_bid_info as i left join sys_user as u on u.user_id = i.user_id left join sys_user as u2 on i.agent =
+        u2.user_id left join sys_user as u3 on u3.user_id = i.project_manager
         <where>
             <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
             <if test="bidName != null  and bidName != ''">and bid_name like concat('%', #{bidName}, '%')</if>
@@ -185,6 +156,7 @@
                i.user_id,
                u.nick_name,
                u.phonenumber,
+               i.remark,
                bid_name,
                bid_number,
                bid_deadline,
@@ -222,10 +194,12 @@
                scale,
                business_category,
                union_company_name,
-               i.apply_status
+               i.apply_status,
+               contact_number,
+               contacts
         from pl_bid_info as i
-                 inner join sys_user as u on u.user_id = i.user_id
-                 inner join sys_user as u2 on i.agent =
+                 left join sys_user as u on u.user_id = i.user_id
+                 left join sys_user as u2 on i.agent =
                                               u2.user_id
         where bid_id = #{bidId}
     </select>
@@ -244,23 +218,141 @@
     <select id="selectBidPlaces" resultMap="PlBidInfoResult">
         select distinct bid_place
         from pl_bid_info
-        <where>
-            <if test="delFlag != null">del_flag=#{delFlag}</if>
-        </where>
-    </select>
-    <select id="selectAgents" resultMap="PlBidInfoResult">
-        select distinct agent,nick_name from pl_bid_info as i inner join sys_user su on i.agent = su.user_id
-        <where>
-            <if test="delFlag != null and delFlag != '' ">i.del_flag=#{delFlag}</if>
-        </where>
+        where del_flag = '0'
+          and bid_place is not null
     </select>
     <select id="listCreaters" resultType="com.ruoyi.project.bidinfo.domain.PlBidInfo">
-        select distinct i.create_by from pl_bid_info as i inner join sys_user su on i.agent = su.user_id
+        select distinct i.create_by
+        from pl_bid_info as i
+                 inner join sys_user su on i.agent = su.user_id
+        where del_flag = '0'
+    </select>
+
+    <!--  某人当年/某年投标总数-->
+    <select id="getContractCount" parameterType="PlBidInfo" resultType="java.lang.Integer">
+        select count(bid_id) as count
+        from pl_bid_info
         <where>
-            <if test="delFlag != null">del_flag=#{delFlag}</if>
+            <if test="delFlag != null">del_flag=#{delFlag} and</if>
+            <if test="bidDate = null or bidDate=''">
+                year (bid_date) = (select year (SYSDATE()))
+            </if>
+            <if test="bidDate != null and bidDate != ''">
+                and year (bid_date) = year(#{bidDate})
+            </if>
+            <if test="projectManagerName != null and projectManagerName != ''">
+                and project_manager_name = #{projectManagerName}
+            </if>
+            -- and apply_status = '3'
         </where>
     </select>
 
+    <!--统计中标总数 -->
+    <select id="getContractWins" parameterType="PlBidInfo" resultType="java.lang.Integer">
+        select count(bid_id) as count
+        from pl_bid_info
+        <where>
+            win_bid = '1'
+            <if test="delFlag != null">and del_flag=#{delFlag}</if>
+            <if test="winningDate != null or winningDate != ''">
+                and year(winning_date) = #{winningDate}
+            </if>
+            <if test="winningDate = null or winningDate = ''">
+                and year (winning_date) =(select year (SYSDATE())) -- 当年中标 and
+            </if>
+            <if test="projectManagerName != null and projectManager != '' ">
+                and project_manager_name=#{projectManagerName}
+            </if>
+            -- and apply_status = '3'
+        </where>
+    </select>
+    <!--失标总数-->
+    <select id="getContractLosted" parameterType="PlBidInfo" resultType="java.lang.Integer">
+        select count(bid_id) as count
+        from pl_bid_info
+        <where>
+            win_bid = '0'
+            <if test="delFlag != null">and del_flag=#{delFlag}</if>
+            <if test="bidDate != null or bidDate !=''">
+                and year(bid_date) = #{bidDate}
+            </if>
+            <if test="bidDate = null or bidDate = ''">
+                and year (bid_date) =(select year (SYSDATE())) -- 当年中标 and
+            </if>
+            <if test="projectManagerName != null and projectManager != '' ">
+                and project_manager_name=#{projectManagerName}
+            </if>
+            -- and apply_status = '3'
+        </where>
+    </select>
+    <!-- 某人。 某年。 投标保证金总额-->
+    <!--    winning_date 中标年份-->
+    <select id="selelectSumBidBond" parameterType="PlBidInfo" resultType="integer">
+        select sum(bid_bond) as count
+        from pl_bid_info
+        <where>
+            <if test="delFlag != null">del_flag=#{delFlag}</if>
+            <if test="winningDate != null or winningDate != ''">
+                and year(winning_date) = #{winningDate}
+            </if>
+            <if test="winningDate = null or winningDate = ''">
+                and year (winning_date) =(select year (SYSDATE())) -- 当年中标 and
+            </if>
+            <if test="projectManagerName != null and projectManager != '' ">
+                and project_manager_name=#{projectManagerName}
+            </if>
+            -- and apply_status = '3'
+        </where>
+    </select>
+
+    <!--    已回收保证金总额 -->
+    <select id="selelectSumBidBondRecov" parameterType="PlBidInfo" resultType="integer">
+        select sum(bid_bond) as count
+        from pl_bid_info
+        <where>
+            <if test="bidBondRecovered">bid_bond_recovered = #{bidBondRecovered}</if>
+            <if test="delFlag != null">and del_flag=#{delFlag}</if>
+            <if test="bidBondTakebackDate != null or bidBondTakebackDate != ''">
+                and year(bid_bond_takeback_date) = #{bidBondTakebackDate}
+            </if>
+            <if test="bidBondTakebackDate = null or bidBondTakebackDate = ''">
+                and year (bid_bond_takeback_date) =(select year (SYSDATE())) -- 当年中标 and
+            </if>
+            <if test="projectManagerName != null and projectManager != '' ">
+                and project_manager_name=#{projectManagerName}
+            </if>
+            -- and apply_status = '3'
+        </where>
+    </select>
+    <!--    履约金总额 -->
+    <select id="selelectSumformBond" parameterType="PlBidInfo" resultType="integer">
+        select sum(perform_bond) as count
+        from pl_bid_info
+        <where>
+            win_bid = '1'
+            <if test="delFlag != null">and del_flag=#{delFlag}</if>
+            <if test="performBondRecovered">and perform_bond_recovered = #{performBondRecovered}</if>
+            <if test="performBondTakebackDate != null or performBondTakebackDate != ''">
+                and year(perform_bond_takeback_date) = #{performBondTakebackDate}
+            </if>
+            <if test="performBondTakebackDate = null or performBondTakebackDate = ''">
+                and year (perform_bond_takeback_date) =(select year (SYSDATE())) -- 当年中标 and
+            </if>
+            <if test="projectManagerName != null and projectManager != '' ">
+                and project_manager_name=#{projectManagerName}
+            </if>
+            -- and apply_status = '3'
+        </where>
+    </select>
+
+
+    <!--查询本表的代理人-->
+    <select id="selectAgents" resultMap="PlBidInfoResult">
+        select distinct agent, nick_name
+        from pl_bid_info as i
+                 inner join sys_user su on i.agent = su.user_id
+        where i.del_flag = '0'
+    </select>
     <insert id="insertPlBidInfo" parameterType="PlBidInfo">
         insert into pl_bid_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -309,6 +401,8 @@
             <if test="businessCategory != null">business_category,</if>
             <if test="unionCompanyName != null">union_company_name,</if>
             <if test="bidPlace != null">bid_place,</if>
+            <if test="contactNumber != null">contact_number,</if>
+            <if test="contacts!= null">contacts,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="bidId != null">#{bidId},</if>
@@ -356,6 +450,8 @@
             <if test="businessCategory != null">#{businessCategory},</if>
             <if test="unionCompanyName != null">#{unionCompanyName},</if>
             <if test="bidPlace != null">#{bidPlace},</if>
+            <if test="contactNumber != null">#{contactNumber},</if>
+            <if test="contacts != null">#{contacts},</if>
         </trim>
     </insert>
 
@@ -408,6 +504,8 @@
             <if test="businessCategory != null">business_category = #{businessCategory},</if>
             <if test="unionCompanyName != null">union_company_name = #{unionCompanyName},</if>
             <if test="bidPlace != null">bid_place = #{bidPlace},</if>
+            <if test="contacts != null">contacts = #{contacts},</if>
+            <if test="contactNumber != null">contact_number = #{contactNumber},</if>
         </trim>
         where bid_id = #{bidId}
     </update>

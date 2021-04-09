@@ -1,8 +1,8 @@
 package com.ruoyi.project.bidinfo.mapper;
 
-import java.util.List;
-
 import com.ruoyi.project.bidinfo.domain.PlBidInfo;
+
+import java.util.List;
 
 /**
  * 投标信息申请Mapper接口
@@ -78,4 +78,43 @@ public interface PlBidInfoMapper {
      * 查寻已录入的创建人
      */
     List<PlBidInfo> listCreaters();
+
+    /**
+     * 某人今年/某年投标总数
+     * 带有bid_date参数时查询投标年份
+     * 带有projectManagerName 只查询本人 不带查询全部
+     */
+    int getContractCount(PlBidInfo info);
+
+    /**
+     * 今年/某年 中标
+     * 带有winning_date参数时查询该年份的中标数
+     * 带有 projectManagerName 只查询本人 不带查询全部
+     */
+    int getContractWins(PlBidInfo info);
+
+    /**
+     * 失标 统计
+     */
+    int getContractLosted(PlBidInfo info);
+    /**
+     * 投标总数
+     */
+    int selelectSumBidBond(PlBidInfo info);
+
+    int selelectSumBidBondRecov(PlBidInfo info);
+
+    /**
+     * performBondRecovered
+     * =======》没有设置 查询全部履约保证金
+     * =======》= 0 未回收
+     * =======》= 1 已回收
+     * performBondTakebackDate
+     * =======》指定了年份 查询某年的情况
+     * =======》没指定值查询本年
+     * projectManagerName
+     * =======》有值 查询此人
+     * =======》没值 查询全部人员
+     */
+    int selelectSumformBond(PlBidInfo info);
 }

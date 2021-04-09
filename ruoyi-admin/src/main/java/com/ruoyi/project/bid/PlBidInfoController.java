@@ -1,14 +1,16 @@
-package com.ruoyi.project.client.controller;
+package com.ruoyi.project.bid;
 
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.model.LoginUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.project.bidinfo.domain.PlBidInfo;
-import com.ruoyi.project.bidinfo.service.IPlBidInfoService;
+import com.ruoyi.project.bidinfo.IPlBidInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -29,8 +31,44 @@ import java.util.List;
 @RestController
 @RequestMapping("/project/bidinfo")
 public class PlBidInfoController extends BaseController {
-    @Autowired
     private IPlBidInfoService plBidInfoService;
+
+    @Autowired
+    PlBidInfoController(IPlBidInfoService plBidInfoService) {
+        this.plBidInfoService = plBidInfoService;
+    }
+
+    /**
+     * 已提交审批的投标列表
+     */
+    @PostMapping("/audit")
+    @ApiImplicitParam(name = "plBidInfo", value = "已提交审批的投标查询对象", required = false)
+    @ApiOperation(value = "已提交审批的投标列表", response = TableDataInfo.class)
+    public AjaxResult auditUpdate(@RequestBody PlBidInfo plBidInfo) {
+        plBidInfo.setUpdateTime(DateUtils.getNowDate());
+        plBidInfoService.auditUpdate(plBidInfo);
+        return AjaxResult.success(plBidInfoService.auditList(plBidInfo));
+    }
+
+    /**
+     * 已提交审批的投标列表
+     */
+    @GetMapping("audit/list")
+    @ApiImplicitParam(name = "plBidInfo", value = "已提交审批的投标查询对象", required = false)
+    @ApiOperation(value = "已提交审批的投标列表", response = TableDataInfo.class)
+    public TableDataInfo auditList(PlBidInfo plBidInfo) {
+        List<PlBidInfo> plBidInfos = plBidInfoService.auditList(plBidInfo);
+        return getDataTable(plBidInfos);
+    }
+
+    /**
+     * 查询投标汇总信息
+     */
+    @ApiOperation(value = "查询投标汇总信息", response = AjaxResult.class)
+    @GetMapping("/getSummary")
+    public AjaxResult getSummary(PlBidInfo plBidInfo) {
+        return AjaxResult.success(plBidInfoService.selectSummary(plBidInfo));
+    }
 
     /**
      * 查询已录入的招标单位
@@ -128,7 +166,11 @@ public class PlBidInfoController extends BaseController {
     @Log(title = "投标信息申请", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PlBidInfo plBidInfo) {
-        plBidInfo.setCreateBy(SecurityUtils.getUsername());
+        //录入人就是负责人
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        plBidInfo.setProjectManagerName(loginUser.getUsername());
+        plBidInfo.setCreateBy(loginUser.getUsername());
+        plBidInfo.setAgent(loginUser.getUser().getUserId().toString());
         return toAjax(plBidInfoService.insertPlBidInfo(plBidInfo));
     }
 

@@ -10,6 +10,7 @@ public class ProcessEnginePlugInTest implements ProcessEnginePlugin {
     @Override
     //获取配置插件
     public void preInit(ProcessEngineConfigurationImpl processEngineConfiguration) {
+
         System.out.println("\n\npreInit ..... . ... .. plugin..\thistoryLevel");
     }
 

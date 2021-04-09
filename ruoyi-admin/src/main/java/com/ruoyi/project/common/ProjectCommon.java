@@ -1,7 +1,6 @@
 package com.ruoyi.project.common;
 
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.project.service.IProjectCommonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

@@ -1,4 +1,4 @@
-package com.ruoyi.project.client.controller;
+package com.ruoyi.project.client;
 
 import com.ruoyi.project.client.domain.PlClientServer;
 import com.ruoyi.project.client.service.IPlClientServerService;

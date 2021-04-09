@@ -335,7 +335,100 @@ public class PlBidInfo extends BaseEntity {
      */
     @ApiModelProperty(value = "经办人电话")
     private String phoneNum;
+    /**
+     * 联系人电话
+     */
+    @ApiModelProperty(value = "联系人电话")
+    private String contactNumber;
+    /**
+     * 联系人
+     */
+    @ApiModelProperty(value = "联系人")
+    private String contacts;
 
+    /**
+     * 投标附件
+     */
+    @ApiModelProperty(value = "投标附件")
+    private String accessoriesBid;
+    /**
+     * 中标附件
+     */
+
+    @ApiModelProperty(value = "中标附件")
+    private String accessoriesWin;
+    /**
+     * 审查附件
+     */
+    @ApiModelProperty(value = "审查附件")
+    private String accessoriesAudit;
+    /**
+     * 中标备注
+     */
+
+    @ApiModelProperty(value = "中标备注")
+    private String remarkWin;
+    /**
+     * 审查备注
+     */
+    @ApiModelProperty(value = "审查备注")
+    private String remarkAudit;
+
+    public String getAccessoriesBid() {
+        return accessoriesBid;
+    }
+
+    public void setAccessoriesBid(String accessoriesBid) {
+        this.accessoriesBid = accessoriesBid;
+    }
+
+    public String getAccessoriesWin() {
+        return accessoriesWin;
+    }
+
+    public void setAccessoriesWin(String accessoriesWin) {
+        this.accessoriesWin = accessoriesWin;
+    }
+
+    public String getAccessoriesAudit() {
+        return accessoriesAudit;
+    }
+
+    public void setAccessoriesAudit(String accessoriesAudit) {
+        this.accessoriesAudit = accessoriesAudit;
+    }
+
+    public String getRemarkWin() {
+        return remarkWin;
+    }
+
+    public void setRemarkWin(String remarkWin) {
+        this.remarkWin = remarkWin;
+    }
+
+    public String getRemarkAudit() {
+        return remarkAudit;
+    }
+
+    public void setRemarkAudit(String remarkAudit) {
+        this.remarkAudit = remarkAudit;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
 
     public String getPhonenumber() {
         return phonenumber;

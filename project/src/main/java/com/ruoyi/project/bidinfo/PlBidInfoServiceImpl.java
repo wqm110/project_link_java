@@ -1,14 +1,17 @@
-package com.ruoyi.project.bidinfo.service.impl;
+package com.ruoyi.project.bidinfo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.IdUtils;
+import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.project.bidinfo.domain.PlBidInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.project.bidinfo.mapper.PlBidInfoMapper;
-import com.ruoyi.project.bidinfo.domain.PlBidInfo;
-import com.ruoyi.project.bidinfo.service.IPlBidInfoService;
 
 /**
  * 投标信息申请Service业务层处理
@@ -18,8 +21,12 @@ import com.ruoyi.project.bidinfo.service.IPlBidInfoService;
  */
 @Service
 public class PlBidInfoServiceImpl implements IPlBidInfoService {
-    @Autowired
     private PlBidInfoMapper plBidInfoMapper;
+
+    @Autowired
+    PlBidInfoServiceImpl(PlBidInfoMapper plBidInfoMapper) {
+        this.plBidInfoMapper = plBidInfoMapper;
+    }
 
     /**
      * 查询投标信息申请
@@ -52,6 +59,7 @@ public class PlBidInfoServiceImpl implements IPlBidInfoService {
     @Override
     public int insertPlBidInfo(PlBidInfo plBidInfo) {
         plBidInfo.setCreateTime(DateUtils.getNowDate());
+        plBidInfo.setUserId(SecurityUtils.getLoginUser().getUser().getUserId());
         if (null == plBidInfo.getBidId())
             plBidInfo.setBidId(IdUtils.snowLId());
         return plBidInfoMapper.insertPlBidInfo(plBidInfo);
@@ -118,5 +126,78 @@ public class PlBidInfoServiceImpl implements IPlBidInfoService {
     @Override
     public List<PlBidInfo> listCeaters() {
         return plBidInfoMapper.listCreaters();
+    }
+
+    /**
+     * 汇总信息
+     * TODO 不区分 人 4-8-2021
+     */
+    public Map<String, Object> selectSummary(PlBidInfo info) {
+        Map<String, Object> summary = new HashMap<>();
+//        info.setProjectManagerName("admin");
+        /*
+         * 某人今年/某年投标总数
+         * 带有bid_date参数时查询投标年份
+         * 带有projectManagerName 只查询本人 不带查询全部
+         */
+        int contractSum = plBidInfoMapper.getContractCount(info);
+        /*
+         * 今年/某年 中标
+         * 带有winning_date参数时查询该年份的中标数
+         * 带有 projectManagerName 只查询本人 不带查询全部
+         */
+        int contractWins = plBidInfoMapper.getContractWins(info);
+        /*
+         * 失标 统计
+         */
+        int contractLosted = plBidInfoMapper.getContractLosted(info);
+        /*
+         * 某人。 某年。 投标保证金总额
+         */
+        int SumBidBond = plBidInfoMapper.selelectSumBidBond(info);
+        /*
+         * 某人。 某年。 投标保证金回收总额
+         */
+        int SumBidBondRecov = plBidInfoMapper.selelectSumBidBondRecov(info);
+        /*
+         * 保证金已回收、未回收 统计
+         * performBondRecovered
+         * =======》没有设置 查询全部履约保证金
+         * =======》= 0 未回收
+         * =======》= 1 已回收
+         * performBondTakebackDate
+         * =======》指定了年份 查询某年的情况
+         * =======》没指定值查询本年
+         * projectManagerName
+         * =======》有值 查询此人
+         * =======》没值 查询全部人员
+         */
+        int SumformBond = plBidInfoMapper.selelectSumformBond(info);
+
+        summary.put("contractSum", contractSum);
+        summary.put("contractWins", contractWins);
+        summary.put("contractLosted", contractLosted);
+        summary.put("SumBidBond", SumBidBond);
+        summary.put("SumBidBondRecov", SumBidBondRecov);
+        summary.put("SumformBond", SumformBond);
+
+        return summary;
+    }
+
+    /**
+     * TODO 提交审批的列表
+     * 审批状态不为0
+     */
+    @Override
+    public List<PlBidInfo> auditList(PlBidInfo plBidInfo) {
+        return new ArrayList<>();
+    }
+
+    /**
+     * TODO 修改审批
+     */
+    @Override
+    public int auditUpdate(PlBidInfo plBidInfo) {
+        return 0;
     }
 }

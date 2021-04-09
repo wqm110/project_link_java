@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.contract.mapper.PlContractFeePlanMapper">
+
+    <resultMap type="PlContractFeePlan" id="PlContractFeePlanResult">
+        <result property="planId" column="plan_id"/>
+        <result property="contractId" column="contract_id"/>
+        <result property="planDesc" column="plan_desc"/>
+        <result property="planFee" column="plan_fee"/>
+        <result property="planPaymentTime" column="plan_payment_time"/>
+        <result property="remindDaysAdvance" column="remind_days_advance"/>
+        <result property="reminderDate" column="reminder_date"/>
+        <result property="reminder" column="reminder"/>
+        <result property="reminderName" column="reminder_name"/>
+        <result property="sentReminder" column="sent_reminder"/>
+        <result property="status" column="status"/>
+        <result property="completeStatus" column="complete_status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createByName" column="create_by_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="selectPlContractFeePlanVo">
+        select plan_id,
+               contract_id,
+               plan_desc,
+               plan_fee,
+               plan_payment_time,
+               remind_days_advance,
+               reminder_date,
+               reminder,
+               reminder_name,
+               sent_reminder,
+               status,
+               complete_status,
+               del_flag,
+               create_by,
+               create_by_name,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from pl_contract_fee_plan
+    </sql>
+
+    <select id="selectPlContractFeePlanList" parameterType="PlContractFeePlan" resultMap="PlContractFeePlanResult">
+        <include refid="selectPlContractFeePlanVo"/>
+        <where>
+            <if test="contractId != null  and contractId != ''">and contract_id = #{contractId}</if>
+            <if test="planDesc != null  and planDesc != ''">and plan_desc = #{planDesc}</if>
+            <if test="planFee != null ">and plan_fee = #{planFee}</if>
+            <if test="planPaymentTime != null ">and plan_payment_time = #{planPaymentTime}</if>
+            <if test="remindDaysAdvance != null ">and remind_days_advance = #{remindDaysAdvance}</if>
+            <if test="reminderDate != null ">and reminder_date = #{reminderDate}</if>
+            <if test="reminder != null ">and reminder = #{reminder}</if>
+            <if test="reminderName != null  and reminderName != ''">and reminder_name like concat('%', #{reminderName},
+                '%')
+            </if>
+            <if test="sentReminder != null  and sentReminder != ''">and sent_reminder = #{sentReminder}</if>
+            <if test="status != null  and status != ''">and status = #{status}</if>
+            <if test="completeStatus != null  and completeStatus != ''">and complete_status = #{completeStatus}</if>
+            <if test="createByName != null  and createByName != ''">and create_by_name like concat('%', #{createByName},
+                '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectPlContractFeePlanById" parameterType="Long" resultMap="PlContractFeePlanResult">
+        <include refid="selectPlContractFeePlanVo"/>
+        where plan_id = #{planId}
+    </select>
+    <select id="getContractPlansByFatherId" resultType="com.ruoyi.project.contract.domain.PlContractFeePlan"
+            parameterType="java.lang.String">
+        select plan_id,
+               contract_id,
+               plan_desc,
+               plan_fee,
+               plan_payment_time,
+               remind_days_advance,
+               reminder_date,
+               reminder,
+               reminder_name,
+               sent_reminder,
+               status,
+               complete_status,
+               del_flag,
+               create_by,
+               create_by_name,
+               create_time,
+               update_by,
+               update_time,
+               remark
+        from pl_contract_fee_plan
+        where contract_id = #{contractId}
+    </select>
+    <select id="getcollected" resultMap="PlContractFeePlanResult">
+        select plan_id, i.contract_id, plan_desc, plan_fee, plan_payment_time, remind_days_advance, reminder_date,
+        reminder, reminder_name, sent_reminder, i.status, complete_status, f.del_flag,i.del_flag,i.signing_date
+        from pl_contract_fee_plan as f left join pl_contract_info as i on i.contract_id = f.contract_id
+        <where>
+            i.del_flag= '0' and f.del_flag= '0'
+            <choose>
+                <when test="ed != null and ed != ''">
+                    <if test="s != null and s != ''">
+                        and YEAR (signing_date) between #{s} and #{ed}
+                    </if>
+                </when>
+                <otherwise>
+                    <if test="s != null and s != ''">
+                        and YEAR (signing_date) = #{s}
+                    </if>
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <!--    实收计收 年-->
+    <select id="selectSummaryChartsFeeCollectedYear"
+            resultType="com.ruoyi.project.contract.domain.PlContractFeePlan">
+        select sum(plan_fee)                             plan_fee,
+               sum(if(complete_status = 1, plan_fee, 0)) collated_fee,
+               plan_payment_time,
+               complete_status,
+               del_flag,
+            YEAR (plan_payment_time) as plan_year,
+            update_time,
+            remark
+        from pl_contract_fee_plan
+        where del_flag = '0'
+        group by YEAR (plan_payment_time)
+        having plan_year between #{s}
+           and #{ed}
+    </select>
+
+    <select id="getSummaryChartsFeeCollectedMonth" resultType="com.ruoyi.project.contract.domain.PlContractFeePlan"
+            parameterType="int">
+        select sum(plan_fee)                             plan_fee,
+               sum(if(complete_status = 1, plan_fee, 0)) collated_fee,
+            month (plan_payment_time) as plan_time,
+            year (plan_payment_time) as plan_year,
+            complete_status,
+            del_flag,
+            update_time,
+            remark
+        from pl_contract_fee_plan
+        where del_flag = '0'
+        group by month (plan_payment_time)
+        having plan_year = #{s}
+
+    </select>
+    <select id="getSummaryChartsFeeCollectedQuarter" resultType="com.ruoyi.project.contract.domain.PlContractFeePlan"
+            parameterType="int">
+        select sum(plan_fee)                             plan_fee,
+               sum(if(complete_status = 1, plan_fee, 0)) collated_fee,
+               plan_payment_time,
+               complete_status,
+               del_flag,
+            YEAR (plan_payment_time) as plan_time,
+            update_time,
+            remark
+        from pl_contract_fee_plan
+        where del_flag = '0'
+        group by month (plan_payment_time)
+        having plan_time = #{s}
+    </select>
+
+    <insert id="insertPlContractFeePlan" parameterType="PlContractFeePlan">
+        insert into pl_contract_fee_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="planId != null">plan_id,</if>
+            <if test="contractId != null and contractId != ''">contract_id,</if>
+            <if test="planDesc != null">plan_desc,</if>
+            <if test="planFee != null">plan_fee,</if>
+            <if test="planPaymentTime != null">plan_payment_time,</if>
+            <if test="remindDaysAdvance != null">remind_days_advance,</if>
+            <if test="reminderDate != null">reminder_date,</if>
+            <if test="reminder != null">reminder,</if>
+            <if test="reminderName != null">reminder_name,</if>
+            <if test="sentReminder != null">sent_reminder,</if>
+            <if test="status != null">status,</if>
+            <if test="completeStatus != null">complete_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createByName != null">create_by_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="planId != null">#{planId},</if>
+            <if test="contractId != null and contractId != ''">#{contractId},</if>
+            <if test="planDesc != null">#{planDesc},</if>
+            <if test="planFee != null">#{planFee},</if>
+            <if test="planPaymentTime != null">#{planPaymentTime},</if>
+            <if test="remindDaysAdvance != null">#{remindDaysAdvance},</if>
+            <if test="reminderDate != null">#{reminderDate},</if>
+            <if test="reminder != null">#{reminder},</if>
+            <if test="reminderName != null">#{reminderName},</if>
+            <if test="sentReminder != null">#{sentReminder},</if>
+            <if test="status != null">#{status},</if>
+            <if test="completeStatus != null">#{completeStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createByName != null">#{createByName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePlContractFeePlan" parameterType="PlContractFeePlan">
+        update pl_contract_fee_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="contractId != null and contractId != ''">contract_id = #{contractId},</if>
+            <if test="planDesc != null">plan_desc = #{planDesc},</if>
+            <if test="planFee != null">plan_fee = #{planFee},</if>
+            <if test="planPaymentTime != null">plan_payment_time = #{planPaymentTime},</if>
+            <if test="remindDaysAdvance != null">remind_days_advance = #{remindDaysAdvance},</if>
+            <if test="reminderDate != null">reminder_date = #{reminderDate},</if>
+            <if test="reminder != null">reminder = #{reminder},</if>
+            <if test="reminderName != null">reminder_name = #{reminderName},</if>
+            <if test="sentReminder != null">sent_reminder = #{sentReminder},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="completeStatus != null">complete_status = #{completeStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createByName != null">create_by_name = #{createByName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where plan_id = #{planId}
+    </update>
+
+    <delete id="deletePlContractFeePlanById" parameterType="String">
+        delete
+        from pl_contract_fee_plan
+        where plan_id = #{planId}
+    </delete>
+
+    <delete id="deletePlContractFeePlanByIds" parameterType="Long">
+        delete from pl_contract_fee_plan where plan_id in
+        <foreach item="planId" collection="array" open="(" separator="," close=")">
+            #{planId}
+        </foreach>
+    </delete>
+</mapper>

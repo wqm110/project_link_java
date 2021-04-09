@@ -1,4 +1,4 @@
-package com.ruoyi.project.client.controller;
+package com.ruoyi.project.client;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.IdUtils;

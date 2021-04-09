@@ -91,3 +91,28 @@ CREATE TABLE `pl_contract_info` (
  `apply_time` datetime DEFAULT NULL COMMENT '申请时间',
  PRIMARY KEY (`contract_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合同信息表'
+
+
+
+CREATE TABLE `pl_contract_fee_plan`(
+ `plan_id` varchar(100) NOT NULL COMMENT '收费计划ID',
+ `contract_id` varchar(100) NOT NULL COMMENT '合同ID',
+ `plan_desc` varchar(500) DEFAULT '' COMMENT '计划说明',
+ `plan_fee` decimal(10,2) DEFAULT '0.00' COMMENT '计划收费(万元)',
+ `plan_payment_time` date DEFAULT NULL COMMENT '计划付费时间',
+ `remind_days_advance` int(4) DEFAULT '0' COMMENT '提前几天提醒',
+ `reminder_date` date DEFAULT NULL COMMENT '提醒日期',
+ `reminder` bigint(20) DEFAULT NULL COMMENT '提醒人用户ID',
+ `reminder_name` varchar(30) DEFAULT NULL COMMENT '提醒人名称',
+ `sent_reminder` varchar(1) DEFAULT '否' COMMENT '是否已发送提醒：是，否',
+ `status` char(1) DEFAULT '0' COMMENT '状态（0正常 1停用）',
+ `complete_status` char(1) DEFAULT '0' COMMENT '是否收款完成(1是 / 0否)',
+ `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+ `create_by` varchar(64) DEFAULT '' COMMENT '创建者用户ID',
+ `create_by_name` varchar(30) DEFAULT NULL COMMENT '创建者名称',
+ `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+ `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+ `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+ `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+ PRIMARY KEY (`plan_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合同收费计划表'
