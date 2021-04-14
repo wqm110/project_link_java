@@ -3,9 +3,11 @@ package com.ruoyi.project.client;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.common.utils.IdUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.project.client.domain.PlClient;
 import com.ruoyi.project.client.service.IPlClientService;
@@ -18,6 +20,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 客户信息Controller
@@ -29,9 +32,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/project/client")
 public class PlClientController extends BaseController {
-    @Autowired
     private IPlClientService plClientService;
 
+    @Autowired
+    PlClientController(IPlClientService plClientService) {
+        this.plClientService = plClientService;
+    }
+
+    @GetMapping("/getSummary")
+    @ApiOperation("查询当前客户主页概览")
+    public AjaxResult getSummary() {
+        SysUser user = SecurityUtils.getLoginUser().getUser();
+        Map<String,Object> map = plClientService.getSummary(user.getUserId());
+        return AjaxResult.success("cheng");
+    }
 
 //    /**
 //     * 查询当前用户所服务的用户

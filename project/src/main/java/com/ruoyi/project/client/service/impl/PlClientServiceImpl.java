@@ -2,6 +2,7 @@ package com.ruoyi.project.client.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.IdUtils;
@@ -95,5 +96,22 @@ public class PlClientServiceImpl implements IPlClientService {
     public List<PlClient> selectPlClientListByIds(ArrayList<String> clientsUserIds) {
 
         return plClientMapper.selectPlClientByIds(clientsUserIds);
+    }
+
+    @Override
+    public Map<String, Object> getSummary(Long userId) {
+        /**
+         * @Title: getSummary
+         * <p>Description:客户模块主页 </p>
+         * @author: wqm
+         * @Param: userId 当前用户id
+         * @version 创建时间：2021/4/9
+         * @return : java.util.Map<java.lang.String,java.lang.Object>
+         */
+        // 统计我的客户
+        //统计重点客户
+        //统计所有拜访
+        //TODO 客户主页统计
+        return null;
     }
 }

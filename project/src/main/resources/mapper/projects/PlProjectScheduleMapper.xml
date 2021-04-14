@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.PlProjectScheduleMapper">
+    
+    <resultMap type="PlProjectSchedule" id="PlProjectScheduleResult">
+        <result property="scheduleId"    column="schedule_id"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="taskMode"    column="task_mode"    />
+        <result property="taskName"    column="task_name"    />
+        <result property="predecessor"    column="predecessor"    />
+        <result property="taskProgress"    column="task_progress"    />
+        <result property="taskDuration"    column="task_duration"    />
+        <result property="taskStartDate"    column="task_start_date"    />
+        <result property="taskCompletionDate"    column="task_completion_date"    />
+        <result property="taskHours"    column="task_hours"    />
+        <result property="taskDept"    column="task_dept"    />
+        <result property="taskPrincipalId"    column="task_principal_id"    />
+        <result property="resourceName"    column="resource_name"    />
+        <result property="codeSerial"    column="code_serial"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="milestoneFlag"    column="milestone_flag"    />
+        <result property="finishedFlag"    column="finished_flag"    />
+    </resultMap>
+
+    <sql id="selectPlProjectScheduleVo">
+        select schedule_id, project_id, task_mode, task_name, predecessor, task_progress, task_duration, task_start_date, task_completion_date, task_hours, task_dept, task_principal_id, resource_name, code_serial, status, del_flag, create_by, create_time, update_by, update_time, remark, milestone_flag, finished_flag from pl_project_schedule
+    </sql>
+
+    <select id="selectPlProjectScheduleList" parameterType="PlProjectSchedule" resultMap="PlProjectScheduleResult">
+        <include refid="selectPlProjectScheduleVo"/>
+        <where>  
+            <if test="projectId != null  and projectId != ''"> and project_id = #{projectId}</if>
+            <if test="taskMode != null  and taskMode != ''"> and task_mode = #{taskMode}</if>
+            <if test="taskName != null  and taskName != ''"> and task_name like concat('%', #{taskName}, '%')</if>
+            <if test="predecessor != null "> and predecessor = #{predecessor}</if>
+            <if test="taskProgress != null "> and task_progress = #{taskProgress}</if>
+            <if test="taskDuration != null "> and task_duration = #{taskDuration}</if>
+            <if test="taskStartDate != null "> and task_start_date = #{taskStartDate}</if>
+            <if test="taskCompletionDate != null "> and task_completion_date = #{taskCompletionDate}</if>
+            <if test="taskHours != null "> and task_hours = #{taskHours}</if>
+            <if test="taskDept != null "> and task_dept = #{taskDept}</if>
+            <if test="taskPrincipalId != null  and taskPrincipalId != ''"> and task_principal_id = #{taskPrincipalId}</if>
+            <if test="resourceName != null  and resourceName != ''"> and resource_name like concat('%', #{resourceName}, '%')</if>
+            <if test="codeSerial != null "> and code_serial = #{codeSerial}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="milestoneFlag != null  and milestoneFlag != ''"> and milestone_flag = #{milestoneFlag}</if>
+            <if test="finishedFlag != null  and finishedFlag != ''"> and finished_flag = #{finishedFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlProjectScheduleById" parameterType="String" resultMap="PlProjectScheduleResult">
+        <include refid="selectPlProjectScheduleVo"/>
+        where schedule_id = #{scheduleId}
+    </select>
+        
+    <insert id="insertPlProjectSchedule" parameterType="PlProjectSchedule">
+        insert into pl_project_schedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="scheduleId != null">schedule_id,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="taskMode != null">task_mode,</if>
+            <if test="taskName != null">task_name,</if>
+            <if test="predecessor != null">predecessor,</if>
+            <if test="taskProgress != null">task_progress,</if>
+            <if test="taskDuration != null">task_duration,</if>
+            <if test="taskStartDate != null">task_start_date,</if>
+            <if test="taskCompletionDate != null">task_completion_date,</if>
+            <if test="taskHours != null">task_hours,</if>
+            <if test="taskDept != null">task_dept,</if>
+            <if test="taskPrincipalId != null">task_principal_id,</if>
+            <if test="resourceName != null">resource_name,</if>
+            <if test="codeSerial != null">code_serial,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="milestoneFlag != null">milestone_flag,</if>
+            <if test="finishedFlag != null">finished_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="scheduleId != null">#{scheduleId},</if>
+            <if test="projectId != null">#{projectId},</if>
+            <if test="taskMode != null">#{taskMode},</if>
+            <if test="taskName != null">#{taskName},</if>
+            <if test="predecessor != null">#{predecessor},</if>
+            <if test="taskProgress != null">#{taskProgress},</if>
+            <if test="taskDuration != null">#{taskDuration},</if>
+            <if test="taskStartDate != null">#{taskStartDate},</if>
+            <if test="taskCompletionDate != null">#{taskCompletionDate},</if>
+            <if test="taskHours != null">#{taskHours},</if>
+            <if test="taskDept != null">#{taskDept},</if>
+            <if test="taskPrincipalId != null">#{taskPrincipalId},</if>
+            <if test="resourceName != null">#{resourceName},</if>
+            <if test="codeSerial != null">#{codeSerial},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="milestoneFlag != null">#{milestoneFlag},</if>
+            <if test="finishedFlag != null">#{finishedFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlProjectSchedule" parameterType="PlProjectSchedule">
+        update pl_project_schedule
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="taskMode != null">task_mode = #{taskMode},</if>
+            <if test="taskName != null">task_name = #{taskName},</if>
+            <if test="predecessor != null">predecessor = #{predecessor},</if>
+            <if test="taskProgress != null">task_progress = #{taskProgress},</if>
+            <if test="taskDuration != null">task_duration = #{taskDuration},</if>
+            <if test="taskStartDate != null">task_start_date = #{taskStartDate},</if>
+            <if test="taskCompletionDate != null">task_completion_date = #{taskCompletionDate},</if>
+            <if test="taskHours != null">task_hours = #{taskHours},</if>
+            <if test="taskDept != null">task_dept = #{taskDept},</if>
+            <if test="taskPrincipalId != null">task_principal_id = #{taskPrincipalId},</if>
+            <if test="resourceName != null">resource_name = #{resourceName},</if>
+            <if test="codeSerial != null">code_serial = #{codeSerial},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="milestoneFlag != null">milestone_flag = #{milestoneFlag},</if>
+            <if test="finishedFlag != null">finished_flag = #{finishedFlag},</if>
+        </trim>
+        where schedule_id = #{scheduleId}
+    </update>
+
+    <delete id="deletePlProjectScheduleById" parameterType="String">
+        delete from pl_project_schedule where schedule_id = #{scheduleId}
+    </delete>
+
+    <delete id="deletePlProjectScheduleByIds" parameterType="String">
+        delete from pl_project_schedule where schedule_id in 
+        <foreach item="scheduleId" collection="array" open="(" separator="," close=")">
+            #{scheduleId}
+        </foreach>
+    </delete>
+</mapper>

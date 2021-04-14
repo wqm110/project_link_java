@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.projects.mapper.PlProjectsMapper">
+    
+    <resultMap type="PlProjects" id="PlProjectsResult">
+        <result property="projectId"    column="project_id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="projectNumber"    column="project_number"    />
+        <result property="userId"    column="user_id"    />
+        <result property="principalContact"    column="principal_contact"    />
+        <result property="projectType"    column="project_type"    />
+        <result property="relatedContracts"    column="related_contracts"    />
+        <result property="clientId"    column="client_id"    />
+        <result property="conUnitName"    column="con_unit_name"    />
+        <result property="planningTemplateId"    column="planning_template_id"    />
+        <result property="designCategory"    column="design_category"    />
+        <result property="stageName"    column="stage_name"    />
+        <result property="projectStatus"    column="project_status"    />
+        <result property="planStartedDate"    column="plan_started_date"    />
+        <result property="planEndDate"    column="plan_end_date"    />
+        <result property="projectYear"    column="project_year"    />
+        <result property="participatingDept"    column="participating_dept"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="syncFlag"    column="sync_flag"    />
+        <result property="cpProjectId"    column="cp_project_id"    />
+    </resultMap>
+
+    <sql id="selectPlProjectsVo">
+        select project_id, project_name, project_number, user_id, principal_contact, project_type, related_contracts, client_id, con_unit_name, planning_template_id, design_category, stage_name, project_status, plan_started_date, plan_end_date, project_year, participating_dept, status, del_flag, create_by, create_time, update_by, update_time, remark, sync_flag, cp_project_id from pl_projects
+    </sql>
+
+    <select id="selectPlProjectsList" parameterType="PlProjects" resultMap="PlProjectsResult">
+        <include refid="selectPlProjectsVo"/>
+        <where>  
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="projectNumber != null  and projectNumber != ''"> and project_number = #{projectNumber}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="principalContact != null  and principalContact != ''"> and principal_contact = #{principalContact}</if>
+            <if test="projectType != null  and projectType != ''"> and project_type = #{projectType}</if>
+            <if test="relatedContracts != null  and relatedContracts != ''"> and related_contracts = #{relatedContracts}</if>
+            <if test="clientId != null  and clientId != ''"> and client_id = #{clientId}</if>
+            <if test="conUnitName != null  and conUnitName != ''"> and con_unit_name like concat('%', #{conUnitName}, '%')</if>
+            <if test="planningTemplateId != null  and planningTemplateId != ''"> and planning_template_id = #{planningTemplateId}</if>
+            <if test="designCategory != null  and designCategory != ''"> and design_category = #{designCategory}</if>
+            <if test="stageName != null  and stageName != ''"> and stage_name like concat('%', #{stageName}, '%')</if>
+            <if test="projectStatus != null  and projectStatus != ''"> and project_status = #{projectStatus}</if>
+            <if test="planStartedDate != null "> and plan_started_date = #{planStartedDate}</if>
+            <if test="planEndDate != null "> and plan_end_date = #{planEndDate}</if>
+            <if test="projectYear != null  and projectYear != ''"> and project_year = #{projectYear}</if>
+            <if test="participatingDept != null  and participatingDept != ''"> and participating_dept = #{participatingDept}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="syncFlag != null  and syncFlag != ''"> and sync_flag = #{syncFlag}</if>
+            <if test="cpProjectId != null  and cpProjectId != ''"> and cp_project_id = #{cpProjectId}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlProjectsById" parameterType="Long" resultMap="PlProjectsResult">
+        <include refid="selectPlProjectsVo"/>
+        where project_id = #{projectId}
+    </select>
+        
+    <insert id="insertPlProjects" parameterType="PlProjects">
+        insert into pl_projects
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">project_id,</if>
+            <if test="projectName != null">project_name,</if>
+            <if test="projectNumber != null">project_number,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="principalContact != null">principal_contact,</if>
+            <if test="projectType != null">project_type,</if>
+            <if test="relatedContracts != null">related_contracts,</if>
+            <if test="clientId != null">client_id,</if>
+            <if test="conUnitName != null">con_unit_name,</if>
+            <if test="planningTemplateId != null">planning_template_id,</if>
+            <if test="designCategory != null">design_category,</if>
+            <if test="stageName != null">stage_name,</if>
+            <if test="projectStatus != null">project_status,</if>
+            <if test="planStartedDate != null">plan_started_date,</if>
+            <if test="planEndDate != null">plan_end_date,</if>
+            <if test="projectYear != null">project_year,</if>
+            <if test="participatingDept != null">participating_dept,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="syncFlag != null">sync_flag,</if>
+            <if test="cpProjectId != null">cp_project_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projectId != null">#{projectId},</if>
+            <if test="projectName != null">#{projectName},</if>
+            <if test="projectNumber != null">#{projectNumber},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="principalContact != null">#{principalContact},</if>
+            <if test="projectType != null">#{projectType},</if>
+            <if test="relatedContracts != null">#{relatedContracts},</if>
+            <if test="clientId != null">#{clientId},</if>
+            <if test="conUnitName != null">#{conUnitName},</if>
+            <if test="planningTemplateId != null">#{planningTemplateId},</if>
+            <if test="designCategory != null">#{designCategory},</if>
+            <if test="stageName != null">#{stageName},</if>
+            <if test="projectStatus != null">#{projectStatus},</if>
+            <if test="planStartedDate != null">#{planStartedDate},</if>
+            <if test="planEndDate != null">#{planEndDate},</if>
+            <if test="projectYear != null">#{projectYear},</if>
+            <if test="participatingDept != null">#{participatingDept},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="syncFlag != null">#{syncFlag},</if>
+            <if test="cpProjectId != null">#{cpProjectId},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlProjects" parameterType="PlProjects">
+        update pl_projects
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectName != null">project_name = #{projectName},</if>
+            <if test="projectNumber != null">project_number = #{projectNumber},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="principalContact != null">principal_contact = #{principalContact},</if>
+            <if test="projectType != null">project_type = #{projectType},</if>
+            <if test="relatedContracts != null">related_contracts = #{relatedContracts},</if>
+            <if test="clientId != null">client_id = #{clientId},</if>
+            <if test="conUnitName != null">con_unit_name = #{conUnitName},</if>
+            <if test="planningTemplateId != null">planning_template_id = #{planningTemplateId},</if>
+            <if test="designCategory != null">design_category = #{designCategory},</if>
+            <if test="stageName != null">stage_name = #{stageName},</if>
+            <if test="projectStatus != null">project_status = #{projectStatus},</if>
+            <if test="planStartedDate != null">plan_started_date = #{planStartedDate},</if>
+            <if test="planEndDate != null">plan_end_date = #{planEndDate},</if>
+            <if test="projectYear != null">project_year = #{projectYear},</if>
+            <if test="participatingDept != null">participating_dept = #{participatingDept},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="syncFlag != null">sync_flag = #{syncFlag},</if>
+            <if test="cpProjectId != null">cp_project_id = #{cpProjectId},</if>
+        </trim>
+        where project_id = #{projectId}
+    </update>
+
+    <delete id="deletePlProjectsById" parameterType="Long">
+        delete from pl_projects where project_id = #{projectId}
+    </delete>
+
+    <delete id="deletePlProjectsByIds" parameterType="String">
+        delete from pl_projects where project_id in 
+        <foreach item="projectId" collection="array" open="(" separator="," close=")">
+            #{projectId}
+        </foreach>
+    </delete>
+</mapper>

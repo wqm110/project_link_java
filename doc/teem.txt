@@ -116,3 +116,35 @@ CREATE TABLE `pl_contract_fee_plan`(
  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
  PRIMARY KEY (`plan_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='合同收费计划表'
+
+
+DORP TABLE IF EXITS `pl_projects`;
+CREATE TABLE `pl_projects` (
+ `project_id` bigint NOT NULL COMMENT '项目ID',
+ `project_name` varchar(100) DEFAULT '' COMMENT '项目名称',
+ `project_number` varchar(100) DEFAULT '' COMMENT '项目编号',
+ `user_id` varchar(100) DEFAULT '' COMMENT '项目负责人',
+ `principal_contact` varchar(100) DEFAULT NULL COMMENT '项目负责人联系方式',
+ `project_type` char(1) DEFAULT '0' COMMENT '项目类型',
+ `related_contracts` varchar(500) DEFAULT NULL COMMENT '关联合同id(s)',
+ `client_id` varchar(100) DEFAULT '' COMMENT '客户信息ID',
+ `con_unit_name` varchar(100) DEFAULT NULL COMMENT '建设单位名称',
+--  `planning_template_id` varchar(100) DEFAULT '' COMMENT '策划模板ID',
+ `design_category` char(1) DEFAULT '0' COMMENT '设计类别',
+ `stage_name` varchar(20) DEFAULT NULL COMMENT '设计阶段',
+ `project_status` char(1) DEFAULT '0' COMMENT '项目状态 (0已备案 1进行中 2已暂停 3 已完成)',
+ `plan_started_date` date DEFAULT NULL COMMENT '计划开始时间',
+ `plan_end_date` date DEFAULT NULL COMMENT '计划结束时间',
+ `project_year` varchar(100) DEFAULT NULL COMMENT '项目所在年份',
+ `participating_dept` varchar(500) DEFAULT '' COMMENT '参与部门',
+ `status` char(1) DEFAULT '0' COMMENT '状态（0正常 1停用）',
+ `del_flag` char(1) DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+ `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+ `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+ `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+ `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+ `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+ `sync_flag` char(1) DEFAULT '0' COMMENT '0-未同步 1-已同步',
+ `cp_project_id` varchar(100) DEFAULT NULL COMMENT '同步协同后在协同的id',
+ PRIMARY KEY (`project_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='项目基本信息'

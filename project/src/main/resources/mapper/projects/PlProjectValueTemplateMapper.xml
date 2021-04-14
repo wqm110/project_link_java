@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.mapper.PlProjectValueTemplateMapper">
+    
+    <resultMap type="PlProjectValueTemplate" id="PlProjectValueTemplateResult">
+        <result property="tmeplateId"    column="tmeplate_id"    />
+        <result property="tmeplateName"    column="tmeplate_name"    />
+        <result property="allocationBase"    column="allocation_base"    />
+        <result property="typeCoefficient"    column="type_coefficient"    />
+        <result property="difficulty"    column="difficulty"    />
+        <result property="stageCoefficient"    column="stage_coefficient"    />
+        <result property="setsCoefficient"    column="sets_coefficient"    />
+        <result property="alterCoefficient"    column="alter_coefficient"    />
+        <result property="pmCoefficient"    column="pm_coefficient"    />
+        <result property="status"    column="status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectPlProjectValueTemplateVo">
+        select tmeplate_id, tmeplate_name, allocation_base, type_coefficient, difficulty, stage_coefficient, sets_coefficient, alter_coefficient, pm_coefficient, status, del_flag, create_by, create_time, update_by, update_time, remark from pl_project_value_template
+    </sql>
+
+    <select id="selectPlProjectValueTemplateList" parameterType="PlProjectValueTemplate" resultMap="PlProjectValueTemplateResult">
+        <include refid="selectPlProjectValueTemplateVo"/>
+        <where>  
+            <if test="tmeplateName != null  and tmeplateName != ''"> and tmeplate_name like concat('%', #{tmeplateName}, '%')</if>
+            <if test="allocationBase != null "> and allocation_base = #{allocationBase}</if>
+            <if test="typeCoefficient != null "> and type_coefficient = #{typeCoefficient}</if>
+            <if test="difficulty != null "> and difficulty = #{difficulty}</if>
+            <if test="stageCoefficient != null "> and stage_coefficient = #{stageCoefficient}</if>
+            <if test="setsCoefficient != null "> and sets_coefficient = #{setsCoefficient}</if>
+            <if test="alterCoefficient != null "> and alter_coefficient = #{alterCoefficient}</if>
+            <if test="pmCoefficient != null "> and pm_coefficient = #{pmCoefficient}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlProjectValueTemplateById" parameterType="String" resultMap="PlProjectValueTemplateResult">
+        <include refid="selectPlProjectValueTemplateVo"/>
+        where tmeplate_id = #{tmeplateId}
+    </select>
+        
+    <insert id="insertPlProjectValueTemplate" parameterType="PlProjectValueTemplate">
+        insert into pl_project_value_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tmeplateId != null">tmeplate_id,</if>
+            <if test="tmeplateName != null">tmeplate_name,</if>
+            <if test="allocationBase != null">allocation_base,</if>
+            <if test="typeCoefficient != null">type_coefficient,</if>
+            <if test="difficulty != null">difficulty,</if>
+            <if test="stageCoefficient != null">stage_coefficient,</if>
+            <if test="setsCoefficient != null">sets_coefficient,</if>
+            <if test="alterCoefficient != null">alter_coefficient,</if>
+            <if test="pmCoefficient != null">pm_coefficient,</if>
+            <if test="status != null">status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tmeplateId != null">#{tmeplateId},</if>
+            <if test="tmeplateName != null">#{tmeplateName},</if>
+            <if test="allocationBase != null">#{allocationBase},</if>
+            <if test="typeCoefficient != null">#{typeCoefficient},</if>
+            <if test="difficulty != null">#{difficulty},</if>
+            <if test="stageCoefficient != null">#{stageCoefficient},</if>
+            <if test="setsCoefficient != null">#{setsCoefficient},</if>
+            <if test="alterCoefficient != null">#{alterCoefficient},</if>
+            <if test="pmCoefficient != null">#{pmCoefficient},</if>
+            <if test="status != null">#{status},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlProjectValueTemplate" parameterType="PlProjectValueTemplate">
+        update pl_project_value_template
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tmeplateName != null">tmeplate_name = #{tmeplateName},</if>
+            <if test="allocationBase != null">allocation_base = #{allocationBase},</if>
+            <if test="typeCoefficient != null">type_coefficient = #{typeCoefficient},</if>
+            <if test="difficulty != null">difficulty = #{difficulty},</if>
+            <if test="stageCoefficient != null">stage_coefficient = #{stageCoefficient},</if>
+            <if test="setsCoefficient != null">sets_coefficient = #{setsCoefficient},</if>
+            <if test="alterCoefficient != null">alter_coefficient = #{alterCoefficient},</if>
+            <if test="pmCoefficient != null">pm_coefficient = #{pmCoefficient},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where tmeplate_id = #{tmeplateId}
+    </update>
+
+    <delete id="deletePlProjectValueTemplateById" parameterType="String">
+        delete from pl_project_value_template where tmeplate_id = #{tmeplateId}
+    </delete>
+
+    <delete id="deletePlProjectValueTemplateByIds" parameterType="String">
+        delete from pl_project_value_template where tmeplate_id in 
+        <foreach item="tmeplateId" collection="array" open="(" separator="," close=")">
+            #{tmeplateId}
+        </foreach>
+    </delete>
+</mapper>

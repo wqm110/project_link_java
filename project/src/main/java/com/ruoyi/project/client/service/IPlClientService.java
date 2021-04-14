@@ -2,6 +2,8 @@ package com.ruoyi.project.client.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.project.client.domain.PlClient;
 
 /**
@@ -61,4 +63,6 @@ public interface IPlClientService
     public int deletePlClientById(Long clientId);
 
     List<PlClient> selectPlClientListByIds(ArrayList<String> clientsUserIds);
+
+    Map<String, Object> getSummary(Long userId);
 }
