@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.projects.mapper.PlProjectTasksendAssignMapper">
+    
+    <resultMap type="PlProjectTasksendAssign" id="PlProjectTasksendAssignResult">
+        <result property="id"    column="id"    />
+        <result property="applyUserId"    column="apply_user_id"    />
+        <result property="applyTime"    column="apply_time"    />
+        <result property="number"    column="number"    />
+        <result property="projectId"    column="project_id"    />
+        <result property="designPhase"    column="design_phase"    />
+        <result property="designCycle"    column="design_cycle"    />
+        <result property="desginDept"    column="desgin_dept"    />
+        <result property="censorClass"    column="censor_class"    />
+        <result property="constructUnitName"    column="construct_unit_name"    />
+        <result property="conUnit"    column="con_unit"    />
+        <result property="contactName"    column="contact_name"    />
+        <result property="contactPhone"    column="contact_phone"    />
+        <result property="address"    column="address"    />
+        <result property="email"    column="email"    />
+        <result property="designRequire"    column="design_require"    />
+        <result property="designPlanRemark"    column="design_plan_remark"    />
+        <result property="ghStartTime"    column="gh_start_time"    />
+        <result property="ghEndTime"    column="gh_end_time"    />
+        <result property="cbStartTime"    column="cb_start_time"    />
+        <result property="cbEndTime"    column="cb_end_time"    />
+        <result property="sgtStartTime"    column="sgt_start_time"    />
+        <result property="sgtEndTime"    column="sgt_end_time"    />
+        <result property="attach"    column="attach"    />
+        <result property="tsDate"    column="ts_date"    />
+        <result property="instanceId"    column="instance_id"    />
+        <result property="applyStatus"    column="apply_status"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectPlProjectTasksendAssignVo">
+        select id, apply_user_id, apply_time, number, project_id, design_phase, design_cycle, desgin_dept, censor_class, construct_unit_name, con_unit, contact_name, contact_phone, address, email, design_require, design_plan_remark, gh_start_time, gh_end_time, cb_start_time, cb_end_time, sgt_start_time, sgt_end_time, attach, ts_date, instance_id, apply_status, del_flag, create_by, create_time, update_by, update_time from pl_project_tasksend_assign
+    </sql>
+
+    <select id="selectPlProjectTasksendAssignList" parameterType="PlProjectTasksendAssign" resultMap="PlProjectTasksendAssignResult">
+        <include refid="selectPlProjectTasksendAssignVo"/>
+        <where>  
+            <if test="applyUserId != null  and applyUserId != ''"> and apply_user_id = #{applyUserId}</if>
+            <if test="applyTime != null "> and apply_time = #{applyTime}</if>
+            <if test="number != null  and number != ''"> and number = #{number}</if>
+            <if test="projectId != null  and projectId != ''"> and project_id = #{projectId}</if>
+            <if test="designPhase != null  and designPhase != ''"> and design_phase = #{designPhase}</if>
+            <if test="designCycle != null  and designCycle != ''"> and design_cycle = #{designCycle}</if>
+            <if test="desginDept != null  and desginDept != ''"> and desgin_dept = #{desginDept}</if>
+            <if test="censorClass != null  and censorClass != ''"> and censor_class = #{censorClass}</if>
+            <if test="constructUnitName != null  and constructUnitName != ''"> and construct_unit_name like concat('%', #{constructUnitName}, '%')</if>
+            <if test="conUnit != null  and conUnit != ''"> and con_unit = #{conUnit}</if>
+            <if test="contactName != null  and contactName != ''"> and contact_name like concat('%', #{contactName}, '%')</if>
+            <if test="contactPhone != null  and contactPhone != ''"> and contact_phone = #{contactPhone}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="designRequire != null  and designRequire != ''"> and design_require = #{designRequire}</if>
+            <if test="designPlanRemark != null  and designPlanRemark != ''"> and design_plan_remark = #{designPlanRemark}</if>
+            <if test="ghStartTime != null "> and gh_start_time = #{ghStartTime}</if>
+            <if test="ghEndTime != null "> and gh_end_time = #{ghEndTime}</if>
+            <if test="cbStartTime != null "> and cb_start_time = #{cbStartTime}</if>
+            <if test="cbEndTime != null "> and cb_end_time = #{cbEndTime}</if>
+            <if test="sgtStartTime != null "> and sgt_start_time = #{sgtStartTime}</if>
+            <if test="sgtEndTime != null "> and sgt_end_time = #{sgtEndTime}</if>
+            <if test="attach != null  and attach != ''"> and attach = #{attach}</if>
+            <if test="tsDate != null "> and ts_date = #{tsDate}</if>
+            <if test="instanceId != null  and instanceId != ''"> and instance_id = #{instanceId}</if>
+            <if test="applyStatus != null  and applyStatus != ''"> and apply_status = #{applyStatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlProjectTasksendAssignById" parameterType="String" resultMap="PlProjectTasksendAssignResult">
+        <include refid="selectPlProjectTasksendAssignVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPlProjectTasksendAssign" parameterType="PlProjectTasksendAssign">
+        insert into pl_project_tasksend_assign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="applyUserId != null">apply_user_id,</if>
+            <if test="applyTime != null">apply_time,</if>
+            <if test="number != null">number,</if>
+            <if test="projectId != null">project_id,</if>
+            <if test="designPhase != null">design_phase,</if>
+            <if test="designCycle != null">design_cycle,</if>
+            <if test="desginDept != null">desgin_dept,</if>
+            <if test="censorClass != null">censor_class,</if>
+            <if test="constructUnitName != null">construct_unit_name,</if>
+            <if test="conUnit != null">con_unit,</if>
+            <if test="contactName != null">contact_name,</if>
+            <if test="contactPhone != null">contact_phone,</if>
+            <if test="address != null">address,</if>
+            <if test="email != null">email,</if>
+            <if test="designRequire != null">design_require,</if>
+            <if test="designPlanRemark != null">design_plan_remark,</if>
+            <if test="ghStartTime != null">gh_start_time,</if>
+            <if test="ghEndTime != null">gh_end_time,</if>
+            <if test="cbStartTime != null">cb_start_time,</if>
+            <if test="cbEndTime != null">cb_end_time,</if>
+            <if test="sgtStartTime != null">sgt_start_time,</if>
+            <if test="sgtEndTime != null">sgt_end_time,</if>
+            <if test="attach != null">attach,</if>
+            <if test="tsDate != null">ts_date,</if>
+            <if test="instanceId != null">instance_id,</if>
+            <if test="applyStatus != null">apply_status,</if>
+            <if test="delFlag != null">del_flag,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="applyUserId != null">#{applyUserId},</if>
+            <if test="applyTime != null">#{applyTime},</if>
+            <if test="number != null">#{number},</if>
+            <if test="projectId != null">#{projectId},</if>
+            <if test="designPhase != null">#{designPhase},</if>
+            <if test="designCycle != null">#{designCycle},</if>
+            <if test="desginDept != null">#{desginDept},</if>
+            <if test="censorClass != null">#{censorClass},</if>
+            <if test="constructUnitName != null">#{constructUnitName},</if>
+            <if test="conUnit != null">#{conUnit},</if>
+            <if test="contactName != null">#{contactName},</if>
+            <if test="contactPhone != null">#{contactPhone},</if>
+            <if test="address != null">#{address},</if>
+            <if test="email != null">#{email},</if>
+            <if test="designRequire != null">#{designRequire},</if>
+            <if test="designPlanRemark != null">#{designPlanRemark},</if>
+            <if test="ghStartTime != null">#{ghStartTime},</if>
+            <if test="ghEndTime != null">#{ghEndTime},</if>
+            <if test="cbStartTime != null">#{cbStartTime},</if>
+            <if test="cbEndTime != null">#{cbEndTime},</if>
+            <if test="sgtStartTime != null">#{sgtStartTime},</if>
+            <if test="sgtEndTime != null">#{sgtEndTime},</if>
+            <if test="attach != null">#{attach},</if>
+            <if test="tsDate != null">#{tsDate},</if>
+            <if test="instanceId != null">#{instanceId},</if>
+            <if test="applyStatus != null">#{applyStatus},</if>
+            <if test="delFlag != null">#{delFlag},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlProjectTasksendAssign" parameterType="PlProjectTasksendAssign">
+        update pl_project_tasksend_assign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="applyUserId != null">apply_user_id = #{applyUserId},</if>
+            <if test="applyTime != null">apply_time = #{applyTime},</if>
+            <if test="number != null">number = #{number},</if>
+            <if test="projectId != null">project_id = #{projectId},</if>
+            <if test="designPhase != null">design_phase = #{designPhase},</if>
+            <if test="designCycle != null">design_cycle = #{designCycle},</if>
+            <if test="desginDept != null">desgin_dept = #{desginDept},</if>
+            <if test="censorClass != null">censor_class = #{censorClass},</if>
+            <if test="constructUnitName != null">construct_unit_name = #{constructUnitName},</if>
+            <if test="conUnit != null">con_unit = #{conUnit},</if>
+            <if test="contactName != null">contact_name = #{contactName},</if>
+            <if test="contactPhone != null">contact_phone = #{contactPhone},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="designRequire != null">design_require = #{designRequire},</if>
+            <if test="designPlanRemark != null">design_plan_remark = #{designPlanRemark},</if>
+            <if test="ghStartTime != null">gh_start_time = #{ghStartTime},</if>
+            <if test="ghEndTime != null">gh_end_time = #{ghEndTime},</if>
+            <if test="cbStartTime != null">cb_start_time = #{cbStartTime},</if>
+            <if test="cbEndTime != null">cb_end_time = #{cbEndTime},</if>
+            <if test="sgtStartTime != null">sgt_start_time = #{sgtStartTime},</if>
+            <if test="sgtEndTime != null">sgt_end_time = #{sgtEndTime},</if>
+            <if test="attach != null">attach = #{attach},</if>
+            <if test="tsDate != null">ts_date = #{tsDate},</if>
+            <if test="instanceId != null">instance_id = #{instanceId},</if>
+            <if test="applyStatus != null">apply_status = #{applyStatus},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deletePlProjectTasksendAssignById" parameterType="String">
+        delete from pl_project_tasksend_assign where id = #{id}
+    </delete>
+
+    <delete id="deletePlProjectTasksendAssignByIds" parameterType="String">
+        delete from pl_project_tasksend_assign where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
