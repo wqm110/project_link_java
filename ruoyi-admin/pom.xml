@@ -17,11 +17,7 @@
 
     <dependencies>
         <!--        引用别的模块-->
-        <dependency>
-            <groupId>com.ruoyi</groupId>
-            <artifactId>project</artifactId>
-            <version>0.0.1</version>
-        </dependency>
+
         <!--        工作流-->
         <dependency>
             <groupId>com.ruoyi</groupId>
@@ -75,6 +71,12 @@
         <dependency>
             <groupId>com.ruoyi</groupId>
             <artifactId>ruoyi-generator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>project</artifactId>
+            <version>0.0.1</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
