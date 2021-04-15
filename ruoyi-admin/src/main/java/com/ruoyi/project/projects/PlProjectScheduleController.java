@@ -1,6 +1,9 @@
 package com.ruoyi.project.projects;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.IdUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,15 +29,14 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 项目进度计划Controller
- * 
+ *
  * @author ruoyi
  * @date 2021-04-14
  */
 @Api(tags = "B项目进度计划")
 @RestController
 @RequestMapping("/project/schedule")
-public class PlProjectScheduleController extends BaseController
-{
+public class PlProjectScheduleController extends BaseController {
     @Autowired
     private IPlProjectScheduleService plProjectScheduleService;
 
@@ -47,8 +49,7 @@ public class PlProjectScheduleController extends BaseController
     @ApiImplicitParams({
             @ApiImplicitParam(name = "plProjectSchedule", value = "项目进度计划查询对象", required = false, paramType = "query")
     })
-    public TableDataInfo list(PlProjectSchedule plProjectSchedule)
-    {
+    public TableDataInfo list(PlProjectSchedule plProjectSchedule) {
         startPage();
         List<PlProjectSchedule> list = plProjectScheduleService.selectPlProjectScheduleList(plProjectSchedule);
         return getDataTable(list);
@@ -64,8 +65,7 @@ public class PlProjectScheduleController extends BaseController
             @ApiImplicitParam(name = "plProjectSchedule", value = "项目进度计划查询对象", required = false, paramType = "query")
     })
     @GetMapping("/export")
-    public AjaxResult export(PlProjectSchedule plProjectSchedule)
-    {
+    public AjaxResult export(PlProjectSchedule plProjectSchedule) {
         List<PlProjectSchedule> list = plProjectScheduleService.selectPlProjectScheduleList(plProjectSchedule);
         ExcelUtil<PlProjectSchedule> util = new ExcelUtil<PlProjectSchedule>(PlProjectSchedule.class);
         return util.exportExcel(list, "schedule");
@@ -80,8 +80,7 @@ public class PlProjectScheduleController extends BaseController
     @ApiImplicitParams({
             @ApiImplicitParam(name = "scheduleId", value = "项目进度计划ID", required = true, paramType = "query")
     })
-    public AjaxResult getInfo(@PathVariable("scheduleId") String scheduleId)
-    {
+    public AjaxResult getInfo(@PathVariable("scheduleId") String scheduleId) {
         return AjaxResult.success(plProjectScheduleService.selectPlProjectScheduleById(scheduleId));
     }
 
@@ -95,8 +94,9 @@ public class PlProjectScheduleController extends BaseController
     @PreAuthorize("@ss.hasPermi('project:schedule:add')")
     @Log(title = "项目进度计划", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody PlProjectSchedule plProjectSchedule)
-    {
+    public AjaxResult add(@RequestBody PlProjectSchedule plProjectSchedule) {
+        plProjectSchedule.setCreateBy(SecurityUtils.getUsername());
+        plProjectSchedule.setScheduleId(IdUtils.snowLId().toString());
         return toAjax(plProjectScheduleService.insertPlProjectSchedule(plProjectSchedule));
     }
 
@@ -110,8 +110,7 @@ public class PlProjectScheduleController extends BaseController
     @PreAuthorize("@ss.hasPermi('project:schedule:edit')")
     @Log(title = "项目进度计划", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody PlProjectSchedule plProjectSchedule)
-    {
+    public AjaxResult edit(@RequestBody PlProjectSchedule plProjectSchedule) {
         return toAjax(plProjectScheduleService.updatePlProjectSchedule(plProjectSchedule));
     }
 
@@ -121,12 +120,11 @@ public class PlProjectScheduleController extends BaseController
     @ApiOperation(value = "删除项目进度计划")
     @PreAuthorize("@ss.hasPermi('project:schedule:remove')")
     @Log(title = "项目进度计划", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{scheduleIds}")
+    @DeleteMapping("/{scheduleIds}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "scheduleIds", value = "项目进度计划ID[]", required = true, paramType = "body")
     })
-    public AjaxResult remove(@PathVariable String[] scheduleIds)
-    {
+    public AjaxResult remove(@PathVariable String[] scheduleIds) {
         return toAjax(plProjectScheduleService.deletePlProjectScheduleByIds(scheduleIds));
     }
 }
