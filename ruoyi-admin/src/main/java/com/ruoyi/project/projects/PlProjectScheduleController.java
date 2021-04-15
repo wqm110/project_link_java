@@ -2,6 +2,7 @@ package com.ruoyi.project.projects;
 
 import java.util.List;
 
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.IdUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -97,6 +98,7 @@ public class PlProjectScheduleController extends BaseController {
     public AjaxResult add(@RequestBody PlProjectSchedule plProjectSchedule) {
         plProjectSchedule.setCreateBy(SecurityUtils.getUsername());
         plProjectSchedule.setScheduleId(IdUtils.snowLId().toString());
+        plProjectSchedule.setCreateTime(DateUtils.getNowDate());
         return toAjax(plProjectScheduleService.insertPlProjectSchedule(plProjectSchedule));
     }
 
@@ -111,6 +113,8 @@ public class PlProjectScheduleController extends BaseController {
     @Log(title = "项目进度计划", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PlProjectSchedule plProjectSchedule) {
+        plProjectSchedule.setUpdateTime(DateUtils.getNowDate());
+        plProjectSchedule.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(plProjectScheduleService.updatePlProjectSchedule(plProjectSchedule));
     }
 

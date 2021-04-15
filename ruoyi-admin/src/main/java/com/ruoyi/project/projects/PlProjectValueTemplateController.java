@@ -1,6 +1,10 @@
 package com.ruoyi.project.projects;
 
 import java.util.List;
+
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.IdUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,15 +30,14 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 项目产值分配模板Controller
- * 
+ *
  * @author wqm
  * @date 2021-04-14
  */
 @Api(tags = "B项目产值分配模板")
 @RestController
 @RequestMapping("/project/template")
-public class PlProjectValueTemplateController extends BaseController
-{
+public class PlProjectValueTemplateController extends BaseController {
     @Autowired
     private IPlProjectValueTemplateService plProjectValueTemplateService;
 
@@ -47,8 +50,7 @@ public class PlProjectValueTemplateController extends BaseController
     @ApiImplicitParams({
             @ApiImplicitParam(name = "plProjectValueTemplate", value = "项目产值分配模板查询对象", required = false, paramType = "query")
     })
-    public TableDataInfo list(PlProjectValueTemplate plProjectValueTemplate)
-    {
+    public TableDataInfo list(PlProjectValueTemplate plProjectValueTemplate) {
         startPage();
         List<PlProjectValueTemplate> list = plProjectValueTemplateService.selectPlProjectValueTemplateList(plProjectValueTemplate);
         return getDataTable(list);
@@ -64,8 +66,7 @@ public class PlProjectValueTemplateController extends BaseController
             @ApiImplicitParam(name = "plProjectValueTemplate", value = "项目产值分配模板查询对象", required = false, paramType = "query")
     })
     @GetMapping("/export")
-    public AjaxResult export(PlProjectValueTemplate plProjectValueTemplate)
-    {
+    public AjaxResult export(PlProjectValueTemplate plProjectValueTemplate) {
         List<PlProjectValueTemplate> list = plProjectValueTemplateService.selectPlProjectValueTemplateList(plProjectValueTemplate);
         ExcelUtil<PlProjectValueTemplate> util = new ExcelUtil<PlProjectValueTemplate>(PlProjectValueTemplate.class);
         return util.exportExcel(list, "template");
@@ -80,8 +81,7 @@ public class PlProjectValueTemplateController extends BaseController
     @ApiImplicitParams({
             @ApiImplicitParam(name = "tmeplateId", value = "项目产值分配模板ID", required = true, paramType = "query")
     })
-    public AjaxResult getInfo(@PathVariable("tmeplateId") String tmeplateId)
-    {
+    public AjaxResult getInfo(@PathVariable("tmeplateId") String tmeplateId) {
         return AjaxResult.success(plProjectValueTemplateService.selectPlProjectValueTemplateById(tmeplateId));
     }
 
@@ -95,8 +95,10 @@ public class PlProjectValueTemplateController extends BaseController
     @PreAuthorize("@ss.hasPermi('project:template:add')")
     @Log(title = "项目产值分配模板", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody PlProjectValueTemplate plProjectValueTemplate)
-    {
+    public AjaxResult add(@RequestBody PlProjectValueTemplate plProjectValueTemplate) {
+        plProjectValueTemplate.setTmeplateId(IdUtils.snowLId().toString());
+        plProjectValueTemplate.setCreateTime(DateUtils.getNowDate());
+        plProjectValueTemplate.setCreateBy(SecurityUtils.getUsername());
         return toAjax(plProjectValueTemplateService.insertPlProjectValueTemplate(plProjectValueTemplate));
     }
 
@@ -110,8 +112,7 @@ public class PlProjectValueTemplateController extends BaseController
     @PreAuthorize("@ss.hasPermi('project:template:edit')")
     @Log(title = "项目产值分配模板", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody PlProjectValueTemplate plProjectValueTemplate)
-    {
+    public AjaxResult edit(@RequestBody PlProjectValueTemplate plProjectValueTemplate) {
         return toAjax(plProjectValueTemplateService.updatePlProjectValueTemplate(plProjectValueTemplate));
     }
 
@@ -121,12 +122,11 @@ public class PlProjectValueTemplateController extends BaseController
     @ApiOperation(value = "删除项目产值分配模板")
     @PreAuthorize("@ss.hasPermi('project:template:remove')")
     @Log(title = "项目产值分配模板", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{tmeplateIds}")
+    @DeleteMapping("/{tmeplateIds}")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "tmeplateIds", value = "项目产值分配模板ID[]", required = true, paramType = "body")
     })
-    public AjaxResult remove(@PathVariable String[] tmeplateIds)
-    {
+    public AjaxResult remove(@PathVariable String[] tmeplateIds) {
         return toAjax(plProjectValueTemplateService.deletePlProjectValueTemplateByIds(tmeplateIds));
     }
 }

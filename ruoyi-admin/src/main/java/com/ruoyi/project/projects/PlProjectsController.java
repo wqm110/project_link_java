@@ -2,6 +2,7 @@ package com.ruoyi.project.projects;
 
 import java.util.List;
 
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.IdUtils;
 import com.ruoyi.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,7 +48,7 @@ public class PlProjectsController extends BaseController {
     @GetMapping("/list")
     @ApiOperation(value = "查询项目基本信息列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "plProjects", value = "项目基本信息查询对象", required = false, paramType = "query")
+            @ApiImplicitParam(name = "plProjects" , value = "项目基本信息查询对象" , required = false, paramType = "query")
     })
     public TableDataInfo list(PlProjects plProjects) {
         startPage();
@@ -60,9 +61,9 @@ public class PlProjectsController extends BaseController {
      */
     @ApiOperation(value = "导出项目基本信息列表")
     @PreAuthorize("@ss.hasPermi('project:projects:export')")
-    @Log(title = "项目基本信息", businessType = BusinessType.EXPORT)
+    @Log(title = "项目基本信息" , businessType = BusinessType.EXPORT)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "plProjects", value = "项目基本信息查询对象", required = false, paramType = "query")
+            @ApiImplicitParam(name = "plProjects" , value = "项目基本信息查询对象" , required = false, paramType = "query")
     })
     @GetMapping("/export")
     public AjaxResult export(PlProjects plProjects) {
@@ -78,7 +79,7 @@ public class PlProjectsController extends BaseController {
     @PreAuthorize("@ss.hasPermi('project:projects:query')")
     @GetMapping(value = "/{projectId}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "projectId", value = "项目基本信息ID", required = true, paramType = "query")
+            @ApiImplicitParam(name = "projectId" , value = "项目基本信息ID" , required = true, paramType = "query")
     })
     public AjaxResult getInfo(@PathVariable("projectId") Long projectId) {
         return AjaxResult.success(plProjectsService.selectPlProjectsById(projectId));
@@ -89,10 +90,10 @@ public class PlProjectsController extends BaseController {
      */
     @ApiOperation(value = "新增项目基本信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "plProjects", value = "项目基本信息对象（可关联多个合同）", required = true, paramType = "body")
+            @ApiImplicitParam(name = "plProjects" , value = "项目基本信息对象（可关联多个合同）" , required = true, paramType = "body")
     })
     @PreAuthorize("@ss.hasPermi('project:projects:add')")
-    @Log(title = "项目基本信息", businessType = BusinessType.INSERT)
+    @Log(title = "项目基本信息" , businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody PlProjects plProjects) {
         //TODO 验证合项目号重复
@@ -106,13 +107,15 @@ public class PlProjectsController extends BaseController {
      * 修改项目基本信息
      */
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "plProjects", value = "项目基本信息对象", required = true, paramType = "body")
+            @ApiImplicitParam(name = "plProjects" , value = "项目基本信息对象" , required = true, paramType = "body")
     })
     @ApiOperation(value = "修改项目基本信息")
     @PreAuthorize("@ss.hasPermi('project:projects:edit')")
-    @Log(title = "项目基本信息", businessType = BusinessType.UPDATE)
+    @Log(title = "项目基本信息" , businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody PlProjects plProjects) {
+        plProjects.setUpdateBy(SecurityUtils.getUsername());
+        plProjects.setUpdateTime(DateUtils.getNowDate());
         return toAjax(plProjectsService.updatePlProjects(plProjects));
     }
 
@@ -121,10 +124,10 @@ public class PlProjectsController extends BaseController {
      */
     @ApiOperation(value = "删除项目基本信息")
     @PreAuthorize("@ss.hasPermi('project:projects:remove')")
-    @Log(title = "项目基本信息", businessType = BusinessType.DELETE)
+    @Log(title = "项目基本信息" , businessType = BusinessType.DELETE)
     @DeleteMapping("/{projectIds}")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "projectIds", value = "项目基本信息ID[]", required = true, paramType = "body")
+            @ApiImplicitParam(name = "projectIds" , value = "项目基本信息ID[]" , required = true, paramType = "body")
     })
     public AjaxResult remove(@PathVariable Long[] projectIds) {
         return toAjax(plProjectsService.deletePlProjectsByIds(projectIds));

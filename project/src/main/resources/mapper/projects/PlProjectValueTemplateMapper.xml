@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.mapper.PlProjectValueTemplateMapper">
+<mapper namespace="com.ruoyi.project.projects.mapper.PlProjectValueTemplateMapper">
     
     <resultMap type="PlProjectValueTemplate" id="PlProjectValueTemplateResult">
         <result property="tmeplateId"    column="tmeplate_id"    />
@@ -24,7 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectPlProjectValueTemplateVo">
-        select tmeplate_id, tmeplate_name, allocation_base, type_coefficient, difficulty, stage_coefficient, sets_coefficient, alter_coefficient, pm_coefficient, status, del_flag, create_by, create_time, update_by, update_time, remark from pl_project_value_template
+        select tmeplate_id, tmeplate_name, allocation_base, type_coefficient, difficulty, stage_coefficient, sets_coefficient, alter_coefficient, pm_coefficient, status, del_flag, create_by, create_time, update_by, update_time, remark
+        from pl_project_value_template
     </sql>
 
     <select id="selectPlProjectValueTemplateList" parameterType="PlProjectValueTemplate" resultMap="PlProjectValueTemplateResult">

@@ -1,5 +1,7 @@
 package ${packageName}.controller;
-
+import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.IdUtils;
+import com.ruoyi.common.utils.SecurityUtils;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,8 +108,10 @@ public class ${ClassName}Controller extends BaseController
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:add')")
     @Log(title = "${functionName}", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ${ClassName} ${className})
-    {
+    public AjaxResult add(@RequestBody ${ClassName} ${className}){
+        ${className}.setCreateBy(SecurityUtils.getUsername());
+        //${className}.setId(IdUtils.snowLId().toString());
+        ${className}.setCreateTime(DateUtils.getNowDate());
         return toAjax(${className}Service.insert${ClassName}(${className}));
     }
 
@@ -123,6 +127,8 @@ public class ${ClassName}Controller extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody ${ClassName} ${className})
     {
+        ${className}.setUpdateBy(SecurityUtils.getUsername());
+        ${className}.setUpdateTime(DateUtils.getNowDate());
         return toAjax(${className}Service.update${ClassName}(${className}));
     }
 

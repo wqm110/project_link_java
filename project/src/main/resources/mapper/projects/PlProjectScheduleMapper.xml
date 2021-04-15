@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.project.mapper.PlProjectScheduleMapper">
+<mapper namespace="com.ruoyi.project.projects.mapper.PlProjectScheduleMapper">
     
     <resultMap type="PlProjectSchedule" id="PlProjectScheduleResult">
         <result property="scheduleId"    column="schedule_id"    />
